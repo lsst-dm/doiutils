@@ -2,7 +2,7 @@
 # https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
 name = "lsst-doiutils"
 description = "Utilities to support DOI generation"
-license = {text = "BSD 3-Clause License"}
+license = "BSD-3-Clause"
 license-files = ["LICENSE"]
 readme= "README.md"
 keywords = [
