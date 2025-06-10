@@ -4,5 +4,5 @@
 Python API reference
 ####################
 
-.. automodapi:: doiutils
+.. automodapi:: lsst.doiutils
    :include-all-objects:

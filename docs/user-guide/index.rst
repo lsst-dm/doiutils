@@ -1,4 +1,4 @@
-:og:description: Learn how to use doiutils.
+:og:description: Learn how to use lsst-doiutils.
 
 ##########
 User guide

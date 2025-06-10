@@ -1,4 +1,4 @@
-"""Utilities to support DOI generation"""
+"""Utilities to support DOI generation."""
 
 __all__ = ["__version__"]
 

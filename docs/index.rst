@@ -1,19 +1,19 @@
 :og:description: Utilities to support DOI generation
 :html_theme.sidebar_secondary.remove:
 
-########
-doiutils
-########
+#############
+lsst-doiutils
+#############
 
 Utilities to support DOI generation
 
-Install doiutils from PyPI:
+Install lsst-doiutils from PyPI:
 
 .. code-block:: bash
 
-   pip install doiutils
+   pip install lsst-doiutils
 
-doiutils is developed on GitHub at https://github.com/lsst-dm/doiutils.
+lsst-doiutils is developed on GitHub at https://github.com/lsst-dm/doiutils.
 
 .. toctree::
    :hidden:
