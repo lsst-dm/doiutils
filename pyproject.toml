@@ -56,10 +56,10 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 where = ["src"]
-include = ["doiutils*"]
+include = ["lsst*"]
 
 [tool.black]
-line-length = 79
+line-length = 110
 target-version = ["py313"]
 
 [tool.coverage.run]
