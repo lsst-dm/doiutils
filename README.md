@@ -1,4 +1,4 @@
-# doiutils
+# lsst-doiutils
 
 Utilities to support DOI generation
 Learn more at https://doiutils.lsst.io
@@ -6,10 +6,10 @@ Learn more at https://doiutils.lsst.io
 Install from PyPI:
 
 ```sh
-pip install doiutils
+pip install lsst-doiutils
 ```
 
-doiutils is developed by Rubin Observatory at https://github.com/lsst-dm/doiutils.
+lsst-doiutils is developed by Rubin Observatory at https://github.com/lsst-dm/doiutils.
 
 ## Features
 
@@ -17,7 +17,7 @@ doiutils is developed by Rubin Observatory at https://github.com/lsst-dm/doiutil
 
 ## Developing doiutils
 
-The best way to start contributing to doiutils is by cloning this repository, creating a virtual environment, and running the `make init` command:
+The best way to start contributing to lsst-doiutils is by cloning this repository, creating a virtual environment, and running the `make init` command:
 
 ```sh
 git clone https://github.com/lsst-dm/doiutils.git
