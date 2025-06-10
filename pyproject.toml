@@ -1,8 +1,8 @@
 [project]
 # https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
-name = "doiutils"
+name = "lsst-doiutils"
 description = "Utilities to support DOI generation"
-license = "MIT"
+license = {text = "BSD 3-Clause License"}
 license-files = ["LICENSE"]
 readme= "README.md"
 keywords = [
@@ -22,7 +22,9 @@ classifiers = [
     "Typing :: Typed",
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "elinkapi"
+]
 dynamic = ["version"]
 
 [project.optional-dependencies]
@@ -63,7 +65,7 @@ target-version = ["py313"]
 [tool.coverage.run]
 parallel = true
 branch = true
-source = ["doiutils"]
+source = ["lsst.doiutils"]
 
 [tool.coverage.paths]
 source = ["src", ".tox/*/site-packages"]
@@ -117,7 +119,7 @@ python_files = ["tests/*.py", "tests/*/*.py"]
 extend = "ruff-shared.toml"
 
 [tool.ruff.lint.isort]
-known-first-party = ["doiutils", "tests"]
+known-first-party = ["lsst", "tests"]
 split-on-trailing-comma = false
 
 [tool.scriv]
