@@ -1,7 +1,7 @@
 # DOI requirements for Data Preview 1
 # Assumes Rubin/NSF/DOE creators.
 title: Legacy Survey of Space and Time Data Preview 1
-site: https://dp1.lsst.io
+site_url: https://dp1.lsst.io
 date: 2025-06-30
 abstract: |
   The Legacy Survey of Space and Time Data Preview 1 (DP1) is the first release

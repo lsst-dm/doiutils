@@ -84,6 +84,8 @@ ignore = [
     "COM819",
     "ISC001",
     "ISC002",
+    "T201",  # print being used for debugging early version.
+    "PTH123",  # what's wrong with open() anyhow
 ]
 select = ["ALL"]
 
