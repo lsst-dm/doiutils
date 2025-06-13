@@ -34,6 +34,7 @@ dev = [
     "pytest",
     "pytest-asyncio",
     "mypy",
+    "types-PyYAML",
     # Documentation
     "documenteer[guide]<2",
     "scriv",
