@@ -110,17 +110,22 @@ _IDENTIFIERS = [
 ]
 
 
+class DatasetTypeSource(BaseModel):
+    """Specific description of butler vs TAP dataset."""
+
+    name: str
+    doi: str | None = None
+    osti_id: int | None = None
+    count: int | None = None
+
+
 class DataReleaseDatasetType(BaseModel):
     """A component dataset type found within a data release."""
 
     abstract: str
     path: str
-    butler_name: str = ""
-    tap_name: str = ""
-    butler_doi: str | None = None
-    butler_osti_id: int | None = None
-    tap_doi: str | None = None
-    tap_osti_id: int | None = None
+    butler: DatasetTypeSource | None = None
+    tap: DatasetTypeSource | None = None
 
     def get_record_key(self, variant: str) -> str:
         """Return a key to associate with an OSTI record prior to assigning
@@ -136,11 +141,14 @@ class DataReleaseDatasetType(BaseModel):
         key : `str`
             Key to use in `dict` of records.
         """
-        match variant:
-            case "butler":
-                return self.butler_name
-            case "tap":
-                return self.tap_name
+        if variant == "butler":
+            if not self.butler:
+                raise ValueError("Butler key requested but not a butler dataset type.")
+            return self.butler.name
+        elif variant == "tap":
+            if not self.tap:
+                raise ValueError("Tap key requested but not a butler dataset type.")
+            return self.tap.name
         raise RuntimeError(f"Unrecognized variant {variant} for key calculation.")
 
     def set_saved_metadata(self, key: str, osti_id: int, doi: str) -> bool:
@@ -162,15 +170,14 @@ class DataReleaseDatasetType(BaseModel):
             was updated. `False` if the key was not recognized and likely
             associated with another dataset type.
         """
-        match key:
-            case self.butler_name:
-                self.butler_doi = doi
-                self.butler_osti_id = osti_id
-            case self.tap_name:
-                self.tap_doi = doi
-                self.tap_osti_id = osti_id
-            case _:
-                return False
+        if self.butler and self.butler.name == key:
+            self.butler.doi = doi
+            self.butler.osti_id = osti_id
+        elif self.tap and self.tap.name == key:
+            self.tap.doi = doi
+            self.tap.osti_id = osti_id
+        else:
+            return False
         return True
 
 
@@ -203,6 +210,7 @@ class DataReleaseConfig(BaseModel):
             Open file handle associated with a YAML configuration.
         """
         config_dict = yaml.safe_load(fh)
+        print(config_dict)
         return cls.model_validate(config_dict)
 
     def write_yaml_fh(self, fh: IO[str]) -> None:
@@ -303,48 +311,48 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
         dtype_abstract = dtype_abstract[0].lower() + dtype_abstract[1:]
 
         uniquify_paths = False
-        if dataset_type.butler_name and dataset_type.tap_name:
+        if dataset_type.butler and dataset_type.tap:
             # Both datasets exist and will be given distinct DOIs but we
             # should ensure that they have different target URLs.
             uniquify_paths = True
 
-        if dataset_type.butler_name:
+        if dataset_type.butler:
             extra_text = (
                 "This dataset is a subset of the full data release"
-                f" consisting of the {dataset_type.butler_name} dataset type. These are "
+                f" consisting of the {dataset_type.butler.name} dataset type. These are "
             )
 
             abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
             fragment = "#butler" if uniquify_paths else ""
 
-            if not dataset_type.butler_osti_id:
+            if not dataset_type.butler.osti_id:
                 records[dataset_type.get_record_key("butler")] = _make_sub_record(
                     record_content,
-                    f": {dataset_type.butler_name} dataset type",
+                    f": {dataset_type.butler.name} dataset type",
                     abstract,
                     dataset_type.path + fragment,
                 )
             else:
                 _LOG.info(
-                    "DOI already assigned for %s: %d", dataset_type.butler_name, dataset_type.butler_osti_id
+                    "DOI already assigned for %s: %d", dataset_type.butler.name, dataset_type.butler.osti_id
                 )
 
-        if dataset_type.tap_name:
+        if dataset_type.tap:
             extra_text = (
                 "This dataset is a subset of the full data release consisting of "
-                f"a searchable catalog named {dataset_type.tap_name}. This catalog contains "
+                f"a searchable catalog named {dataset_type.tap.name}. This catalog contains "
             )
             abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
             fragment = "#tap" if uniquify_paths else ""
 
-            if not dataset_type.tap_osti_id:
+            if not dataset_type.tap.osti_id:
                 records[dataset_type.get_record_key("tap")] = _make_sub_record(
                     record_content,
-                    f": {dataset_type.butler_name} searchable catalog",
+                    f": {dataset_type.tap.name} searchable catalog",
                     abstract,
                     dataset_type.path + fragment,
                 )
             else:
-                _LOG.info("DOI already assigned for %s: %d", dataset_type.tap_name, dataset_type.tap_osti_id)
+                _LOG.info("DOI already assigned for %s: %d", dataset_type.tap.name, dataset_type.tap.osti_id)
 
     return records
