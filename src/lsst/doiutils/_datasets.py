@@ -14,13 +14,14 @@ from __future__ import annotations
 __all__: list[str] = []
 
 import copy
-import sys
+import logging
 import typing
 from datetime import datetime
+from typing import IO, Self
 
 import elinkapi
 import yaml
-from pydantic import AnyHttpUrl, BaseModel
+from pydantic import AnyHttpUrl, BaseModel, field_serializer
 
 """
 Aim
@@ -59,6 +60,8 @@ formats?
 
 
 """
+
+_LOG = logging.getLogger("lsst.doiutils")
 
 _LOCATION = elinkapi.Geolocation(
     type="POINT",
@@ -114,7 +117,61 @@ class DataReleaseDatasetType(BaseModel):
     path: str
     butler_name: str = ""
     tap_name: str = ""
-    doi: str | None = None
+    butler_doi: str | None = None
+    butler_osti_id: int | None = None
+    tap_doi: str | None = None
+    tap_osti_id: int | None = None
+
+    def get_record_key(self, variant: str) -> str:
+        """Return a key to associate with an OSTI record prior to assigning
+        an OSTI ID.
+
+        Parameters
+        ----------
+        variant : `str`
+            "tap" or "butler"
+
+        Returns
+        -------
+        key : `str`
+            Key to use in `dict` of records.
+        """
+        match variant:
+            case "butler":
+                return self.butler_name
+            case "tap":
+                return self.tap_name
+        raise RuntimeError(f"Unrecognized variant {variant} for key calculation.")
+
+    def set_saved_metadata(self, key: str, osti_id: int, doi: str) -> bool:
+        """Try to set the DOI for the given key.
+
+        Parameters
+        ----------
+        key : `str`
+            Key associated with this DOI information.
+        ost_id : `int`
+            The OSTI ID to associate with this key.
+        doi : `str`
+            The DOI associated with this key.
+
+        Returns
+        -------
+        updated : `bool`
+            `True` if the key is known to this dataset type and the record
+            was updated. `False` if the key was not recognized and likely
+            associated with another dataset type.
+        """
+        match key:
+            case self.butler_name:
+                self.butler_doi = doi
+                self.butler_osti_id = osti_id
+            case self.tap_name:
+                self.tap_doi = doi
+                self.tap_osti_id = osti_id
+            case _:
+                return False
+        return True
 
 
 class DataReleaseConfig(BaseModel):
@@ -129,6 +186,62 @@ class DataReleaseConfig(BaseModel):
     instrument_doi: str
     dataset_types: list[DataReleaseDatasetType]
     doi: str | None = None
+    osti_id: int | None = None
+
+    @field_serializer("site_url")
+    def serialize_url(self, url: AnyHttpUrl) -> str:
+        return str(url)
+
+    @classmethod
+    def from_yaml_fh(cls, fh: IO[str]) -> Self:
+        """Create a configuration from a file handle pointing to a YAML
+        file.
+
+        Parameters
+        ----------
+        fh : `typing.IO`
+            Open file handle associated with a YAML configuration.
+        """
+        config_dict = yaml.safe_load(fh)
+        return cls.model_validate(config_dict)
+
+    def write_yaml_fh(self, fh: IO[str]) -> None:
+        """Write this configuration as YAML to the given file handle.
+
+        Parameters
+        ----------
+        fh : `typing.IO`
+            Open file handle associated to use for writing the YAML.
+        """
+        yaml.safe_dump(self.model_dump(exclude_unset=True), fh)
+
+    def set_saved_metadata(self, key: str | None, saved_record: elinkapi.Record) -> None:
+        """Update the configuration to reflect that a DOI has been saved.
+
+        Parameters
+        ----------
+        key : `str`
+            Key associated with the dataset that has been saved. This can be
+            `None` to indicating the primary DOI, or the butler or tap name
+            to indicate a specific dataset type.
+        """
+        osti_id = saved_record.osti_id
+        if osti_id is None:
+            raise RuntimeError("This record does not correspond to a saved record.")
+        doi = saved_record.doi
+        if not doi:
+            raise RuntimeError("No DOI associated with this record. Was it saved?")
+        if key is None:
+            self.doi = doi
+            self.osti_id = osti_id
+            return
+
+        # Find the corresponding key.
+        for dtype in self.dataset_types:
+            if dtype.set_saved_metadata(key, osti_id, doi):
+                return
+
+        raise RuntimeError(f"Key {key} not found in this configuration. Unable to set OSTI ID.")
 
 
 def _make_sub_record(
@@ -144,7 +257,7 @@ def _make_sub_record(
     return elinkapi.Record.model_validate(dtype_content)
 
 
-def make_records(config: DataReleaseConfig) -> list[elinkapi.Record]:
+def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]:
     """Given a configuration, construct DOI records suitable for submission."""
     # Remove new lines from the abstract.
     abstract = config.abstract.replace("\n", " ").strip()
@@ -172,8 +285,13 @@ def make_records(config: DataReleaseConfig) -> list[elinkapi.Record]:
         "access_limitations": ["UNL"],
         "geolocations": [_LOCATION],
     }
-    records: list[elinkapi.Record] = []
-    records.append(elinkapi.Record.model_validate(record_content))
+    records: dict[str | None, elinkapi.Record] = {}
+
+    # Primary DOI uses a None key.
+    if not config.osti_id:
+        records[None] = elinkapi.Record.model_validate(record_content)
+    else:
+        _LOG.info("DOI already assigned for primary dataset: %d", config.osti_id)
 
     # Should we strip the instrument DOI from subset DOIs. We want them
     # to be solely isPartOf the full data release and not themselves be
@@ -199,14 +317,17 @@ def make_records(config: DataReleaseConfig) -> list[elinkapi.Record]:
             abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
             fragment = "#butler" if uniquify_paths else ""
 
-            records.append(
-                _make_sub_record(
+            if not dataset_type.butler_osti_id:
+                records[dataset_type.get_record_key("butler")] = _make_sub_record(
                     record_content,
                     f": {dataset_type.butler_name} dataset type",
                     abstract,
                     dataset_type.path + fragment,
                 )
-            )
+            else:
+                _LOG.info(
+                    "DOI already assigned for %s: %d", dataset_type.butler_name, dataset_type.butler_osti_id
+                )
 
         if dataset_type.tap_name:
             extra_text = (
@@ -216,30 +337,14 @@ def make_records(config: DataReleaseConfig) -> list[elinkapi.Record]:
             abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
             fragment = "#tap" if uniquify_paths else ""
 
-            records.append(
-                _make_sub_record(
+            if not dataset_type.tap_osti_id:
+                records[dataset_type.get_record_key("tap")] = _make_sub_record(
                     record_content,
                     f": {dataset_type.butler_name} searchable catalog",
                     abstract,
                     dataset_type.path + fragment,
                 )
-            )
+            else:
+                _LOG.info("DOI already assigned for %s: %d", dataset_type.tap_name, dataset_type.tap_osti_id)
 
     return records
-
-
-def main() -> int:
-    cfg_file = sys.argv[1]
-
-    with open(cfg_file) as fd:
-        config_dict = yaml.safe_load(fd)
-    config = DataReleaseConfig.model_validate(config_dict)
-
-    records = make_records(config)
-    for rec in [records[5]]:
-        print(rec.model_dump_json(exclude_defaults=True))
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

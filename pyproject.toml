@@ -135,3 +135,6 @@ format = "md"
 md_header_level = "2"
 new_fragment_template = "file:changelog.d/_template.md.jinja"
 skip_fragments = "_template.md.jinja"
+
+[project.scripts]
+lsst-doi = "lsst.doiutils._cli:cli"
