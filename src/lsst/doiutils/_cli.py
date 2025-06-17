@@ -88,13 +88,19 @@ def datasets(
     # we can update the configuration (to prevent new uploads of the same
     # thing).
 
-    for i, (key, record) in enumerate(records.items()):
-        saved_record = api.post_new_record(record, "save")
-        print(saved_record.osti_id, saved_record.doi)
+    n_saved = 0
+    for key, record in records.items():
+        try:
+            saved_record = api.post_new_record(record, "save")
+        except Exception:
+            _LOG.exception("Error saving record for key %s", key)
+            continue
+
+        n_saved += 1
+        _LOG.info("Saved record %s as %s", key, saved_record.doi)
 
         dr_config.set_saved_metadata(key, saved_record)
 
-        if i == 2:
-            break
-
-    dr_config.write_yaml_fh(sys.stdout)
+    if n_saved > 0:
+        dr_config.write_yaml_fh(sys.stdout)
+    _LOG.info("Saved %d record%s out of %d", n_saved, "" if n_saved == 1 else "s", len(records))

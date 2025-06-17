@@ -210,7 +210,6 @@ class DataReleaseConfig(BaseModel):
             Open file handle associated with a YAML configuration.
         """
         config_dict = yaml.safe_load(fh)
-        print(config_dict)
         return cls.model_validate(config_dict)
 
     def write_yaml_fh(self, fh: IO[str]) -> None:
