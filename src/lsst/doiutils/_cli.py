@@ -44,9 +44,11 @@ def cli(ctx: click.Context, log_level: str, log_file: str | None) -> None:
     """Rubin LSST DOI utility command line tools."""
     ctx.ensure_object(dict)
     if log_file:
-        logging.basicConfig(filename=log_file, level=log_level)
+        logging.basicConfig(filename=log_file, level=logging.WARNING)
     else:
-        logging.basicConfig(level=log_level)
+        logging.basicConfig(level=logging.WARNING)
+    # Force LSST logger to INFO.
+    logging.getLogger("lsst").setLevel(logging.INFO)
 
 
 @cli.command("datasets")
