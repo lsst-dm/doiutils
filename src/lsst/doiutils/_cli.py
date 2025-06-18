@@ -109,3 +109,59 @@ def update_relationships(
     api = elinkapi.Elink(target=server, token=token)
 
     update_record_relationships(dr_config, api, dry_run=dry_run)
+
+
+@cli.command("count-butler-datasets")
+@click.argument("config", type=click.File())
+@click.argument("repo", type=str)
+@click.argument("collection", type=str)
+@click.pass_context
+def count_butler_datasets(
+    ctx: click.Context,
+    config: IO[str],
+    repo: str,
+    collection: str,
+) -> None:
+    """Count the number of datasets for each butler dataset type.
+
+    CONFIG is the configuration file containing a full description of all
+    the datasets that are part of this data release.
+
+    REPO is the URI or label of a butler repository.
+
+    COLLECTION is the Butler collection to search for datasets
+    """
+    # Optional butler dependency.
+    from lsst.daf.butler import Butler, MissingDatasetTypeError
+
+    dr_config = DataReleaseConfig.from_yaml_fh(config)
+    butler = Butler.from_config(repo)
+
+    collections = butler.collections.query(collection)
+
+    updated = False
+    for dtype in dr_config.dataset_types:
+        if not dtype.butler:
+            continue
+        with butler.query() as query:
+            # Calibrations is treated as a "magic" dataset type.
+            dataset_types = [dtype.butler.name]
+            if dtype.butler.name == "calibrations":
+                all_types = butler.registry.queryDatasetTypes()
+                dataset_types = [dt.name for dt in all_types if dt.isCalibration()]
+
+            count = 0
+            for dataset_type in dataset_types:
+                try:
+                    results = query.datasets(dataset_type, collections=collections, find_first=True)
+                    count += results.count(exact=True)
+                except MissingDatasetTypeError:
+                    _LOG.info("Dataset type %s not known to this repo.", dataset_type)
+
+            if count > 0:
+                _LOG.info("Number of datasets of type %s: %d", dtype.butler.name, count)
+                dtype.butler.count = count
+                updated = True
+
+    if updated:
+        dr_config.write_yaml_fh(sys.stdout)
