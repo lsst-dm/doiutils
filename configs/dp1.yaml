@@ -33,34 +33,41 @@ dataset_types:
   - butler:
       name: raw
       count: 16125
+      format: application/fits
     abstract: |
       Unprocessed images from the LSST Commissioning Camera.
     path: products/images/raw_exposure.html
   - butler:
       name: visit_image
+      format: application/fits
     abstract: |
       Individual processed and calibrated sky images obtained from a single observation
       with a single filter.
     path: products/images/visit_image.html
   - butler:
       name: difference_image
+      format: application/fits
     abstract: |
       Images created by subtracting a template image from a visit image.
     path: products/images/difference_image.html
   - butler:
       name: deep_coadd
+      format: application/fits
     abstract: |
       The combination of multiple processed, calibrated, and background-subtracted
       images, for a patch of sky, for each of the six filters.
     path: products/images/deep_coadd.html
   - butler:
       name: template_coadd
+      format: application/fits
     abstract: |
       The combination of processed images with the best seeing, for a patch of
       sky and for each of the six LSST filters. Used to create difference images.
     path: products/images/template_coadd.html
   - butler:
-      name: survey_property_maps
+      name: survey property
+      alias: "deepCoadd_*_consolidated_map_*"
+      format: HSP
     abstract: HealSparse property maps for the survey.
     path: products/spmaps/index.html
   # These are both parquet files that are available to butler and searchable.
@@ -72,18 +79,21 @@ dataset_types:
   # Butler name and TAP name differ: object vs Object; object_forced_source vs ForcedSource
   - butler:
       name: dia_source
+      format: application/vnd.apache.parquet
     tap:
       name: DiaSource
     abstract: Measurements for detected sources in difference images.
     path: products/catalogs/dia_source.html
   - butler:
       name: dia_object
+      format: application/vnd.apache.parquet
     tap:
       name: DiaObject
     abstract: Derived properties for transient and variable objects.
     path: products/catalogs/dia_object.html
   - butler:
       name: dia_object_forced_source
+      format: application/vnd.apache.parquet
     tap:
       name: DiaForcedSourceOnDiaObject
     abstract: |
@@ -91,18 +101,21 @@ dataset_types:
     path: products/catalogs/dia_forced_source.html
   - butler:
       name: source
+      format: application/vnd.apache.parquet
     tap:
       name: Source
     abstract: Measurements for detected sources in processed visit images.
     path: products/catalogs/source.html
   - butler:
       name: object
+      format: application/vnd.apache.parquet
     tap:
       name: Object
     abstract: Detections from deep co-adds.
     path: products/catalogs/object.html
   - butler:
       name: object_forced_source
+      format: application/vnd.apache.parquet
     tap:
       name: ForcedSource
     abstract: |
@@ -110,18 +123,21 @@ dataset_types:
     path: products/catalogs/forced_source.html
   - butler:
       name: visit_table
+      format: application/vnd.apache.parquet
     tap:
       name: Visit
     abstract: Metadata, including dates and filters for every visit.
     path: products/catalogs/visit_table.html
   - butler:
       name: visit_detector_table
+      format: application/vnd.apache.parquet
     tap:
       name: CcdVisit
     abstract: Per-detector visit metadata.
     path: products/catalogs/visit_detector_table.htm
   - butler:
       name: ss_source
+      format: application/vnd.apache.parquet
     tap:
       name: SSSource
     abstract: |
@@ -129,6 +145,7 @@ dataset_types:
     path: products/catalogs/ss_source.html
   - butler:
       name: ss_object
+      format: application/vnd.apache.parquet
       count: 1
     tap:
       name: SSObject

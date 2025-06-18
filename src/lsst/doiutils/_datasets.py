@@ -117,9 +117,11 @@ class DatasetTypeSource(BaseModel):
     """Specific description of butler vs TAP dataset."""
 
     name: str
+    alias: str | None = None
     doi: str | None = None
     osti_id: int | None = None
     count: int | None = None
+    format: str | None = None
 
 
 class DataReleaseDatasetType(BaseModel):
@@ -278,7 +280,12 @@ class DataReleaseConfig(BaseModel):
 
 
 def _make_sub_record(
-    primary_content: dict[str, typing.Any], extra_title: str, abstract: str, extra_path: str
+    primary_content: dict[str, typing.Any],
+    extra_title: str,
+    abstract: str,
+    extra_path: str,
+    format_information: str | None = None,
+    product_size: str | None = None,
 ) -> elinkapi.Record:
     """Make a sub-record for a dataset."""
     # Modify a copy.
@@ -286,6 +293,10 @@ def _make_sub_record(
     dtype_content["description"] = abstract
     dtype_content["title"] += extra_title
     dtype_content["site_url"] += extra_path
+    if format_information:
+        dtype_content["format_information"] = format_information
+    if product_size:
+        dtype_content["product_size"] = product_size
 
     # Remove related identifiers. We only want the instrument to be
     # referenced from the primary DOI.
@@ -352,9 +363,11 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
             )
 
             abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
+            product_size: str | None = None
             if dataset_type.butler.count:
                 s = "" if dataset_type.butler.count == 1 else "s"
                 abstract += f" This release contains {dataset_type.butler.count} dataset{s} of this type."
+                product_size = f"{dataset_type.butler.count} file{s}"
             fragment = "#butler" if uniquify_paths else ""
 
             if not dataset_type.butler.osti_id:
@@ -363,6 +376,8 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
                     f": {dataset_type.butler.name} dataset type",
                     abstract,
                     dataset_type.path + fragment,
+                    product_size=product_size,
+                    format_information=dataset_type.butler.format,
                 )
             else:
                 _LOG.info(
