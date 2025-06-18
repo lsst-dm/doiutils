@@ -117,20 +117,36 @@ class DatasetTypeSource(BaseModel):
     """Specific description of butler vs TAP dataset."""
 
     name: str
+    """Name of the dataset type to use in the DOI record."""
     alias: str | None = None
+    """Aliased name that can be specific to the source this is attached to.
+    For example, for butler source this is a dataset type glob that can
+    correspond to multiple dataset types.
+    """
     doi: str | None = None
+    """DOI issued for this dataset type source."""
     osti_id: int | None = None
+    """OSTI ID issued for this dataset type source."""
     count: int | None = None
+    """Count to use for this dataset type source. For butler this is the
+    number of datasets. For TAP this will be the number of rows in the catalog.
+    """
     format: str | None = None
+    """Format of the dataset. For butler this will be the MIME type of file
+    extension of the files. No value is used for TAP source."""
 
 
 class DataReleaseDatasetType(BaseModel):
     """A component dataset type found within a data release."""
 
     abstract: str
+    """Description of this dataset type."""
     path: str
+    """Path to the landing page relative to the main site URL."""
     butler: DatasetTypeSource | None = None
+    """Details of butler datasets associated with this dataset type."""
     tap: DatasetTypeSource | None = None
+    """Details of TAP catalogs associated with this dataset type."""
 
     def get_record_key(self, variant: str) -> str:
         """Return a key to associate with an OSTI record prior to assigning
@@ -192,13 +208,27 @@ class DataReleaseConfig(BaseModel):
     """
 
     title: str
+    """Main title for the data release."""
     site_url: AnyHttpUrl
+    """Main landing page for this data release."""
     date: datetime.date
+    """Date the data release was made public (YYYY-MM-DD)"""
     abstract: str
+    """Description of this data release. Will be included with dataset type
+    descriptions.
+    """
     instrument_doi: str
+    """DOI of the instrument that collected this data."""
     dataset_types: list[DataReleaseDatasetType]
+    """Dataset types associated with this data release that we wish to also
+    issue DOIs for.
+    """
     doi: str | None = None
+    """DOI of the data release."""
     osti_id: int | None = None
+    """OSTI ID of the data release (required to retrieve and edit the record
+    in ELink).
+    """
 
     @cached_property
     def osti_id_to_dataset_type(self) -> dict[int, DataReleaseDatasetType]:
