@@ -14,11 +14,11 @@ from __future__ import annotations
 __all__: list[str] = []
 
 import copy
+import datetime
 import itertools
 import logging
 import typing
 from collections.abc import Iterable
-from datetime import datetime
 from functools import cached_property
 from typing import IO, Self
 
@@ -191,7 +191,7 @@ class DataReleaseConfig(BaseModel):
 
     title: str
     site_url: AnyHttpUrl
-    date: datetime
+    date: datetime.date
     abstract: str
     instrument_doi: str
     dataset_types: list[DataReleaseDatasetType]
@@ -236,7 +236,7 @@ class DataReleaseConfig(BaseModel):
             Open file handle associated with a YAML configuration.
         """
         config_dict = yaml.safe_load(fh)
-        return cls.model_validate(config_dict)
+        return cls.model_validate(config_dict, strict=True)
 
     def write_yaml_fh(self, fh: IO[str]) -> None:
         """Write this configuration as YAML to the given file handle.
@@ -291,7 +291,7 @@ def _make_sub_record(
     # referenced from the primary DOI.
     dtype_content.pop("related_identifiers", None)
 
-    return elinkapi.Record.model_validate(dtype_content)
+    return elinkapi.Record.model_validate(dtype_content, strict=True)
 
 
 def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]:
@@ -326,7 +326,7 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
 
     # Primary DOI uses a None key.
     if not config.osti_id:
-        records[None] = elinkapi.Record.model_validate(record_content)
+        records[None] = elinkapi.Record.model_validate(record_content, strict=True)
     else:
         _LOG.info("DOI already assigned for primary dataset: %d", config.osti_id)
 
