@@ -155,7 +155,9 @@ def count_butler_datasets(
             count = 0
             for dataset_type in dataset_types:
                 try:
-                    results = query.datasets(dataset_type, collections=collections, find_first=True)
+                    # We want all we can find to be included in the count.
+                    # This is especially important for calibrations.
+                    results = query.datasets(dataset_type, collections=collections, find_first=False)
                     count += results.count(exact=True)
                 except MissingDatasetTypeError:
                     _LOG.info("Dataset type %s not known to this repo.", dataset_type)
