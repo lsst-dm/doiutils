@@ -151,6 +151,10 @@ def count_butler_datasets(
             if dtype.butler.name == "calibrations":
                 all_types = butler.registry.queryDatasetTypes()
                 dataset_types = [dt.name for dt in all_types if dt.isCalibration()]
+            elif dtype.butler.alias:
+                # Alias is an indication that we have multiple dataset types
+                # in this dataset.
+                dataset_types = [dt.name for dt in butler.registry.queryDatasetTypes(dtype.butler.alias)]
 
             count = 0
             for dataset_type in dataset_types:
