@@ -86,6 +86,7 @@ ignore = [
     "ISC002",
     "T201",  # print being used for debugging early version.
     "PTH123",  # what's wrong with open() anyhow
+    "PTH",  # os.path is fine.
 ]
 select = ["ALL"]
 
