@@ -14,9 +14,12 @@ from __future__ import annotations
 __all__: list[str] = []
 
 import copy
+import itertools
 import logging
 import typing
+from collections.abc import Iterable
 from datetime import datetime
+from functools import cached_property
 from typing import IO, Self
 
 import elinkapi
@@ -195,6 +198,29 @@ class DataReleaseConfig(BaseModel):
     doi: str | None = None
     osti_id: int | None = None
 
+    @cached_property
+    def osti_id_to_dataset_type(self) -> dict[int, DataReleaseDatasetType]:
+        """OSTI IDs associated with each dataset type.
+
+        It is required that every OSTI ID is specified.
+        """
+        osti_id_map: dict[int, DataReleaseDatasetType] = {}
+        for dtype in self.dataset_types:
+            found = False
+            if dtype.butler and dtype.butler.osti_id:
+                osti_id_map[dtype.butler.osti_id] = dtype
+                found = True
+            if dtype.tap and dtype.tap.osti_id:
+                osti_id_map[dtype.tap.osti_id] = dtype
+                found = True
+
+            if not found:
+                raise ValueError(
+                    f"Could not find OSTI ID for dataset type {dtype}. Was this configuration uploaded?"
+                )
+
+        return osti_id_map
+
     @field_serializer("site_url")
     def serialize_url(self, url: AnyHttpUrl) -> str:
         return str(url)
@@ -260,6 +286,10 @@ def _make_sub_record(
     dtype_content["description"] = abstract
     dtype_content["title"] += extra_title
     dtype_content["site_url"] += extra_path
+
+    # Remove related identifiers. We only want the instrument to be
+    # referenced from the primary DOI.
+    dtype_content.pop("related_identifiers", None)
 
     return elinkapi.Record.model_validate(dtype_content)
 
@@ -355,3 +385,142 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
                 _LOG.info("DOI already assigned for %s: %d", dataset_type.tap.name, dataset_type.tap.osti_id)
 
     return records
+
+
+def get_records(config: DataReleaseConfig, elink: elinkapi.Elink) -> dict[int, elinkapi.Record]:
+    """Retrieve records associated with this configuration."""
+    records: dict[int, elinkapi.Record] = {}
+
+    if not config.osti_id:
+        raise ValueError(
+            "No OSTI ID found for this data release. Was this configuration updated after upload?"
+        )
+
+    records[config.osti_id] = elink.get_single_record(config.osti_id)
+    if records[config.osti_id].osti_id != config.osti_id:
+        raise RuntimeError("Unexpectedly got different OSTI ID from primary record than requested")
+
+    for osti_id in config.osti_id_to_dataset_type:
+        records[osti_id] = elink.get_single_record(osti_id)
+        if records[osti_id].osti_id != osti_id:
+            raise RuntimeError("Unexpectedly got different OSTI ID from record than requested")
+
+    return records
+
+
+def submit_records(config: DataReleaseConfig, elink: elinkapi.Elink, *, dry_run: bool = False) -> int:
+    """Submit records from configuration to ELink.
+
+    Returns
+    -------
+    n_saved : `int`
+        Number of records stored. If greater than 0 the config will be updated
+        with the DOI and OSTI record information.
+    """
+    records = make_records(config)
+
+    if dry_run:
+        for rec in records.values():
+            print(rec.model_dump_json(exclude_defaults=True, indent=2))
+        return 0
+
+    _LOG.info("Will be submitting %d records.", len(records))
+
+    # Submit each record, recording the issued OSTI ID as we go so that
+    # we can update the configuration (to prevent new uploads of the same
+    # thing).
+
+    n_saved = 0
+    for key, record in records.items():
+        try:
+            saved_record = elink.post_new_record(record, "save")
+        except Exception:
+            _LOG.exception("Error saving record for key %s", key)
+            continue
+
+        n_saved += 1
+        _LOG.info("Saved record %s as %s", key, saved_record.doi)
+
+        config.set_saved_metadata(key, saved_record)
+
+    _LOG.info("Saved %d record%s out of %d", n_saved, "" if n_saved == 1 else "s", len(records))
+    return n_saved
+
+
+def update_record_relationships(
+    config: DataReleaseConfig, elink: elinkapi.Elink, *, dry_run: bool = False
+) -> None:
+    """Update the relationships between records for this data release.
+
+    Notes
+    -----
+    The configuration must correspond to one that includes saved OSTI
+    identifiers.
+    """
+    _LOG.info("Retrieving records from OSTI")
+    saved_records = get_records(config, elink)
+
+    # Set IsPartOf relationship. All entries are part of the primary
+    # entry.
+    primary_id = config.osti_id
+    if primary_id is None:
+        raise RuntimeError("Primary dataset must have a specified OSTI ID in configuration.")
+    primary_doi = config.doi
+    if primary_doi is None:
+        raise RuntimeError("Primary dataset DOI must be defined.")
+    primary_record = saved_records.pop(primary_id)
+
+    is_part_of = elinkapi.RelatedIdentifier(type="DOI", relation="IsPartOf", value=primary_doi)
+
+    _LOG.info("Updating relationships")
+    # Mapping of OSTI ID to DatasetType configuration.
+    osti_id_to_dataset_type = config.osti_id_to_dataset_type
+
+    for dataset_osti, dataset_record in saved_records.items():
+        # Record that this is part of the main collection.
+        dataset_record.add(is_part_of)
+
+        # Tell the primary that this contains the subset.
+        primary_record.add(
+            elinkapi.RelatedIdentifier(type="DOI", relation="HasPart", value=dataset_record.doi)
+        )
+
+        if dtype := osti_id_to_dataset_type.get(dataset_osti):
+            if dtype.butler and dtype.tap:
+                # We have to link the two together. Link one direction now
+                # and the other direction when that OSTI ID is encountered.
+                # We are only modifying the current record.
+                if dtype.butler.osti_id == dataset_osti:
+                    # We have verified this elsewhere but mypy cannot tell.
+                    if dtype.tap.doi is None:
+                        raise RuntimeError(f"Unexpectedly got null DOI for TAP dataset {dtype}")
+                    dataset_record.add(
+                        elinkapi.RelatedIdentifier(
+                            type="DOI", relation="IsOriginalFormOf", value=dtype.tap.doi
+                        )
+                    )
+                elif dtype.tap.osti_id == dataset_osti:
+                    # We have verified this elsewhere but mypy cannot tell.
+                    if dtype.butler.doi is None:
+                        raise RuntimeError(f"Unexpectedly got null DOI for butler dataset {dtype}")
+                    dataset_record.add(
+                        elinkapi.RelatedIdentifier(
+                            type="DOI", relation="IsVariantFormOf", value=dtype.butler.doi
+                        )
+                    )
+                else:
+                    raise RuntimeError("Logic error in DOI assignment")
+
+    update_records(itertools.chain([primary_record], saved_records.values()), elink, dry_run=dry_run)
+
+
+def update_records(
+    records: Iterable[elinkapi.Record], elink: elinkapi.Elink, *, dry_run: bool = False
+) -> None:
+    """Save the given records as updates to an existing record."""
+    _LOG.info("Uploading modified records")
+    for record in records:
+        if dry_run:
+            print(record.model_dump_json(indent=2))
+        else:
+            elink.update_record(record.osti_id, record, "save")

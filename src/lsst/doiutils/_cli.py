@@ -19,7 +19,7 @@ import click
 import elinkapi
 
 from . import __version__
-from ._datasets import DataReleaseConfig, make_records
+from ._datasets import DataReleaseConfig, submit_records, update_record_relationships
 
 _LOG = logging.getLogger("lsst.doiutils")
 
@@ -73,34 +73,39 @@ def datasets(
     the datasets that are part of this data release.
     """
     dr_config = DataReleaseConfig.from_yaml_fh(config)
-    records = make_records(dr_config)
-
-    if dry_run:
-        for rec in records.values():
-            print(rec.model_dump_json(exclude_defaults=True, indent=2))
-        return
-
-    _LOG.info("Will be submitting %d records.", len(records))
-
     api = elinkapi.Elink(target=server, token=token)
-
-    # Submit each record, recording the issued OSTI ID as we go so that
-    # we can update the configuration (to prevent new uploads of the same
-    # thing).
-
-    n_saved = 0
-    for key, record in records.items():
-        try:
-            saved_record = api.post_new_record(record, "save")
-        except Exception:
-            _LOG.exception("Error saving record for key %s", key)
-            continue
-
-        n_saved += 1
-        _LOG.info("Saved record %s as %s", key, saved_record.doi)
-
-        dr_config.set_saved_metadata(key, saved_record)
+    n_saved = submit_records(dr_config, api, dry_run=dry_run)
 
     if n_saved > 0:
         dr_config.write_yaml_fh(sys.stdout)
-    _LOG.info("Saved %d record%s out of %d", n_saved, "" if n_saved == 1 else "s", len(records))
+
+
+@cli.command("update-relationships")
+@click.argument("config", type=click.File())
+@click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
+@click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
+@click.option(
+    "--server",
+    default="https://review.osti.gov/elink2api/",
+    help="Desired endpoint to use for submission. Default is to use the test server. "
+    "For a final submission use https://www.osti.gov/elink2api/",
+)
+@click.pass_context
+def update_relationships(
+    ctx: click.Context,
+    config: IO[str],
+    dry_run: bool,  # noqa: FBT001
+    token: str,
+    server: str,
+) -> None:
+    """Update relationships between DOIs within a data release.
+
+    CONFIG is the configuration file containing a full description of all
+    the datasets that are part of this data release and their associated
+    DOIs and OSTI IDs from a previous upload.
+    """
+    dr_config = DataReleaseConfig.from_yaml_fh(config)
+
+    api = elinkapi.Elink(target=server, token=token)
+
+    update_record_relationships(dr_config, api, dry_run=dry_run)
