@@ -352,6 +352,9 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
             )
 
             abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
+            if dataset_type.butler.count:
+                s = "" if dataset_type.butler.count == 1 else "s"
+                abstract += f" This release contains {dataset_type.butler.count} dataset{s} of this type."
             fragment = "#butler" if uniquify_paths else ""
 
             if not dataset_type.butler.osti_id:

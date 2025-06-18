@@ -32,6 +32,7 @@ dataset_types:
     path: products/calibrations/index.html
   - butler:
       name: raw
+      count: 16125
     abstract: |
       Unprocessed images from the LSST Commissioning Camera.
     path: products/images/raw_exposure.html
@@ -128,6 +129,7 @@ dataset_types:
     path: products/catalogs/ss_source.html
   - butler:
       name: ss_object
+      count: 1
     tap:
       name: SSObject
     abstract: Derived parameters for moving objects.
