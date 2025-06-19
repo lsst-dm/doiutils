@@ -17,6 +17,7 @@ import copy
 import datetime
 import itertools
 import logging
+import textwrap
 import types
 import typing
 from collections.abc import Iterable
@@ -304,6 +305,17 @@ class DataReleaseConfig(BaseModel):
         """
         model = self.model_dump(exclude_unset=True)
         if YAML:
+            # We would like the abstract to use block style formatting.
+            from ruamel.yaml.scalarstring import LiteralScalarString
+
+            def block_text(text: str, offset: int = -2) -> str:
+                return LiteralScalarString(textwrap.fill(text, width=(80 + offset)))
+
+            model["abstract"] = block_text(model["abstract"])
+            for dtype in model["dataset_types"]:
+                if len(dtype["abstract"]) > 68:
+                    dtype["abstract"] = block_text(dtype["abstract"], offset=-6)
+
             YAML().dump(model, fh)
         elif yaml:
             yaml.safe_dump(model, fh)
