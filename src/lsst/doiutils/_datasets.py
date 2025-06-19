@@ -17,14 +17,22 @@ import copy
 import datetime
 import itertools
 import logging
+import types
 import typing
 from collections.abc import Iterable
 from functools import cached_property
 from typing import IO, Self
 
 import elinkapi
-import yaml
-from pydantic import AnyHttpUrl, BaseModel, field_serializer
+from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer
+
+yaml: types.ModuleType | None = None
+YAML: type | None = None
+try:
+    from ruamel.yaml import YAML
+except ImportError:
+    import yaml
+
 
 """
 Aim
@@ -113,6 +121,15 @@ _IDENTIFIERS = [
 ]
 
 
+def _strip_newlines(text: str) -> str:
+    """Replace new lines with spaces.
+
+    All our dataset configs are single paragraphs and the YAML parser injects
+    newlines that were not really there.
+    """
+    return text.replace("\n", " ").strip()
+
+
 class DatasetTypeSource(BaseModel):
     """Specific description of butler vs TAP dataset."""
 
@@ -139,7 +156,7 @@ class DatasetTypeSource(BaseModel):
 class DataReleaseDatasetType(BaseModel):
     """A component dataset type found within a data release."""
 
-    abstract: str
+    abstract: typing.Annotated[str, AfterValidator(_strip_newlines)]
     """Description of this dataset type."""
     path: str
     """Path to the landing page relative to the main site URL."""
@@ -213,7 +230,7 @@ class DataReleaseConfig(BaseModel):
     """Main landing page for this data release."""
     date: datetime.date
     """Date the data release was made public (YYYY-MM-DD)"""
-    abstract: str
+    abstract: typing.Annotated[str, AfterValidator(_strip_newlines)]
     """Description of this data release. Will be included with dataset type
     descriptions.
     """
@@ -267,7 +284,14 @@ class DataReleaseConfig(BaseModel):
         fh : `typing.IO`
             Open file handle associated with a YAML configuration.
         """
-        config_dict = yaml.safe_load(fh)
+        if YAML:
+            yaml_loader = YAML()
+            config_dict = yaml_loader.load(fh)
+        elif yaml:
+            # Fallback to using pyyaml.
+            config_dict = yaml.safe_load(fh)
+        else:
+            raise RuntimeError("YAML loader not available.")
         return cls.model_validate(config_dict, strict=True)
 
     def write_yaml_fh(self, fh: IO[str]) -> None:
@@ -278,7 +302,13 @@ class DataReleaseConfig(BaseModel):
         fh : `typing.IO`
             Open file handle associated to use for writing the YAML.
         """
-        yaml.safe_dump(self.model_dump(exclude_unset=True), fh)
+        model = self.model_dump(exclude_unset=True)
+        if YAML:
+            YAML().dump(model, fh)
+        elif yaml:
+            yaml.safe_dump(model, fh)
+        else:
+            raise RuntimeError("No YAML writer available.")
 
     def set_saved_metadata(self, key: str | None, saved_record: elinkapi.Record) -> None:
         """Update the configuration to reflect that a DOI has been saved.
@@ -337,9 +367,6 @@ def _make_sub_record(
 
 def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]:
     """Given a configuration, construct DOI records suitable for submission."""
-    # Remove new lines from the abstract.
-    abstract = config.abstract.replace("\n", " ").strip()
-
     instrument_relation = elinkapi.RelatedIdentifier(
         type="DOI", relation="IsCollectedBy", value=config.instrument_doi
     )
@@ -351,7 +378,7 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
         "site_ownership_code": "SLAC-LSST",
         "title": config.title,
         "site_url": str(config.site_url),
-        "description": abstract,
+        "description": config.abstract,
         "related_identifiers": [instrument_relation],
         "identifiers": _IDENTIFIERS,
         "organizations": list(_ORGANIZATIONS.values()),
@@ -375,7 +402,7 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
     # to be solely isPartOf the full data release and not themselves be
     # isCollectedBy the instrument?
     for dataset_type in config.dataset_types:
-        dtype_abstract = dataset_type.abstract.replace("\n", " ").strip()
+        dtype_abstract = dataset_type.abstract
         # Lower case the first character for grammar given that extra_text
         # below starts a sentence.
         dtype_abstract = dtype_abstract[0].lower() + dtype_abstract[1:]

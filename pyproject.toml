@@ -23,7 +23,8 @@ classifiers = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "elinkapi"
+    "elinkapi",
+    "ruamel.yaml"
 ]
 dynamic = ["version"]
 
