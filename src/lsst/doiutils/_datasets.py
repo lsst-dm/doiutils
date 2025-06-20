@@ -451,6 +451,8 @@ def _make_tap_record(
     if count_text:
         abstract += count_text + "."
 
+    product_format = "IVOA TAP-queryable catalog" if not tap.format else tap.format
+
     if not tap.osti_id:
         record = _make_sub_record(
             base_record,
@@ -458,7 +460,7 @@ def _make_tap_record(
             abstract,
             dtype_path + fragment,
             product_size=product_size,
-            format_information=tap.format,
+            format_information=product_format,
         )
         return tap.name, record
     else:
