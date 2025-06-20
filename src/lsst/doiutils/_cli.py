@@ -173,3 +173,43 @@ def count_butler_datasets(
 
     if updated:
         dr_config.write_yaml_fh(sys.stdout)
+
+
+@cli.command("generate-rst-replacements")
+@click.argument("config", type=click.File())
+@click.pass_context
+def generate_rst_replacements(
+    ctx: click.Context,
+    config: IO[str],
+) -> None:
+    """Create the Restructured Text replacement strings required to build
+    the data release documentation.
+
+    CONFIG is the configuration file containing a full description of all
+    the datasets that are part of this data release.
+    """
+    dr_config = DataReleaseConfig.from_yaml_fh(config)
+
+    def _print_replacement(key: str, value: str | int | None) -> None:
+        if isinstance(value, int):
+            value = f"{value:,d}"  # Use comma separators.
+        print(f".. |{key.replace(' ', '_')}| replace:: {value if value is not None else 'TBD'}")
+
+    def _doi_to_rst(doi: str | None) -> str:
+        """Convert the DOI to restructured text."""
+        if not doi:
+            return "TBD"
+        return f"https://doi.org/{doi}"
+
+    _print_replacement("dataset_doi", dr_config.doi)
+
+    for dataset_type in dr_config.dataset_types:
+        if butler := dataset_type.butler:
+            name = butler.name
+            _print_replacement(f"{name}_doi", _doi_to_rst(butler.doi))
+            _print_replacement(f"{name}_butler_count", butler.count)
+        if tap := dataset_type.tap:
+            name = tap.name
+            _print_replacement(f"{name}_doi", _doi_to_rst(tap.doi))
+            _print_replacement(f"{name}_rows", tap.count)
+            _print_replacement(f"{name}_columns", tap.count2)
