@@ -149,6 +149,10 @@ class DatasetTypeSource(BaseModel):
     """Count to use for this dataset type source. For butler this is the
     number of datasets. For TAP this will be the number of rows in the catalog.
     """
+    count2: int | None = None
+    """Secondary count information. For TAP this will be the number of
+    columns. For butler this could be the size in bytes.
+    """
     format: str | None = None
     """Format of the dataset. For butler this will be the MIME type of file
     extension of the files. No value is used for TAP source."""
@@ -377,6 +381,91 @@ def _make_sub_record(
     return elinkapi.Record.model_validate(dtype_content, strict=True)
 
 
+def _make_butler_record(
+    base_record: dict[str, typing.Any],
+    butler: DatasetTypeSource,
+    dtype_abstract: str,
+    dtype_path: str,
+    uniquify_paths: bool,  # noqa: FBT001
+) -> tuple[str | None, elinkapi.Record | None]:
+    extra_text = (
+        "This dataset is a subset of the full data release"
+        f" consisting of the {butler.name} dataset type. These are "
+    )
+
+    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+    product_size: str | None = None
+    if count := butler.count:
+        s = "" if count == 1 else "s"
+        abstract += f" This release contains {count:,d} dataset{s} of this type."
+        product_size = f"{count:,d} file{s}"
+    fragment = "#butler" if uniquify_paths else ""
+
+    if not butler.osti_id:
+        record = _make_sub_record(
+            base_record,
+            f": {butler.name} dataset type",
+            abstract,
+            dtype_path + fragment,
+            product_size=product_size,
+            format_information=butler.format,
+        )
+        return butler.name, record
+    else:
+        _LOG.info("DOI already assigned for %s: %d", butler.name, butler.osti_id)
+    return None, None
+
+
+def _make_tap_record(
+    base_record: dict[str, typing.Any],
+    tap: DatasetTypeSource,
+    dtype_abstract: str,
+    dtype_path: str,
+    uniquify_paths: bool,  # noqa: FBT001
+) -> tuple[str | None, elinkapi.Record | None]:
+    extra_text = (
+        "This dataset is a subset of the full data release consisting of "
+        f"a searchable catalog named {tap.name}. This catalog contains "
+    )
+    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+
+    product_texts: list[str] = []
+    count_text: str | None = None
+    if count := tap.count:
+        s = "" if count == 1 else "s"
+        count_text = f" This catalog contains {count:,d} row{s}"
+        product_texts.append(f"{count:,d} row{s}")
+    if count := tap.count2:  # This is the column count.
+        s = "" if count == 1 else "s"
+        if count_text:
+            count_text += f" with {count:,d} column{s}"
+        else:
+            f" This catalog contains {count:,d} column{s}"
+        product_texts.append(f"{count:,d} column{s}")
+
+    fragment = "#tap" if uniquify_paths else ""
+
+    product_size: str | None = None
+    if product_texts:
+        product_size = "; ".join(product_texts)
+    if count_text:
+        abstract += count_text + "."
+
+    if not tap.osti_id:
+        record = _make_sub_record(
+            base_record,
+            f": {tap.name} searchable catalog",
+            abstract,
+            dtype_path + fragment,
+            product_size=product_size,
+            format_information=tap.format,
+        )
+        return tap.name, record
+    else:
+        _LOG.info("DOI already assigned for %s: %d", tap.name, tap.osti_id)
+    return None, None
+
+
 def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]:
     """Given a configuration, construct DOI records suitable for submission."""
     instrument_relation = elinkapi.RelatedIdentifier(
@@ -426,57 +515,18 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
             uniquify_paths = True
 
         if dataset_type.butler:
-            extra_text = (
-                "This dataset is a subset of the full data release"
-                f" consisting of the {dataset_type.butler.name} dataset type. These are "
+            key, record = _make_butler_record(
+                record_content, dataset_type.butler, dtype_abstract, dataset_type.path, uniquify_paths
             )
-
-            abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
-            product_size: str | None = None
-            if dataset_type.butler.count:
-                s = "" if dataset_type.butler.count == 1 else "s"
-                abstract += f" This release contains {dataset_type.butler.count} dataset{s} of this type."
-                product_size = f"{dataset_type.butler.count} file{s}"
-            fragment = "#butler" if uniquify_paths else ""
-
-            if not dataset_type.butler.osti_id:
-                records[dataset_type.get_record_key("butler")] = _make_sub_record(
-                    record_content,
-                    f": {dataset_type.butler.name} dataset type",
-                    abstract,
-                    dataset_type.path + fragment,
-                    product_size=product_size,
-                    format_information=dataset_type.butler.format,
-                )
-            else:
-                _LOG.info(
-                    "DOI already assigned for %s: %d", dataset_type.butler.name, dataset_type.butler.osti_id
-                )
+            if record:
+                records[key] = record
 
         if dataset_type.tap:
-            extra_text = (
-                "This dataset is a subset of the full data release consisting of "
-                f"a searchable catalog named {dataset_type.tap.name}. This catalog contains "
+            key, record = _make_tap_record(
+                record_content, dataset_type.tap, dtype_abstract, dataset_type.path, uniquify_paths
             )
-            abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
-            product_size: str | None = None
-            if dataset_type.tap.count:
-                s = "" if dataset_type.tap.count == 1 else "s"
-                abstract += f" This catalog contains {dataset_type.tap.count:,d} rows."
-                product_size = f"{dataset_type.tap.count} row{s}"
-            fragment = "#tap" if uniquify_paths else ""
-
-            if not dataset_type.tap.osti_id:
-                records[dataset_type.get_record_key("tap")] = _make_sub_record(
-                    record_content,
-                    f": {dataset_type.tap.name} searchable catalog",
-                    abstract,
-                    dataset_type.path + fragment,
-                    product_size=product_size,
-                    format_information=dataset_type.tap.format,
-                )
-            else:
-                _LOG.info("DOI already assigned for %s: %d", dataset_type.tap.name, dataset_type.tap.osti_id)
+            if record:
+                records[key] = record
 
     return records
 
