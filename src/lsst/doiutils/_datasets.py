@@ -95,6 +95,14 @@ _AFFILIATIONS = {
     ),
 }
 
+_DOE_IDENTIFIERS = [
+    elinkapi.Identifier(type="CN_DOE", value="AC02-76SF00515"),
+]
+_NSF_IDENTIFIERS = [
+    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Agreement AST-1258333"),
+    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Support Agreement AST-1836783"),
+]
+
 _ORGANIZATIONS = {
     "Rubin": elinkapi.Organization(
         type="AUTHOR", name="NSF-DOE Vera C. Rubin Observatory", ror_id="https://ror.org/048g3cy84"
@@ -108,18 +116,20 @@ _ORGANIZATIONS = {
         type="RESEARCHING", name="SLAC National Accelerator Laboratory", ror_id="https://ror.org/05gzmn429"
     ),
     "NSF": elinkapi.Organization(
-        type="SPONSOR", name="U.S. National Science Foundation", ror_id="https://ror.org/021nxhr62"
+        type="SPONSOR",
+        name="U.S. National Science Foundation",
+        ror_id="https://ror.org/021nxhr62",
+        identifiers=_NSF_IDENTIFIERS,
     ),
     "DOE": elinkapi.Organization(
-        type="SPONSOR", name="U.S. Department of Energy Office of Science", ror_id="https://ror.org/00mmn6b08"
+        type="SPONSOR",
+        name="U.S. Department of Energy Office of Science",
+        ror_id="https://ror.org/00mmn6b08",
+        identifiers=_DOE_IDENTIFIERS,
     ),
 }
 
-_IDENTIFIERS = [
-    elinkapi.Identifier(type="CN_DOE", value="AC02-76SF00515"),
-    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Agreement AST-1258333"),
-    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Support Agreement AST-1836783"),
-]
+_IDENTIFIERS = _DOE_IDENTIFIERS + _NSF_IDENTIFIERS
 
 
 def _strip_newlines(text: str) -> str:
