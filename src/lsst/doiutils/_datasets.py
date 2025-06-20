@@ -672,12 +672,30 @@ def update_record_relationships(
 
 
 def update_records(
-    records: Iterable[elinkapi.Record], elink: elinkapi.Elink, *, dry_run: bool = False
+    records: Iterable[elinkapi.Record], elink: elinkapi.Elink, *, dry_run: bool = False, state: str = "save"
 ) -> None:
-    """Save the given records as updates to an existing record."""
-    _LOG.info("Uploading modified records")
+    """Update the given records, potentially including final submission."""
+    _LOG.info("Uploading records with state %s", state)
     for record in records:
         if dry_run:
             print(record.model_dump_json(indent=2))
         else:
-            elink.update_record(record.osti_id, record, "save")
+            try:
+                elink.update_record(record.osti_id, record, state)
+            except Exception:
+                _LOG.error(f"Error uploading record with OSTI ID {record.osti_id}")
+                raise
+
+
+def publish_records(config: DataReleaseConfig, elink: elinkapi.Elink, *, dry_run: bool = False) -> None:
+    """Publish the records.
+
+    Notes
+    -----
+    The configuration must correspond to one that includes saved OSTI
+    identifiers.
+    """
+    _LOG.info("Retrieving records from OSTI")
+    saved_records = get_records(config, elink)
+
+    update_records(saved_records.values(), elink, dry_run=dry_run, state="submit")

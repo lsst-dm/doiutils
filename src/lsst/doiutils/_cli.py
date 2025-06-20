@@ -19,7 +19,7 @@ import click
 import elinkapi
 
 from . import __version__
-from ._datasets import DataReleaseConfig, submit_records, update_record_relationships
+from ._datasets import DataReleaseConfig, publish_records, submit_records, update_record_relationships
 
 _LOG = logging.getLogger("lsst.doiutils")
 
@@ -111,6 +111,37 @@ def update_dataset_relationships(
     api = elinkapi.Elink(target=server, token=token)
 
     update_record_relationships(dr_config, api, dry_run=dry_run)
+
+
+@cli.command("publish-dataset-dois")
+@click.argument("config", type=click.File())
+@click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without publishing.")
+@click.option("--token", default="", type=str, help="Auth token to use for DOI release.")
+@click.option(
+    "--server",
+    default="https://review.osti.gov/elink2api/",
+    help="Desired endpoint to use for release. Default is to use the test server. "
+    "For a final submission use https://www.osti.gov/elink2api/",
+)
+@click.pass_context
+def publish_dataset_dois(
+    ctx: click.Context,
+    config: IO[str],
+    dry_run: bool,  # noqa: FBT001
+    token: str,
+    server: str,
+) -> None:
+    """Publish the DOIs associated with this configuration.
+
+    CONFIG is the configuration file containing a full description of all
+    the datasets that are part of this data release and their associated
+    DOIs and OSTI IDs from a previous upload.
+    """
+    dr_config = DataReleaseConfig.from_yaml_fh(config)
+
+    api = elinkapi.Elink(target=server, token=token)
+
+    publish_records(dr_config, api, dry_run=dry_run)
 
 
 @cli.command("count-butler-datasets")
