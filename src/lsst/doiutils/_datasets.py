@@ -459,6 +459,11 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
                 f"a searchable catalog named {dataset_type.tap.name}. This catalog contains "
             )
             abstract = typing.cast(str, record_content["description"]) + "\n\n" + extra_text + dtype_abstract
+            product_size: str | None = None
+            if dataset_type.tap.count:
+                s = "" if dataset_type.tap.count == 1 else "s"
+                abstract += f" This catalog contains {dataset_type.tap.count:,d} rows."
+                product_size = f"{dataset_type.tap.count} row{s}"
             fragment = "#tap" if uniquify_paths else ""
 
             if not dataset_type.tap.osti_id:
@@ -467,6 +472,8 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
                     f": {dataset_type.tap.name} searchable catalog",
                     abstract,
                     dataset_type.path + fragment,
+                    product_size=product_size,
+                    format_information=dataset_type.tap.format,
                 )
             else:
                 _LOG.info("DOI already assigned for %s: %d", dataset_type.tap.name, dataset_type.tap.osti_id)

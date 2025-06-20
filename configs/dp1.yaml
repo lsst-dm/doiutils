@@ -76,6 +76,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: DiaSource
+    count: 3086404
 - abstract: Derived properties for transient and variable objects.
   path: products/catalogs/dia_object.html
   butler:
@@ -84,6 +85,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: DiaObject
+    count: 1089818
 - abstract: |-
     Forced measurements in visit and difference images, at the coordinates of
     all DIA objects.
@@ -93,7 +95,8 @@ dataset_types:
     count: 597
     format: application/vnd.apache.parquet
   tap:
-    name: DiaForcedSourceOnDiaObject
+    name: ForcedSourceOnDiaObject
+    count: 196911566
 - abstract: Measurements for detected sources in processed visit images.
   path: products/catalogs/source.html
   butler:
@@ -102,6 +105,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: Source
+    count: 45565632
 - abstract: Detections from deep co-adds.
   path: products/catalogs/object.html
   butler:
@@ -110,6 +114,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: Object
+    count: 2299757
 - abstract: |-
     Forced measurements in visit and difference images, at the coordinates of
     all objects.
@@ -120,6 +125,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: ForcedSource
+    count: 268796943
 - abstract: Metadata, including dates and filters for every visit.
   path: products/catalogs/visit_table.html
   butler:
@@ -128,6 +134,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: Visit
+    count: 1786
 - abstract: Per-detector visit metadata.
   path: products/catalogs/visit_detector_table.htm
   butler:
@@ -136,6 +143,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: CcdVisit
+    count: 16071
 - abstract: |-
     Instantaneous physical parameters for moving objects at the time of every
     observation.
