@@ -162,6 +162,7 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: SSSource
+    count: 5988
     count2: 23
 - abstract: Derived parameters for moving objects.
   path: products/catalogs/ss_object.html
@@ -171,4 +172,5 @@ dataset_types:
     format: application/vnd.apache.parquet
   tap:
     name: SSObject
+    count: 431
     count2: 3
