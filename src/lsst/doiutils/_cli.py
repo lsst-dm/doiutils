@@ -51,7 +51,7 @@ def cli(ctx: click.Context, log_level: str, log_file: str | None) -> None:
     logging.getLogger("lsst").setLevel(logging.INFO)
 
 
-@cli.command("datasets")
+@cli.command("save-dataset-dois")
 @click.argument("config", type=click.File())
 @click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
 @click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
@@ -62,7 +62,7 @@ def cli(ctx: click.Context, log_level: str, log_file: str | None) -> None:
     "For a final submission use https://www.osti.gov/elink2api/",
 )
 @click.pass_context
-def datasets(
+def save_dataset_dois(
     ctx: click.Context,
     config: IO[str],
     dry_run: bool,  # noqa: FBT001
@@ -82,7 +82,7 @@ def datasets(
         dr_config.write_yaml_fh(sys.stdout)
 
 
-@cli.command("update-relationships")
+@cli.command("update-dataset-relationships")
 @click.argument("config", type=click.File())
 @click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
 @click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
@@ -93,7 +93,7 @@ def datasets(
     "For a final submission use https://www.osti.gov/elink2api/",
 )
 @click.pass_context
-def update_relationships(
+def update_dataset_relationships(
     ctx: click.Context,
     config: IO[str],
     dry_run: bool,  # noqa: FBT001
