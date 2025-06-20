@@ -260,18 +260,19 @@ class DataReleaseConfig(BaseModel):
         """
         osti_id_map: dict[int, DataReleaseDatasetType] = {}
         for dtype in self.dataset_types:
-            found = False
-            if dtype.butler and dtype.butler.osti_id:
-                osti_id_map[dtype.butler.osti_id] = dtype
-                found = True
-            if dtype.tap and dtype.tap.osti_id:
-                osti_id_map[dtype.tap.osti_id] = dtype
-                found = True
-
-            if not found:
-                raise ValueError(
-                    f"Could not find OSTI ID for dataset type {dtype}. Was this configuration uploaded?"
-                )
+            if butler := dtype.butler:
+                if not butler.osti_id:
+                    raise ValueError(
+                        f"Butler entry exists for {dtype} but no OSTI ID found. "
+                        "Was this configuration uploaded?"
+                    )
+                osti_id_map[butler.osti_id] = dtype
+            if tap := dtype.tap:
+                if not tap.osti_id:
+                    raise ValueError(
+                        f"TAP entry exists for {dtype} but no OSTI ID found. Was this configuration uploaded?"
+                    )
+                osti_id_map[tap.osti_id] = dtype
 
         return osti_id_map
 
