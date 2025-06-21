@@ -251,6 +251,12 @@ class DataReleaseConfig(BaseModel):
     """
     instrument_doi: str
     """DOI of the instrument that collected this data."""
+    description_paper: str | None = None
+    """The DOI of the document describing this data release."""
+    product_size: str | None = None
+    """Descriptive text to use in the product size part of the DOI record.
+    Can be free text. Will not appear in the abstract.
+    """
     dataset_types: list[DataReleaseDatasetType]
     """Dataset types associated with this data release that we wish to also
     issue DOIs for.
@@ -377,6 +383,14 @@ def _make_sub_record(
     """Make a sub-record for a dataset."""
     # Modify a copy.
     dtype_content = copy.deepcopy(primary_content)
+
+    # Remove related identifiers. We only want the instrument to be
+    # referenced from the primary DOI. Also remove product_size since the
+    # components will have their own sizes and should not inherit the full
+    # size.
+    dtype_content.pop("related_identifiers", None)
+    dtype_content.pop("product_size", None)
+
     dtype_content["description"] = abstract
     dtype_content["title"] += extra_title
     dtype_content["site_url"] += extra_path
@@ -384,10 +398,6 @@ def _make_sub_record(
         dtype_content["format_information"] = format_information
     if product_size:
         dtype_content["product_size"] = product_size
-
-    # Remove related identifiers. We only want the instrument to be
-    # referenced from the primary DOI.
-    dtype_content.pop("related_identifiers", None)
 
     return elinkapi.Record.model_validate(dtype_content, strict=True)
 
@@ -481,9 +491,16 @@ def _make_tap_record(
 
 def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]:
     """Given a configuration, construct DOI records suitable for submission."""
-    instrument_relation = elinkapi.RelatedIdentifier(
-        type="DOI", relation="IsCollectedBy", value=config.instrument_doi
+    related_identifiers: list[elinkapi.RelatedIdentifier] = []
+    related_identifiers.append(
+        elinkapi.RelatedIdentifier(type="DOI", relation="IsCollectedBy", value=config.instrument_doi)
     )
+    if config.description_paper:
+        # It's highly unlikely this will be known at DOI creation time but
+        # just in case.
+        related_identifiers.append(
+            elinkapi.RelatedIdentifier(type="DOI", relation="IsDescribedBy", value=config.description_paper)
+        )
 
     # Primary dataset.
     record_content = {
@@ -493,11 +510,12 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
         "title": config.title,
         "site_url": str(config.site_url),
         "description": config.abstract,
-        "related_identifiers": [instrument_relation],
+        "related_identifiers": related_identifiers,
         "identifiers": _IDENTIFIERS,
         "organizations": list(_ORGANIZATIONS.values()),
         "subject_category_code": ["79"],  # "79 ASTRONOMY AND ASTROPHYSICS"
         "publication_date": config.date,
+        "product_size": config.product_size,
         "publisher_information": (
             "SLAC National Accelerator Laboratory (SLAC), Menlo Park, CA (United States)"
         ),
