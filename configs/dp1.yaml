@@ -16,6 +16,7 @@ abstract: |-
   in six broad photometric bands, ugrizy, spanning a range of stellar densities
   and latitudes and overlapping with external reference datasets.
 instrument_doi: 10.71929/rubin/2561361
+description_paper: null
 dataset_types:
 - abstract: |-
     A collection of calibration datasets such as biases, darks, and flats used
@@ -67,7 +68,7 @@ dataset_types:
     name: survey property
     alias: deepCoadd_*_consolidated_map_*
     count: 84
-    format: HSP
+    format: application/fits
 - abstract: Measurements for detected sources in difference images.
   path: products/catalogs/dia_source.html
   butler:
