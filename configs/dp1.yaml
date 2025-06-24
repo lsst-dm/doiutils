@@ -17,6 +17,7 @@ abstract: |-
   and latitudes and overlapping with external reference datasets.
 instrument_doi: 10.71929/rubin/2561361
 description_paper: null
+product_size: "1,421,990 files"
 dataset_types:
 - abstract: |-
     A collection of calibration datasets such as biases, darks, and flats used
