@@ -515,13 +515,15 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
         "organizations": list(_ORGANIZATIONS.values()),
         "subject_category_code": ["79"],  # "79 ASTRONOMY AND ASTROPHYSICS"
         "publication_date": config.date,
-        "product_size": config.product_size,
         "publisher_information": (
             "SLAC National Accelerator Laboratory (SLAC), Menlo Park, CA (United States)"
         ),
         "access_limitations": ["UNL"],
         "geolocations": [_LOCATION],
     }
+    if config.product_size:
+        record_content["product_size"] = config.product_size
+
     records: dict[str | None, elinkapi.Record] = {}
 
     # Primary DOI uses a None key.
