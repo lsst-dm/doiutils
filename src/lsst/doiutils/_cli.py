@@ -232,7 +232,7 @@ def generate_rst_replacements(
             return "TBD"
         return f"https://doi.org/{doi}"
 
-    _print_replacement("dataset_doi", dr_config.doi)
+    _print_replacement("dataset_doi", _doi_to_rst(dr_config.doi))
 
     for dataset_type in dr_config.dataset_types:
         if butler := dataset_type.butler:
