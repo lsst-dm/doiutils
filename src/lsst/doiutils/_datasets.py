@@ -167,6 +167,26 @@ class DatasetTypeSource(BaseModel):
     """Format of the dataset. For butler this will be the MIME type of file
     extension of the files. No value is used for TAP source."""
 
+    def get_subtitle(self, variant: str) -> str:
+        """Return the subtitle for this dataset type.
+
+        Parameters
+        ----------
+        variant : `str`
+            "tap" or "butler".
+
+        Returns
+        -------
+        subtitle: `str`
+            The string to add to the main dataset title. A leading colon is
+            assumed to be added by the caller.
+        """
+        if variant == "butler":
+            return f"{self.name} dataset type"
+        elif variant == "tap":
+            return f"{self.name} searchable catalog"
+        raise RuntimeError(f"Unrecognized variant {variant} for subtitle calculation.")
+
 
 class DataReleaseDatasetType(BaseModel):
     """A component dataset type found within a data release."""
@@ -425,7 +445,7 @@ def _make_butler_record(
     if not butler.osti_id:
         record = _make_sub_record(
             base_record,
-            f": {butler.name} dataset type",
+            f": {butler.get_subtitle('butler')}",
             abstract,
             dtype_path + fragment,
             product_size=product_size,
@@ -477,7 +497,7 @@ def _make_tap_record(
     if not tap.osti_id:
         record = _make_sub_record(
             base_record,
-            f": {tap.name} searchable catalog",
+            f": {tap.get_subtitle('tap')}",
             abstract,
             dtype_path + fragment,
             product_size=product_size,

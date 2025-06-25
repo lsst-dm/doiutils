@@ -226,21 +226,28 @@ def generate_rst_replacements(
             value = f"{value:,d}"  # Use comma separators.
         print(f".. |{key.replace(' ', '_')}| replace:: {value if value is not None else 'TBD'}")
 
-    def _doi_to_rst(doi: str | None) -> str:
+    def _make_title(subtitle: str) -> str:
+        return f"{dr_config.title}: {subtitle}"
+
+    year = dr_config.date.year
+
+    def _doi_to_rst(doi: str | None, title: str) -> str:
         """Convert the DOI to restructured text."""
         if not doi:
             return "TBD"
-        return f"https://doi.org/{doi}"
+        return f"*Citation*: **NSF-DOE Vera C. Rubin Observatory** ({year}); {title} |doi_image| https://doi.org/{doi}"
 
-    _print_replacement("dataset_doi", _doi_to_rst(dr_config.doi))
+    _print_replacement("dataset_doi", _doi_to_rst(dr_config.doi, dr_config.title))
 
     for dataset_type in dr_config.dataset_types:
         if butler := dataset_type.butler:
             name = butler.name
-            _print_replacement(f"{name}_doi", _doi_to_rst(butler.doi))
+            _print_replacement(
+                f"{name}_doi", _doi_to_rst(butler.doi, _make_title(butler.get_subtitle("butler")))
+            )
             _print_replacement(f"{name}_butler_count", butler.count)
         if tap := dataset_type.tap:
             name = tap.name
-            _print_replacement(f"{name}_doi", _doi_to_rst(tap.doi))
+            _print_replacement(f"{name}_doi", _doi_to_rst(tap.doi, _make_title(tap.get_subtitle("tap"))))
             _print_replacement(f"{name}_rows", tap.count)
             _print_replacement(f"{name}_columns", tap.count2)
