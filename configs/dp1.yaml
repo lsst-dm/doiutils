@@ -16,8 +16,8 @@ abstract: |-
   in six broad photometric bands, ugrizy, spanning a range of stellar densities
   and latitudes and overlapping with external reference datasets.
 instrument_doi: 10.71929/rubin/2561361
-description_paper: null
-product_size: "4.75 TiB; 1,421,990 files"
+description_paper:
+product_size: 4.75 TiB; 1,421,990 files
 dataset_types:
 - abstract: |-
     A collection of calibration datasets such as biases, darks, and flats used
@@ -25,11 +25,15 @@ dataset_types:
   path: products/calibrations/index.html
   butler:
     name: calibrations
+    doi: 10.71929/rubin/2570309
+    osti_id: 2570309
     count: 496
 - abstract: Unprocessed images from the LSST Commissioning Camera.
   path: products/images/raw_exposure.html
   butler:
     name: raw
+    doi: 10.71929/rubin/2570310
+    osti_id: 2570310
     count: 16125
     format: application/fits
 - abstract: |-
@@ -38,12 +42,16 @@ dataset_types:
   path: products/images/visit_image.html
   butler:
     name: visit_image
+    doi: 10.71929/rubin/2570311
+    osti_id: 2570311
     count: 15972
     format: application/fits
 - abstract: Images created by subtracting a template image from a visit image.
   path: products/images/difference_image.html
   butler:
     name: difference_image
+    doi: 10.71929/rubin/2570312
+    osti_id: 2570312
     count: 15972
     format: application/fits
 - abstract: |-
@@ -52,6 +60,8 @@ dataset_types:
   path: products/images/deep_coadd.html
   butler:
     name: deep_coadd
+    doi: 10.71929/rubin/2570313
+    osti_id: 2570313
     count: 2644
     format: application/fits
 - abstract: |-
@@ -61,6 +71,8 @@ dataset_types:
   path: products/images/template_coadd.html
   butler:
     name: template_coadd
+    doi: 10.71929/rubin/2570314
+    osti_id: 2570314
     count: 2730
     format: application/fits
 - abstract: HealSparse property maps for the survey.
@@ -68,26 +80,36 @@ dataset_types:
   butler:
     name: survey property
     alias: deepCoadd_*_consolidated_map_*
+    doi: 10.71929/rubin/2570315
+    osti_id: 2570315
     count: 84
     format: application/fits
 - abstract: Measurements for detected sources in difference images.
   path: products/catalogs/dia_source.html
   butler:
     name: dia_source
+    doi: 10.71929/rubin/2570316
+    osti_id: 2570316
     count: 25
     format: application/vnd.apache.parquet
   tap:
     name: DiaSource
+    doi: 10.71929/rubin/2570317
+    osti_id: 2570317
     count: 3086404
     count2: 87
 - abstract: Derived properties for transient and variable objects.
   path: products/catalogs/dia_object.html
   butler:
     name: dia_object
+    doi: 10.71929/rubin/2570318
+    osti_id: 2570318
     count: 25
     format: application/vnd.apache.parquet
   tap:
     name: DiaObject
+    doi: 10.71929/rubin/2570319
+    osti_id: 2570319
     count: 1089818
     count2: 137
 - abstract: |-
@@ -96,30 +118,42 @@ dataset_types:
   path: products/catalogs/dia_forced_source.html
   butler:
     name: dia_object_forced_source
+    doi: 10.71929/rubin/2570320
+    osti_id: 2570320
     count: 597
     format: application/vnd.apache.parquet
   tap:
     name: ForcedSourceOnDiaObject
+    doi: 10.71929/rubin/2570321
+    osti_id: 2570321
     count: 196911566
     count2: 28
 - abstract: Measurements for detected sources in processed visit images.
   path: products/catalogs/source.html
   butler:
     name: source
+    doi: 10.71929/rubin/2570322
+    osti_id: 2570322
     count: 1786
     format: application/vnd.apache.parquet
   tap:
     name: Source
+    doi: 10.71929/rubin/2570323
+    osti_id: 2570323
     count: 45565632
     count2: 156
 - abstract: Detections from deep co-adds.
   path: products/catalogs/object.html
   butler:
     name: object
+    doi: 10.71929/rubin/2570324
+    osti_id: 2570324
     count: 29
     format: application/vnd.apache.parquet
   tap:
     name: Object
+    doi: 10.71929/rubin/2570325
+    osti_id: 2570325
     count: 2299757
     count2: 1296
 - abstract: |-
@@ -128,30 +162,42 @@ dataset_types:
   path: products/catalogs/forced_source.html
   butler:
     name: object_forced_source
+    doi: 10.71929/rubin/2570326
+    osti_id: 2570326
     count: 636
     format: application/vnd.apache.parquet
   tap:
     name: ForcedSource
+    doi: 10.71929/rubin/2570327
+    osti_id: 2570327
     count: 268796943
     count2: 28
 - abstract: Metadata, including dates and filters for every visit.
   path: products/catalogs/visit_table.html
   butler:
     name: visit_table
+    doi: 10.71929/rubin/2570328
+    osti_id: 2570328
     count: 1
     format: application/vnd.apache.parquet
   tap:
     name: Visit
+    doi: 10.71929/rubin/2570329
+    osti_id: 2570329
     count: 1786
     count2: 16
 - abstract: Per-detector visit metadata.
   path: products/catalogs/visit_detector_table.htm
   butler:
     name: visit_detector_table
+    doi: 10.71929/rubin/2570330
+    osti_id: 2570330
     count: 1
     format: application/vnd.apache.parquet
   tap:
     name: CcdVisit
+    doi: 10.71929/rubin/2570331
+    osti_id: 2570331
     count: 16071
     count2: 51
 - abstract: |-
@@ -160,19 +206,29 @@ dataset_types:
   path: products/catalogs/ss_source.html
   butler:
     name: ss_source
+    doi: 10.71929/rubin/2570332
+    osti_id: 2570332
     count: 1
     format: application/vnd.apache.parquet
   tap:
     name: SSSource
+    doi: 10.71929/rubin/2570333
+    osti_id: 2570333
     count: 5988
     count2: 23
 - abstract: Derived parameters for moving objects.
   path: products/catalogs/ss_object.html
   butler:
     name: ss_object
+    doi: 10.71929/rubin/2570334
+    osti_id: 2570334
     count: 1
     format: application/vnd.apache.parquet
   tap:
     name: SSObject
+    doi: 10.71929/rubin/2570335
+    osti_id: 2570335
     count: 431
     count2: 3
+doi: 10.71929/rubin/2570308
+osti_id: 2570308
