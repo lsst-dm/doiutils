@@ -27,13 +27,14 @@ from typing import IO, Self
 import elinkapi
 from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer
 
+from ._utils import strip_newlines
+
 yaml: types.ModuleType | None = None
 YAML: type | None = None
 try:
     from ruamel.yaml import YAML
 except ImportError:
     import yaml
-
 
 """
 Aim
@@ -132,15 +133,6 @@ _ORGANIZATIONS = {
 _IDENTIFIERS = _DOE_IDENTIFIERS + _NSF_IDENTIFIERS
 
 
-def _strip_newlines(text: str) -> str:
-    """Replace new lines with spaces.
-
-    All our dataset configs are single paragraphs and the YAML parser injects
-    newlines that were not really there.
-    """
-    return text.replace("\n", " ").strip()
-
-
 class DatasetTypeSource(BaseModel):
     """Specific description of butler vs TAP dataset."""
 
@@ -191,7 +183,7 @@ class DatasetTypeSource(BaseModel):
 class DataReleaseDatasetType(BaseModel):
     """A component dataset type found within a data release."""
 
-    abstract: typing.Annotated[str, AfterValidator(_strip_newlines)]
+    abstract: typing.Annotated[str, AfterValidator(strip_newlines)]
     """Description of this dataset type."""
     path: str
     """Path to the landing page relative to the main site URL."""
@@ -265,7 +257,7 @@ class DataReleaseConfig(BaseModel):
     """Main landing page for this data release."""
     date: datetime.date
     """Date the data release was made public (YYYY-MM-DD)"""
-    abstract: typing.Annotated[str, AfterValidator(_strip_newlines)]
+    abstract: typing.Annotated[str, AfterValidator(strip_newlines)]
     """Description of this data release. Will be included with dataset type
     descriptions.
     """
