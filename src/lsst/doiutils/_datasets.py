@@ -17,8 +17,6 @@ import copy
 import datetime
 import itertools
 import logging
-import textwrap
-import types
 import typing
 from collections.abc import Iterable
 from functools import cached_property
@@ -27,13 +25,9 @@ from typing import IO, Self
 import elinkapi
 from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer
 
-yaml: types.ModuleType | None = None
-YAML: type | None = None
-try:
-    from ruamel.yaml import YAML
-except ImportError:
-    import yaml
-
+from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, LOCATION, ORGANIZATION_AUTHORS
+from ._utils import strip_newlines
+from ._yaml import load_yaml_fh, prepare_block_text_for_writing, write_to_yaml_fh
 
 """
 Aim
@@ -74,71 +68,6 @@ formats?
 """
 
 _LOG = logging.getLogger("lsst.doiutils")
-
-_LOCATION = elinkapi.Geolocation(
-    type="POINT",
-    label="Cerro Pachón, Chile",
-    points=[elinkapi.Geolocation.Point(latitude=-30.244639, longitude=-70.749417)],
-)
-
-# Affiliations can be pre-calculated
-_AFFILIATIONS = {
-    "Rubin": elinkapi.Affiliation(
-        name="NSF-DOE Vera C. Rubin Observatory", ror_id="https://ror.org/048g3cy84"
-    ),
-    "NOIRLab": elinkapi.Affiliation(
-        name="U.S. National Science Foundation National Optical-Infrared Astronomy Research Laboratory",
-        ror_id="https://ror.org/03zmsge54",
-    ),
-    "SLAC": elinkapi.Affiliation(
-        name="SLAC National Accelerator Laboratory", ror_id="https://ror.org/05gzmn429"
-    ),
-}
-
-_DOE_IDENTIFIERS = [
-    elinkapi.Identifier(type="CN_DOE", value="AC02-76SF00515"),
-]
-_NSF_IDENTIFIERS = [
-    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Agreement AST-1258333"),
-    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Support Agreement AST-1836783"),
-]
-
-_ORGANIZATIONS = {
-    "Rubin": elinkapi.Organization(
-        type="AUTHOR", name="NSF-DOE Vera C. Rubin Observatory", ror_id="https://ror.org/048g3cy84"
-    ),
-    "NOIRLab": elinkapi.Organization(
-        type="RESEARCHING",
-        name="U.S. National Science Foundation National Optical-Infrared Astronomy Research Laboratory",
-        ror_id="https://ror.org/03zmsge54",
-    ),
-    "SLAC": elinkapi.Organization(
-        type="RESEARCHING", name="SLAC National Accelerator Laboratory", ror_id="https://ror.org/05gzmn429"
-    ),
-    "NSF": elinkapi.Organization(
-        type="SPONSOR",
-        name="U.S. National Science Foundation",
-        ror_id="https://ror.org/021nxhr62",
-        identifiers=_NSF_IDENTIFIERS,
-    ),
-    "DOE": elinkapi.Organization(
-        type="SPONSOR",
-        name="U.S. Department of Energy Office of Science",
-        ror_id="https://ror.org/00mmn6b08",
-        identifiers=_DOE_IDENTIFIERS,
-    ),
-}
-
-_IDENTIFIERS = _DOE_IDENTIFIERS + _NSF_IDENTIFIERS
-
-
-def _strip_newlines(text: str) -> str:
-    """Replace new lines with spaces.
-
-    All our dataset configs are single paragraphs and the YAML parser injects
-    newlines that were not really there.
-    """
-    return text.replace("\n", " ").strip()
 
 
 class DatasetTypeSource(BaseModel):
@@ -191,7 +120,7 @@ class DatasetTypeSource(BaseModel):
 class DataReleaseDatasetType(BaseModel):
     """A component dataset type found within a data release."""
 
-    abstract: typing.Annotated[str, AfterValidator(_strip_newlines)]
+    abstract: typing.Annotated[str, AfterValidator(strip_newlines)]
     """Description of this dataset type."""
     path: str
     """Path to the landing page relative to the main site URL."""
@@ -265,7 +194,7 @@ class DataReleaseConfig(BaseModel):
     """Main landing page for this data release."""
     date: datetime.date
     """Date the data release was made public (YYYY-MM-DD)"""
-    abstract: typing.Annotated[str, AfterValidator(_strip_newlines)]
+    abstract: typing.Annotated[str, AfterValidator(strip_newlines)]
     """Description of this data release. Will be included with dataset type
     descriptions.
     """
@@ -326,14 +255,7 @@ class DataReleaseConfig(BaseModel):
         fh : `typing.IO`
             Open file handle associated with a YAML configuration.
         """
-        if YAML:
-            yaml_loader = YAML()
-            config_dict = yaml_loader.load(fh)
-        elif yaml:
-            # Fallback to using pyyaml.
-            config_dict = yaml.safe_load(fh)
-        else:
-            raise RuntimeError("YAML loader not available.")
+        config_dict = load_yaml_fh(fh)
         return cls.model_validate(config_dict, strict=True)
 
     def write_yaml_fh(self, fh: IO[str]) -> None:
@@ -345,23 +267,12 @@ class DataReleaseConfig(BaseModel):
             Open file handle associated to use for writing the YAML.
         """
         model = self.model_dump(exclude_unset=True)
-        if YAML:
-            # We would like the abstract to use block style formatting.
-            from ruamel.yaml.scalarstring import LiteralScalarString
 
-            def block_text(text: str, offset: int = -2) -> str:
-                return LiteralScalarString(textwrap.fill(text, width=(80 + offset)))
+        model["abstract"] = prepare_block_text_for_writing(model["abstract"])
+        for dtype in model["dataset_types"]:
+            dtype["abstract"] = prepare_block_text_for_writing(dtype["abstract"], indent=6)
 
-            model["abstract"] = block_text(model["abstract"])
-            for dtype in model["dataset_types"]:
-                if len(dtype["abstract"]) > 68:
-                    dtype["abstract"] = block_text(dtype["abstract"], offset=-6)
-
-            YAML().dump(model, fh)
-        elif yaml:
-            yaml.safe_dump(model, fh)
-        else:
-            raise RuntimeError("No YAML writer available.")
+        write_to_yaml_fh(model, fh)
 
     def set_saved_metadata(self, key: str | None, saved_record: elinkapi.Record) -> None:
         """Update the configuration to reflect that a DOI has been saved.
@@ -531,15 +442,16 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
         "site_url": str(config.site_url),
         "description": config.abstract,
         "related_identifiers": related_identifiers,
-        "identifiers": _IDENTIFIERS,
-        "organizations": list(_ORGANIZATIONS.values()),
+        "identifiers": IDENTIFIERS,
+        "organizations": [ORGANIZATION_AUTHORS["Rubin"], *FUNDING_ORGANIZATIONS.values()],
         "subject_category_code": ["79"],  # "79 ASTRONOMY AND ASTROPHYSICS"
         "publication_date": config.date,
         "publisher_information": (
+            # This is for internal use and won't be part of DataCite record.
             "SLAC National Accelerator Laboratory (SLAC), Menlo Park, CA (United States)"
         ),
         "access_limitations": ["UNL"],
-        "geolocations": [_LOCATION],
+        "geolocations": [LOCATION],
     }
     if config.product_size:
         record_content["product_size"] = config.product_size
