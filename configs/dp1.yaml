@@ -187,7 +187,7 @@ dataset_types:
     count: 1786
     count2: 16
 - abstract: Per-detector visit metadata.
-  path: products/catalogs/visit_detector_table.htm
+  path: products/catalogs/visit_detector_table.html
   butler:
     name: visit_detector_table
     doi: 10.71929/rubin/2570330
