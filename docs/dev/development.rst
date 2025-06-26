@@ -2,17 +2,17 @@
 Development guide
 #################
 
-This page provides procedures and guidelines for developing and contributing to doiutils.
+This page provides procedures and guidelines for developing and contributing to lsst-doiutils.
 
 Scope of contributions
 ======================
 
-doiutils is an open source package, meaning that you can contribute to doiutils itself, or fork doiutils for your own purposes.
+lsst-doiutils is an open source package, meaning that you can contribute to doiutils itself, or fork lsst-doiutils for your own purposes.
 
-Since doiutils is intended for internal use by Rubin Observatory, community contributions can only be accepted if they align with Rubin Observatory's aims.
+Since lsst-doiutils is intended for internal use by Rubin Observatory, community contributions can only be accepted if they align with Rubin Observatory's aims.
 For that reason, it's a good idea to propose changes with a new `GitHub issue`_ before investing time in making a pull request.
 
-doiutils is developed by the Rubin Observatory SQuaRE team.
+lsst-doiutils is developed by the Rubin Observatory Data Engineering team.
 
 .. _GitHub issue: https://github.com/lsst-dm/doiutils/issues/new
 
@@ -21,7 +21,7 @@ doiutils is developed by the Rubin Observatory SQuaRE team.
 Setting up a local development environment
 ==========================================
 
-To develop doiutils, create a virtual environment with your method of choice (like virtualenvwrapper) and then clone or fork, and install:
+To develop lsst-doiutils, create a virtual environment with your method of choice (like virtualenvwrapper) and then clone or fork, and install:
 
 .. code-block:: sh
 
@@ -31,7 +31,7 @@ To develop doiutils, create a virtual environment with your method of choice (li
 
 This init step does three things:
 
-1. Installs doiutils in an editable mode with its "dev" extra that includes test and documentation dependencies.
+1. Installs lsst-doiutils in an editable mode with its "dev" extra that includes test and documentation dependencies.
 2. Installs pre-commit and tox.
 3. Installs the pre-commit hooks.
 
@@ -109,7 +109,7 @@ You may wish to do this at the start of a development cycle so that you're using
 Updating the change log
 =======================
 
-doiutils uses scriv_ to maintain its change log.
+lsst-doiutils uses scriv_ to maintain its change log.
 
 When preparing a pull request, run :command:`scriv create`.
 This will create a change log fragment in :file:`changelog.d`.

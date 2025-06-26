@@ -1,9 +1,9 @@
 [project]
-title = "doiutils"
+title = "lsst-doiutils"
 copyright = "2025 Association of Universities for Research in Astronomy, Inc. (AURA)"
 
 [project.python]
-package = "doiutils"
+package = "lsst-doiutils"
 
 [sphinx]
 rst_epilog_file = "_rst_epilog.rst"

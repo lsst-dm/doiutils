@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from doiutils import __version__
+from lsst.doiutils import __version__
 
 
 def test_version() -> None:

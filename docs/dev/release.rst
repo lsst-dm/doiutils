@@ -2,14 +2,14 @@
 Release procedure
 #################
 
-This page gives an overview of how doiutils releases are made.
+This page gives an overview of how lsst-doiutils releases are made.
 This information is only useful for maintainers.
 
-doiutils's releases are largely automated through GitHub Actions (see the `ci.yaml`_ workflow file for details).
-When a semantic version tag is pushed to GitHub, `doiutils is released to PyPI`_ with that version.
+lsst-doiutils's releases are largely automated through GitHub Actions (see the `ci.yaml`_ workflow file for details).
+When a semantic version tag is pushed to GitHub, `lsst-doiutils is released to PyPI`_ with that version.
 Similarly, documentation is built and pushed for each version (see https://doiutils.lsst.io/v).
 
-.. _`doiutils is released to PyPI`: https://pypi.org/project/doiutils/
+.. _`lsst-doiutils is released to PyPI`: https://pypi.org/project/lsst-doiutils/
 .. _`ci.yaml`: https://github.com/lsst-dm/doiutils/blob/main/.github/workflows/ci.yaml
 
 .. _regular-release:
@@ -62,10 +62,10 @@ Use `GitHub's Release feature <https://docs.github.com/en/repositories/releasing
 3. Fill in the release notes, copied from the release notes.
    You can use GitHub's change log feature to additionally generate a list of PRs included in the release.
 
-The tag **must** follow the :pep:`440` specification since doiutils uses setuptools_scm_ to set version metadata based on Git tags.
+The tag **must** follow the :pep:`440` specification since lsst-doiutils uses setuptools_scm_ to set version metadata based on Git tags.
 In particular, **don't** prefix the tag with ``v``.
 
-.. _setuptools_scm: https://github.com/pypa/setuptools_scm
+.. _setuptools_scm: https://github.com/pypa/setuptools-scm
 
 The `ci.yaml`_ GitHub Actions workflow uploads the new release to PyPI and documentation to https://doiutils.lsst.io.
 
