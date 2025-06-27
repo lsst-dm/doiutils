@@ -1,0 +1,96 @@
+title: "The LSST Science Pipelines Software: Optical Survey Pipeline Reduction and Analysis Environment"
+handle: PSTN-019
+site_url: https://pstn-019.lsst.io/
+date: 2025-06-27
+abstract: |-
+  The NSF-DOE Vera C. Rubin Observatory will produce the Legacy Survey of Space
+  and Time (LSST), producing 11 data releases over the ten-year survey. The
+  LSST Science Pipelines Software, the Optical Survey Pipeline Reduction and
+  Analysis Environment (OSPRAE), will be used to create these data releases
+  and to perform the nightly alert production. This paper provides an overview
+  of the LSST Science Pipelines Software, describing the components and how
+  they are combined to form pipelines
+doi: 10.71929/rubin/2570545
+osti_id: 2570545
+authors:
+- Rubin
+relationships:
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  References:
+  - 10.1086/305984
+  - 10.3847/1538-3881/aabc4f
+  - 10.3847/1538-4357/ac7c74
+  - 10.1117/12.857297
+  - 10.1145/3307681.3325400
+  - 10.1117/12.366388
+  - 10.1088/1538-3873/aa6c55
+  - 10.1016/j.ascom.2016.02.003
+  - 10.1051/aas:1996164
+  - 10.1086/668468
+  - 10.48550/arXiv.astro-ph/0608715
+  - 10.1093/pasj/psx080
+  - 10.1117/12.459890
+  - 10.1088/1538-3873/ad3aa2
+  - 10.3847/1538-3881/aa9f22
+  - 10.48550/arXiv.2501.15018
+  - 10.1117/12.789466
+  - 10.1093/mnras/stz2357
+  - 10.1088/1538-3873/ad0a73
+  - 10.1117/12.3019081
+  - 10.1016/j.patcog.2007.04.003
+  - 10.1088/0004-6256/150/5/150
+  - 10.1088/0004-6256/150/3/82
+  - 10.48550/arXiv.2211.15795
+  - 10.1038/s41586-020-2649-2
+  - 10.1016/j.ascom.2022.100584
+  - 10.1046/j.1365-8711.2003.06683.x
+  - 10.3847/1538-3881/aad69a
+  - 10.5281/zenodo.14238973
+  - 10.1109/MCSE.2007.55
+  - 10.1117/12.2561112
+  - 10.3847/1538-4357/ab042c
+  - 10.1093/mnras/staa3679
+  - 10.48550/arXiv.1712.00461
+  - 10.1117/12.2312157
+  - 10.1117/12.2231313
+  - 10.1117/12.2629569
+  - 10.48550/arXiv.1512.07914
+  - 10.1117/12.857920
+  - 10.1051/epjconf/202429504026
+  - 10.1109/MCSE.2005.11
+  - 10.1051/0004-6361:20066601
+  - 10.1093/mnras/stv2140
+  - 10.3847/2515-5172/ad0044
+  - 10.1117/12.3019302
+  - 10.1093/pasj/psac006
+  - 10.48550/arXiv.2303.03313
+  - 10.1111/j.1365-2966.2005.09282.x
+  - 10.1093/pasj/psx130
+  - 10.48550/arXiv.2412.09721
+  - 10.48550/arXiv.1910.10094
+  - 10.1016/j.ascom.2018.07.001
+  - 10.1093/pasj/psx063
+  - 10.1017/pasa.2020.45
+  - 10.3847/0004-637X/825/1/61
+  - 10.1088/1748-0221/10/08/C08010
+  - 10.48550/arXiv.2211.13611
+  - 10.48550/arXiv.2111.15030
+  - 10.1117/1.JATIS.6.1.011005
+  - 10.1088/1748-0221/12/05/C05015
+  - 10.48550/arXiv.1912.01703
+  - 10.1086/346138
+  - 10.48550/arXiv.2404.14516
+  - 10.1117/12.3019698
+  - 10.1016/j.ascom.2015.02.002
+  - 10.33232/001c.132299
+  - 10.1051/0004-6361/201424973
+  - 10.1071/AS07028
+  - 10.1117/12.2630226
+  - 10.3847/1538-3881/abba3e
+  - 10.1117/12.3019117
+  - 10.1145/2063348.2063364
+  - 10.1117/12.2561194
+  - 10.3847/1538-4365/abb82b
+  - 10.3847/0004-637X/830/1/27
+  - 10.1093/mnras/stac3350
