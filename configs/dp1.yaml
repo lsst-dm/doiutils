@@ -185,7 +185,7 @@ dataset_types:
     doi: 10.71929/rubin/2570329
     osti_id: 2570329
     count: 1786
-    count2: 16
+    count2: 15
 - abstract: Per-detector visit metadata.
   path: products/catalogs/visit_detector_table.html
   butler:
@@ -199,7 +199,7 @@ dataset_types:
     doi: 10.71929/rubin/2570331
     osti_id: 2570331
     count: 16071
-    count2: 51
+    count2: 50
 - abstract: |-
     Instantaneous physical parameters for moving objects at the time of every
     observation.
