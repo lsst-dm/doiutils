@@ -15,6 +15,8 @@ __all__: list[str] = []
 
 import datetime
 import logging
+import os
+import sys
 import typing
 
 import elinkapi
@@ -150,7 +152,9 @@ def make_paper_record(config: PaperConfig) -> elinkapi.Record:
     # Even though this is not allowed to be a document DOI, we are allowed
     # to set the Dataset Product Number field. This is an Identifier with
     # type RN for Report Number.
-    report_number = elinkapi.Identifier(type="RN", value=f"{config.get_series()} {config.handle}")
+    report_number = elinkapi.Identifier(
+        type="RN", value=f"Vera C. Rubin Observatory {config.get_series()} {config.handle}"
+    )
 
     record_content = {
         "product_type": "DA",  # Don't talk to me about this...
@@ -177,7 +181,52 @@ def make_paper_record(config: PaperConfig) -> elinkapi.Record:
     # (where we would need to keep the SPONSORING organizations but drop
     # the RESEARCHING organizations and keep only the authors). Builder
     # papers are required to have Rubin first author.
-    record_content["organizations"] = [ORGANIZATION_AUTHORS["Rubin"], *FUNDING_ORGANIZATIONS.values()]
+    if config.authors == ["Rubin"]:
+        # Special case, sole author as organization.
+        record_content["organizations"] = [ORGANIZATION_AUTHORS["Rubin"], *FUNDING_ORGANIZATIONS.values()]
+    else:
+        # All Rubin technotes are sponsored by NSF and DOE and have Rubin
+        # publisher, but do not have SLAC/NOIRLab affiliations if there
+        # are real authors.
+        record_content["organizations"] = [
+            FUNDING_ORGANIZATIONS[org] for org in ("RubinInstitution", "NSF", "DOE")
+        ]
+        # Currently only option is to use the author code from lsst-texmf.
+        texmf_dir = os.getenv("LSST_TEXMF_DIR")
+        if not texmf_dir:
+            raise RuntimeError("Unable to find lsst-texmf dir. Please set LSST_TEXMF_DIR.")
+        sys.path.append(os.path.join(texmf_dir, "bin"))
+        from db2authors import AASTeX, AuthorFactory, latex2text
+
+        with open(os.path.join(texmf_dir, "etc", "authordb.yaml")) as fh:
+            authordb = load_yaml_fh(fh)
+        factory = AuthorFactory.from_authordb(authordb)
+
+        authors = [factory.get_author(authorid) for authorid in config.authors]
+        affiliations: dict[str, elinkapi.Affiliation] = {}
+        persons: list[elinkapi.Person] = []
+        for author in authors:
+            # Model doesn't allow None for orcid even though it defaults
+            # to None.
+            extras: dict[str, str] = {}
+            if author.orcid:
+                extras["orcid"] = author.orcid
+            person = elinkapi.Person(
+                type="AUTHOR",
+                first_name=latex2text(author.given_name),
+                last_name=latex2text(author.family_name),
+                **extras,
+            )
+            for affil in author.affiliations:
+                if affil not in affiliations:
+                    # Need to properly organize affiliation data in authordb.
+                    parsed = AASTeX.parse_affiliation(affil)
+                    print(parsed)
+                    # No RORs yet.
+                    affiliations[affil] = elinkapi.Affiliation(name=latex2text(parsed["institute"]))
+                person.add_affiliation(affiliations[affil])
+            persons.append(person)
+        record_content["persons"] = persons
 
     return elinkapi.Record.model_validate(record_content, strict=True)
 
