@@ -20,6 +20,7 @@ import elinkapi
 
 from . import __version__
 from ._datasets import DataReleaseConfig, publish_records, submit_records, update_record_relationships
+from ._papers import PaperConfig, publish_paper, submit_paper
 
 _LOG = logging.getLogger("lsst.doiutils")
 
@@ -251,3 +252,64 @@ def generate_rst_replacements(
             _print_replacement(f"{name}_doi", _doi_to_rst(tap.doi, _make_title(tap.get_subtitle("tap"))))
             _print_replacement(f"{name}_rows", tap.count)
             _print_replacement(f"{name}_columns", tap.count2)
+
+
+@cli.command("save-paper-doi")
+@click.argument("config", type=click.File())
+@click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
+@click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
+@click.option(
+    "--server",
+    default="https://review.osti.gov/elink2api/",
+    help="Desired endpoint to use for submission. Default is to use the test server. "
+    "For a final submission use https://www.osti.gov/elink2api/",
+)
+@click.pass_context
+def save_paper_doi(
+    ctx: click.Context,
+    config: IO[str],
+    dry_run: bool,  # noqa: FBT001
+    token: str,
+    server: str,
+) -> None:
+    """Create 'saved' DOI for a single paper.
+
+    CONFIG is the configuration file containing a full description of
+    the paper to be assigned a DOI.
+    """
+    paper_config = PaperConfig.from_yaml_fh(config)
+    api = elinkapi.Elink(target=server, token=token)
+    saved = submit_paper(paper_config, api, dry_run=dry_run)
+
+    if saved:
+        paper_config.write_yaml_fh(sys.stdout)
+
+
+@cli.command("publish-paper-doi")
+@click.argument("config", type=click.File())
+@click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without publishing.")
+@click.option("--token", default="", type=str, help="Auth token to use for DOI release.")
+@click.option(
+    "--server",
+    default="https://review.osti.gov/elink2api/",
+    help="Desired endpoint to use for release. Default is to use the test server. "
+    "For a final submission use https://www.osti.gov/elink2api/",
+)
+@click.pass_context
+def publish_paper_doi(
+    ctx: click.Context,
+    config: IO[str],
+    dry_run: bool,  # noqa: FBT001
+    token: str,
+    server: str,
+) -> None:
+    """Publish the DOI associated with this configuration.
+
+    CONFIG is the configuration file containing a full description of the
+    the paper with DOIs and OSTI IDs from a previous upload.
+    """
+    paper_config = PaperConfig.from_yaml_fh(config)
+
+    api = elinkapi.Elink(target=server, token=token)
+
+    publish_paper(paper_config, api, dry_run=dry_run)
