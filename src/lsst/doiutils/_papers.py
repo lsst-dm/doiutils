@@ -196,7 +196,7 @@ def make_paper_record(config: PaperConfig) -> elinkapi.Record:
         if not texmf_dir:
             raise RuntimeError("Unable to find lsst-texmf dir. Please set LSST_TEXMF_DIR.")
         sys.path.append(os.path.join(texmf_dir, "bin"))
-        from db2authors import AASTeX, AuthorFactory, latex2text
+        from db2authors import AuthorFactory, latex2text
 
         with open(os.path.join(texmf_dir, "etc", "authordb.yaml")) as fh:
             authordb = load_yaml_fh(fh)
@@ -219,11 +219,14 @@ def make_paper_record(config: PaperConfig) -> elinkapi.Record:
             )
             for affil in author.affiliations:
                 if affil not in affiliations:
-                    # Need to properly organize affiliation data in authordb.
-                    parsed = AASTeX.parse_affiliation(affil)
-                    print(parsed)
-                    # No RORs yet.
-                    affiliations[affil] = elinkapi.Affiliation(name=latex2text(parsed["institute"]))
+                    institute = affil.get_department_and_institute()
+                    # Pydantic model is set up incorrectly and so typing
+                    # rules don't let us specify it at all if it is None.
+                    # This is a workaround.
+                    affil_extras: dict[str, str] = {}
+                    if affil.ror_id:
+                        affil_extras["ror_id"] = f"https://ror.org/{affil.ror_id}"
+                    affiliations[affil] = elinkapi.Affiliation(name=latex2text(institute), **affil_extras)
                 person.add_affiliation(affiliations[affil])
             persons.append(person)
         record_content["persons"] = persons
