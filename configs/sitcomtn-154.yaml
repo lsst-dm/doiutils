@@ -1,0 +1,77 @@
+title: Initial studies of photometric redshifts with LSSTComCam from DP1
+handle: SITCOMTN-154
+site_url: https://sitcomtn-154.lsst.io/
+abstract: |-
+  This technote holds reports based on the first analyses of the Data Preview 1
+  (DP1) data by the Science Unit for photometric redshifts.  Although
+  photometric redshifts are not an official DP1 data product, the "Photo-z
+  Science Unit" generated photo-z estimates for every galaxy in DP1 using the
+  available multi-band imaging on a best-effort basis. This work included
+  developing training and test datasets by matching DP1 data to high-quality
+  reference redshifts obtained with spectroscopy, Grism data, and multi-band
+  photometry. The Science Unit used the RAIL software package to make
+  photometric redshift estimates using eight different algorithms, developed
+  simple scientific performance metrics, used those metrics to explore how the
+  performance of the algorithms varied with configuration changes, derived more
+  optimized configurations of the algorithms and tested the performance of those
+  configurations. This work, the resulting data products and expected data
+  distribution mechanism are all described there.
+date: 2025-06-23
+doi: 10.71929/rubin/2571480
+osti_id: 2571480
+authors:
+- charlese
+- crenshawjf
+- zhangt
+- schmidts
+- adarip
+- cohentanugij
+- grahamml
+- gschwendj
+- kalmbachb
+- kannawadia
+- malza
+- maus
+- sevillai
+- solomonr
+- taranuds
+relationships:
+  References:
+  - 10.1007/978-94-011-3250-3_10
+  - 10.1046/j.1365-8711.1999.02978.x
+  - 10.1046/j.1365-8711.2001.04902.x
+  - 10.1051/0004-6361:20041960
+  - 10.1051/0004-6361/200913626
+  - 10.1051/0004-6361/201527963
+  - 10.1051/0004-6361/202040059
+  - 10.1051/0004-6361/202140310
+  - 10.1051/0004-6361/202451409
+  - 10.1086/192122
+  - 10.1086/308947
+  - 10.1086/505530
+  - 10.1088/0004-637X/690/2/1236
+  - 10.1088/0004-637X/737/2/103
+  - 10.1088/0004-637X/767/2/118
+  - 10.1088/0067-0049/199/2/26
+  - 10.1088/0067-0049/218/2/15
+  - 10.1093/mnras/staa1341
+  - 10.1093/mnras/stt574
+  - 10.1093/mnras/stw1618
+  - 10.1093/mnras/stw1990
+  - 10.1093/mnras/stw857
+  - 10.1111/j.1365-2966.2009.15338.x
+  - 10.1117/12.2629569
+  - 10.1214/17-EJS1302
+  - 10.3847/0067-0049/225/2/27
+  - 10.3847/1538-3881/aa99d4
+  - 10.3847/1538-3881/aca5fb
+  - 10.3847/1538-3881/acb213
+  - 10.3847/1538-3881/accff8
+  - 10.3847/1538-4357/ac9f12
+  - 10.3847/1538-4365/ada148
+  - 10.48550/arXiv.2503.14745
+  - 10.48550/arXiv.2505.02928
+  - 10.1051/0004-6361:20041960
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2570325
