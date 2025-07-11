@@ -48,7 +48,7 @@ DOE_IDENTIFIERS = [
 ]
 NSF_IDENTIFIERS = [
     elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Agreement AST-1258333"),
-    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Agreement  AST-2241526"),
+    elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Agreement AST-2241526"),
     elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Support Agreement AST-1202910"),
     elinkapi.Identifier(type="CN_NONDOE", value="NSF Cooperative Support Agreement AST-2211468"),
 ]
