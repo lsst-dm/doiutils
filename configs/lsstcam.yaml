@@ -28,6 +28,8 @@ relationships:  # IsDescribedBy is more correct but is mostly ignored by citatio
   - 10.1117/12.3019117 # Utsumi 2024
   - 10.1117/12.3019302 # Lange 2024
   - 10.1117/12.789947  # Gilmore 2008
+  - 10.3847/1538-4357/ab042c  # Ivezic et al. 2019
+  - 10.71929/rubin/2570545    # PSTN-019
   IsDescribedBy:
   - 10.1117/12.857920  # Kahn 2010
   - 10.1117/12.3019698 # Roodman 2024
