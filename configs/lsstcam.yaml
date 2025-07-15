@@ -1,0 +1,37 @@
+title: The LSST Camera (LSSTCam)
+site_url: https://lsstcam.lsst.io
+date: 2025-03-15
+abstract: |-
+  The LSST Camera is the sole instrument for the NSF-DOE Vera C. Rubin
+  Observatory and consists of a 3.2 gigapixel focal plane mosaic with
+  in-vacuum controllers, dedicated guider and wavefront CCDs, a three-element
+  corrector whose largest lens is 1.55m in diameter, six optical interference
+  filters covering a 320-1050nm band pass with an out-of-plane filter exchange
+  mechanism, and camera slow control and data acquisition systems capable of
+  digitizing each image in 2 seconds.
+authors:
+- SLAC
+- Rubin
+researching:
+- SLAC
+- RubinInstitution
+sponsoring:
+- DOE
+- NSF
+doi: 10.71929/rubin/2571927
+osti_id: 2571927
+relationships:  # IsDescribedBy is more correct but is mostly ignored by citation trackers. So double up.
+  References:
+  - 10.1117/12.857920  # Kahn 2010
+  - 10.1117/12.3019698 # Roodman 2024
+  - 10.1117/12.673236  # Gilmore 2006
+  - 10.1117/12.3019117 # Utsumi 2024
+  - 10.1117/12.3019302 # Lange 2024
+  - 10.1117/12.789947  # Gilmore 2008
+  IsDescribedBy:
+  - 10.1117/12.857920  # Kahn 2010
+  - 10.1117/12.3019698 # Roodman 2024
+  - 10.1117/12.673236  # Gilmore 2006
+  - 10.1117/12.3019117 # Utsumi 2024
+  - 10.1117/12.3019302 # Lange 2024
+  - 10.1117/12.789947  # Gilmore 2008

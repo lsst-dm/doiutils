@@ -1,0 +1,26 @@
+title: LSST Atmospheric Transmission Imager and Slitless Spectrograph (LATISS)
+site_url: https://latiss.lsst.io
+date: 2020-01-01
+abstract: |-
+  LATISS, the LSST Atmospheric Transmission Imager and Slitless Spectrograph,
+  is installed on the Rubin Auxiliary Telescope, a 1.2-meter telescope
+  dedicated to atmospheric characterization at the NSF-DOE Vera C. Rubin
+  Observatory site. It uses a 4k x 4k CCD, made by ITL, of the same type as
+  used on LSSTCam. It is designed to measure atmospheric transmission and
+  calibrate LSST observations by taking spectra of standard stars.
+authors:
+- Rubin
+researching:
+- RubinInstitution
+- SLAC
+sponsoring:
+- DOE
+- NSF
+doi: 10.71929/rubin/2571930
+osti_id: 2571930
+relationships:  # IsDescribedBy is more correct but is mostly ignored by citation trackers. So double up.
+  References:
+  - 10.71929/rubin/2571927  # LSSTCam
+  - 10.1117/12.2561112
+  IsDescribedBy:
+  - 10.1117/12.2561112
