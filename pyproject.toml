@@ -37,7 +37,7 @@ dev = [
     "mypy",
     "types-PyYAML",
     # Documentation
-    "documenteer[guide]<2",
+    "documenteer[guide]<3",
     "scriv",
 ]
 
