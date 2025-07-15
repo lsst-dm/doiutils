@@ -58,6 +58,9 @@ ORGANIZATION_AUTHORS = {
     "Rubin": elinkapi.Organization(
         type="AUTHOR", name="NSF-DOE Vera C. Rubin Observatory", ror_id="https://ror.org/048g3cy84"
     ),
+    "SLAC": elinkapi.Organization(
+        type="AUTHOR", name="SLAC National Accelerator Laboratory", ror_id="https://ror.org/05gzmn429"
+    ),
 }
 FUNDING_ORGANIZATIONS = {
     # The first RESEARCHING organization becomes the institution listed in

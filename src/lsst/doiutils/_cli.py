@@ -20,6 +20,7 @@ import elinkapi
 
 from . import __version__
 from ._datasets import DataReleaseConfig, publish_records, submit_records, update_record_relationships
+from ._instruments import InstrumentConfig, submit_instrument
 from ._papers import PaperConfig, publish_paper, submit_paper
 
 _LOG = logging.getLogger("lsst.doiutils")
@@ -313,3 +314,34 @@ def publish_paper_doi(
     api = elinkapi.Elink(target=server, token=token)
 
     publish_paper(paper_config, api, dry_run=dry_run)
+
+
+@cli.command("save-instrument-doi")
+@click.argument("config", type=click.File())
+@click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
+@click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
+@click.option(
+    "--server",
+    default="https://review.osti.gov/elink2api/",
+    help="Desired endpoint to use for submission. Default is to use the test server. "
+    "For a final submission use https://www.osti.gov/elink2api/",
+)
+@click.pass_context
+def save_instrument_doi(
+    ctx: click.Context,
+    config: IO[str],
+    dry_run: bool,  # noqa: FBT001
+    token: str,
+    server: str,
+) -> None:
+    """Create 'saved' DOI for a single instrument.
+
+    CONFIG is the configuration file containing a full description of
+    the instrument to be assigned a DOI.
+    """
+    instr_config = InstrumentConfig.from_yaml_fh(config)
+    api = elinkapi.Elink(target=server, token=token)
+    saved = submit_instrument(instr_config, api, dry_run=dry_run)
+
+    if saved:
+        instr_config.write_yaml_fh(sys.stdout)
