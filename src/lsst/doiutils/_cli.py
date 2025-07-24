@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import sys
 from typing import IO
 
@@ -345,3 +346,43 @@ def save_instrument_doi(
 
     if saved:
         instr_config.write_yaml_fh(sys.stdout)
+
+
+@cli.command("extract-references")
+@click.argument("source", type=click.File())
+@click.pass_context
+def extract_references(
+    ctx: click.Context,
+    source: IO[str],
+) -> None:
+    """Extract references DOIs from a source file.
+
+    SOURCE is the file to be parsed. Writes discovered DOIs to standard output.
+    """
+    # Since we have a file handle and not a file name with a suffix, we
+    # use common heuristics to look for DOIs.
+    doi_re = r"10\.\d{4,9}/[-._;()/:A-Z0-9]+"
+
+    # Rather than doing a wide open DOI search, be a bit more intentional
+    # about the variants we are looking for.
+    regexes = (
+        rf"doi\{{({doi_re})\}}",  # mn@doi{DOI} BBL files.
+        rf"doi.org/({doi_re})",  # doi.org/DOI URLs.
+        rf"doi\s+=\s*\{{({doi_re})\}}",  # doi = {DOI} bibtex entries.
+    )
+
+    # Match everything in one go. Assumes the input source file is not
+    # multiple gigabytes.
+    matches = re.findall("|".join(regexes), source.read(), flags=re.IGNORECASE | re.MULTILINE)
+
+    if not matches:
+        print("No DOIs found in source", file=sys.stderr)
+
+    # Because we capture within the regex in findall we get tuples of groups
+    # back.
+    dois: set[str] = set()
+    for m in matches:
+        dois.update({doi for doi in m if doi})
+
+    for doi in sorted(dois):
+        print(doi)
