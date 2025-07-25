@@ -22,7 +22,7 @@ import elinkapi
 from . import __version__
 from ._datasets import DataReleaseConfig, publish_records, submit_records, update_record_relationships
 from ._instruments import InstrumentConfig, submit_instrument
-from ._papers import PaperConfig, publish_paper, submit_paper
+from ._papers import PaperConfig, publish_paper, submit_paper, update_paper_author_refs
 
 _LOG = logging.getLogger("lsst.doiutils")
 
@@ -317,6 +317,35 @@ def publish_paper_doi(
     publish_paper(paper_config, api, dry_run=dry_run)
 
 
+@cli.command("update-paper-info")
+@click.argument("config", type=click.File())
+@click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
+@click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
+@click.option(
+    "--server",
+    default="https://review.osti.gov/elink2api/",
+    help="Desired endpoint to use for submission. Default is to use the test server. "
+    "For a final submission use https://www.osti.gov/elink2api/",
+)
+@click.pass_context
+def update_paper_info(
+    ctx: click.Context,
+    config: IO[str],
+    dry_run: bool,  # noqa: FBT001
+    token: str,
+    server: str,
+) -> None:
+    """Update the authors and references in the DOI record using the given
+    configuration.
+
+    CONFIG is the configuration file containing a full description of the
+    the paper with DOIs and OSTI IDs from a previous upload.
+    """
+    paper_config = PaperConfig.from_yaml_fh(config)
+    api = elinkapi.Elink(target=server, token=token)
+    update_paper_author_refs(paper_config, api, dry_run=dry_run)
+
+
 @cli.command("save-instrument-doi")
 @click.argument("config", type=click.File())
 @click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
@@ -369,6 +398,7 @@ def extract_references(
         rf"doi\{{({doi_re})\}}",  # mn@doi{DOI} BBL files.
         rf"doi.org/({doi_re})",  # doi.org/DOI URLs.
         rf"doi\s+=\s*\{{({doi_re})\}}",  # doi = {DOI} bibtex entries.
+        rf"doi:({doi_re})",  # doi:DOI
     )
 
     # Match everything in one go. Assumes the input source file is not
@@ -382,7 +412,10 @@ def extract_references(
     # back.
     dois: set[str] = set()
     for m in matches:
-        dois.update({doi for doi in m if doi})
+        # A DOI can't end with a "." but can have one inside it so if we
+        # have matched something where the DOI is in a sentence strip the
+        # final period.
+        dois.update({doi.removesuffix(".") for doi in m if doi})
 
     for doi in sorted(dois):
-        print(doi)
+        print(f"- {doi}")
