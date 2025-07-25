@@ -1,0 +1,58 @@
+title: PSF assessment in the field of Abell 360 and shapeHSM shear profile using LSSTComCam data
+handle: SITCOMTN-161
+site_url: https://sitcomtn-161.lsst.io
+abstract: |-
+  The Rubin LSSTComCam on-sky campaign performed at the end of 2024 provided
+  observations of the Abell 360 galaxy cluster; these data allow a preliminary
+  study of cluster weak lensing analysis using Rubin Data Preview 1 (DP1) data.
+  Among all the steps required for such analyses, accurate modeling of the PSF
+  is essential. This work uses several diagnostics, mostly based on the
+  residuals between the second moments of stars and the PSF model, to
+  characterize the accuracy of the PSF modeling in the A360 field. We find the
+  level of the residuals to be sufficiently low not to hinder the measurement
+  of the tangential shear profile around A360. With a simple source selection
+  process, we demonstrate that outputs of the LSST Science Pipelines can be
+  used to detect the tangential shear profile in Abell 360 at the 3.6σ
+  level, and our analysis indicates that contamination from PSF modeling
+  systematics is negligible.
+date: 2025-06-20
+authors:
+- combetc
+- plazasa
+- fus
+- adarip
+- dellantonioi
+- englerta
+- gorsuchmr
+- laliotisk
+- legetp
+- lorenzon
+- mandelbaumr
+- pedersene
+- lindena
+- zhangy
+relationships:
+  References:
+  - 10.1046/j.1365-8711.2003.06683.x
+  - 10.1088/0067-0049/212/1/5
+  - 10.1093/mnras/staa3679
+  - 10.1093/mnras/stab2764
+  - 10.1093/mnras/stab918
+  - 10.1093/mnras/stv398
+  - 10.1093/mnras/stw990
+  - 10.1093/mnras/sty2219
+  - 10.1093/mnras/sty2420
+  - 10.1093/pasj/psac006
+  - 10.1093/pasj/psx130
+  - 10.1111/j.1365-2966.2004.08090.x
+  - 10.1111/j.1365-2966.2005.09282.x
+  - 10.1111/j.1365-2966.2010.16277.x
+  - 10.33232/001c.132299
+  - 10.3847/1538-4365/abd023
+  - 10.48550/arXiv.1809.01669
+  - 10.71929/RUBIN/2561361
+  - 10.71929/RUBIN/2570308
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2571157
+  - 10.71929/rubin/2571480
