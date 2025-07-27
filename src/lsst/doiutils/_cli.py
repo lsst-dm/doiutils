@@ -409,13 +409,15 @@ def extract_references(
         print("No DOIs found in source", file=sys.stderr)
 
     # Because we capture within the regex in findall we get tuples of groups
-    # back.
-    dois: set[str] = set()
+    # back. Store DOIs in a dict with a case-insensitive key and the actual
+    # DOI as the value.
+    dois: dict[str, str] = {}
     for m in matches:
         # A DOI can't end with a "." but can have one inside it so if we
         # have matched something where the DOI is in a sentence strip the
         # final period.
-        dois.update({doi.removesuffix(".") for doi in m if doi})
+        found = {doi.removesuffix(".") for doi in m if doi}
+        dois.update({doi.casefold(): doi for doi in found})
 
-    for doi in sorted(dois):
+    for _, doi in sorted(dois.items()):
         print(f"- {doi}")
