@@ -1,0 +1,33 @@
+title: An Interim Report on the LSSTComCam On-Sky Campaign
+handle: SITCOMTN-149
+site_url: https://sitcomtn-149.lsst.io
+abstract: |-
+  From 24 October to 11 December 2024, the NSF-DOE Vera C. Rubin Observatory
+  conducted an on-sky campaign using the engineering LSST Commissioning Camera
+  (LSSTComCam) to test the end-to-end functionality of hardware and software, as
+  well as operational procedures. This interim report provides a preliminary
+  technical overview of our understanding of the integrated system performance
+  based tests and analyses conducted during the LSSTComCam on-sky campaign. The
+  objectives are to synthesize what we have learned about the system in a timely
+  way to inform on-going commissioning efforts, and to inform the Rubin science
+  community on the progress of the LSSTComCam on-sky campaign. The report is
+  organized into sections to describe major activities during the campaign, as
+  well as multiple aspects of the demonstrated system and science performance.
+  All of the results presented here are to be understood as work in progress
+  using engineering data and the initial versions of the data processing
+  pipelines; the report is a living document that will be updated as analyses
+  are refined.
+doi: 10.71929/rubin/2574402
+osti_id: 2574402
+date: 2025-01-14
+authors:
+- Rubin
+relationships:
+  References:
+  - 10.1016/j.ascom.2016.04.003
+  - 10.3847/1538-4365/abd62c
+  - 10.3847/1538-4365/ac00b3
+  - 10.5281/zenodo.5683848
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2571927
