@@ -21,7 +21,7 @@ import typing
 from itertools import zip_longest
 
 import elinkapi
-from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer
+from pydantic import AfterValidator, AnyHttpUrl, BaseModel, Field, field_serializer
 
 from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, ORGANIZATION_AUTHORS
 from ._utils import strip_newlines
@@ -83,9 +83,10 @@ class PaperConfig(BaseModel):
     author ID. For now special keys of Rubin, NOIRLab, and SLAC exist
     for organizational authorship.
     """
-    relationships: dict[str, list[str]]
+    relationships: dict[str, list[str]] = Field(default_factory=dict)
     """DOI relationships to this paper where the keys are the relationship
-    type and the values are DOIs.
+    type and the values are DOIs. It is allowed for there to be no
+    relationships.
     """
 
     def get_series(self) -> str:
