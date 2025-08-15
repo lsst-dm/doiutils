@@ -1,0 +1,33 @@
+title: Coaddition Artifact Rejection and CompareWarp
+handle: DMTN-080
+site_url: https://dmtn-080.lsst.io
+abstract: |-
+  LSST images will be contaminated with transient artifacts, such as optical
+  ghosts, satellite trails, and cosmic rays, and with transient astronomical
+  sources, such as asteroid ephemerides.  We developed and tested an algorithm
+  to find and reject these artifacts during coaddition, in order to produce
+  clean coadds to be used for deep detection and preliminary object
+  characterization. This algorithm, CompareWarpAssembleCoadd, uses the time-
+  series of PSF-matched warped images to identify transient artifacts. It
+  detects artifact candidates on the image differences between each PSF-matched
+  warp and a static sky model.  These artifact candidates include both true
+  transient artifacts and difference-image false positives such as difficult-
+  subtract-sources and variable sources such as stars and quasars. We use the
+  feature that true transients appear at a given position in the difference
+  images in only a small fraction (configurable) of visits, whereas variable
+  sources and difficult-to-subtract sources appear in most difference images. In
+  this report, we present a description of the method and an evaluation using
+  Hyper SuprimeCam PDR1 data.
+doi: 10.71929/rubin/2583441
+osti_id: 2583441
+date: 2018-08-31
+authors:
+- alsayyady
+relationships:
+  References:
+  - 10.1002/asna.200410285
+  - 10.1016/j.ascom.2016.04.002
+  - 10.1093/pasj/psx080
+  - 10.71929/rubin/2583432
+  IsOriginalFormOf:
+  - 10.5281/zenodo.2605417
