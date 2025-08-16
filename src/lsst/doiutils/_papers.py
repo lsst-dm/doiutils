@@ -16,6 +16,7 @@ __all__: list[str] = []
 import datetime
 import logging
 import os
+import re
 import sys
 import typing
 from itertools import zip_longest
@@ -188,10 +189,21 @@ def _create_related_identifiers(config: PaperConfig) -> list[elinkapi.RelatedIde
     """Create the related identifier information from a paper configuration."""
     related_identifiers: list[elinkapi.RelatedIdentifier] = []
     for relationship, related_dois in config.relationships.items():
-        related_identifiers.extend(
-            elinkapi.RelatedIdentifier(type="DOI", relation=relationship, value=related)
-            for related in related_dois
-        )
+        for related in related_dois:
+            # We do allow non-DOI entries using the type name and a colon.
+            # This is safe because DOIs always start with a number.
+            # e.g., PURL:jy639yg0904
+            # Without a prefix DOI is assumed.
+            relationship_type = "DOI"
+            value = related
+            if match := re.match(r"([A-Z][A-Z0-9]+):(.*)$", related):
+                relationship_type = match.group(1)
+                value = match.group(2)
+
+            related_identifiers.append(
+                elinkapi.RelatedIdentifier(type=relationship_type, relation=relationship, value=value)
+            )
+
     return related_identifiers
 
 
