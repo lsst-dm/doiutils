@@ -1,0 +1,21 @@
+title: IVOA Identifier Usage at the Rubin Observatory
+handle: DMTN-302
+site_url: https://dmtn-302.lsst.io
+abstract: |-
+  The IVOA define a standard URI scheme to reference individual datasets. In
+  this document we will define how these IVOA Identifiers will be formed for
+  Butler datasets and possibly object catalog IDs.
+doi: 10.71929/rubin/2583848
+osti_id: 2583848
+date: 2025-06-03
+authors:
+- jennesst
+- duboisfelsmanngp
+relationships:
+  References:
+  - 10.1117/12.2629569
+  - 10.5479/ADS/bib/2015ivoa.spec.1223D
+  - 10.5479/ADS/bib/2016ivoa.spec.0523D
+  - 10.5479/ADS/bib/2017ivoa.spec.0509L
+  - 10.5479/ADS/bib/2017ivoa.spec.0519F
+  - 10.71929/rubin/2583847
