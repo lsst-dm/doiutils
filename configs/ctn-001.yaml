@@ -1,0 +1,24 @@
+title: LSSTCam and LSSTComCam Focal Plane Layouts
+handle: CTN-001
+site_url: https://ctn-001.lsst.io
+abstract: |-
+  This document includes figures depicting the layouts of the LSST Camera and
+  LSST Commissioning Camera, highlighting the arrangement and identification of
+  science, wavefront, and guider sensors, as well as their individual readout
+  image segments.
+doi: 10.71929/rubin/2584019
+osti_id: 2584019
+date: 2025-03-15
+authors:
+- plazasa
+- digelsw
+- roodmana
+- broughtona
+- CameraTeam
+relationships:
+  References:
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2583999
+  IsOriginalFormOf:
+  - 10.5281/zenodo.14984001
