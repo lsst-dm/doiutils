@@ -1,0 +1,53 @@
+title: Survey Strategy and Cadence Choices for the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST)
+handle: PSTN-051
+site_url: https://pstn-051.lsst.io
+abstract: |-
+  A summary of survey strategy and cadence choices, simulated and evaluated by
+  the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST) Scheduler
+  Team, prepared for the Survey Cadence and Optimization Committee (SCOC). A
+  large telescope survey, covering the entire visible sky repeatedly every few
+  days in multiple bandpasses over the course of ten years, is the core idea of
+  the LSST. An area of about 20,000 square degrees observed under a wide range
+  of conditions to deep coadded limiting magnitudes in bandpasses ugrizy enables
+  cosmological studies and studies of the Milky Way structure with unprecedented
+  precision; the same survey, when cadenced well, can serve to open new windows
+  into our understanding of transient and variable stars, and extend our
+  knowledge of small bodies throughout the Solar System by orders of magnitude.
+  The outlines of, and some basic necessary requirements for these goals are
+  outlined in the LSST Science Requirements Document (SRD). Finding options for
+  the observing strategy to meet more detailed needs of an even wider range of
+  science goals, as well as building the LSST Scheduler and Metrics Analysis
+  Framework, has been the work of the LSST Scheduler Team with support and input
+  from the astronomical community, including the Community Observing Strategy
+  Evaluation Paper (COSEP), the Call for White Papers, numerous performance
+  metrics, and guidance from the LSST Science Advisory Committee in their
+  Recommendations for Operations Simulator Experiments. This report will help
+  enable the SCOC to make its recommendation for the preferred survey strategy.
+doi: 10.71929/rubin/2584084
+osti_id: 2584084
+date: 2021-03-11
+authors:
+- jonesrl
+- yoachimp
+- ivezicv
+- neilsene
+- ribeirot
+relationships:
+  IsOriginalFormOf:
+  - 10.5281/zenodo.4048837
+  References:
+  - 10.1007/978-3-642-18418-5_17
+  - 10.1016/j.icarus.2018.04.018
+  - 10.1051/0004-6361:20042352
+  - 10.1086/523619
+  - 10.1086/659833
+  - 10.1088/0004-6256/137/6/4917
+  - 10.1088/0004-6256/142/4/131
+  - 10.1088/1538-3873/ab0c2a
+  - 10.1088/1538-3873/ab3300
+  - 10.1117/12.2056898
+  - 10.1117/12.2232947
+  - 10.3847/0004-637X/829/1/50
+  - 10.3847/1538-3881/aafece
+  - 10.3847/1538-4357/ab042c
+  - 10.48550/arXiv.1503.07170
