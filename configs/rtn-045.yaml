@@ -1,0 +1,26 @@
+title: Guidelines for User Tutorials
+handle: RTN-045
+site_url: https://rtn-045.lsst.io
+abstract: |-
+  This document defines the guidelines, principles, and formats for user-facing
+  tutorials that demonstrate how to use the Rubin Science Platform (RSP) to
+  analyze data from the Legacy Survey of Space and Time (LSST). All Rubin staff
+  and the broader science community should use these guidelines when
+  contributing to the sets of Jupyter Notebook or documentation-based tutorials
+  maintained by the Rubin Community Science team (CST).
+doi: 10.71929/rubin/2584020
+osti_id: 2584020
+date: 2025-07-25
+authors:
+- grahamml
+- carlinjl
+- adaircl
+- choiy
+- fonsecaalvarezg
+- greenstreets
+- laur
+- madejskig
+- meisnera
+- plazasa
+- tuckerdl
+- williamscc
