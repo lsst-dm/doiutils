@@ -1,0 +1,14 @@
+title: Proposal and Prototype for Prompt Processing
+handle: DMTN-219
+site_url: https://dmtn-219.lsst.io/
+date: 2023-07-10
+abstract: |-
+  The Prompt Processing framework has long been a gray area in the overall Rubin
+  Observatory architecture.  This document attempts to fill that hole by
+  proposing a concrete design with an accompanying prototype implementation that
+  should meet minimum requirements.  Additional features and optimizations that
+  could be incorporated later are also described.
+doi: 10.71929/rubin/2585429
+osti_id: 2585429
+authors:
+- limk
