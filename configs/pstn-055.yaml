@@ -1,0 +1,70 @@
+title: Survey Cadence Optimization Committee's Phase 2 Recommendations
+handle: PSTN-055
+site_url: https://pstn-055.lsst.io
+date: 2023-02-02
+abstract: |-
+  This document describes the recommendations formulated by the Survey Cadence
+  Optimization Committee (SCOC) of Vera C. Rubin Observatory for the observing
+  strategy of the Legacy Survey of Space and Time (LSST). These "Phase 2"
+  recommendations follow the initial "Phase 1" recommendations released in
+  December 2021 as PSTN-053, and convey the current recommendations for the
+  initial implementation of the LSST. These recommendations are based on the
+  SCOC analysis of LSST simulations generated according to PSTN-053 and the
+  feedback received from the scientific community on those simulations. These
+  recommendations should be considered as the current guidance for implementing
+  the LSST observing survey at the start of the survey, a strategy to be
+  reviewed regularly over the survey lifetime, and are accompanied by a
+  simulation, baseline_v3.0, which represents a specific implementation of these
+  recommendations. While these recommendations dramatically narrow the possible
+  LSST observing parameter choices, we emphasize that at this stage they do not
+  yet represent a final or complete set of recommendations for the survey
+  strategy, and several details are still to be refined. Furthermore, the
+  strategy should be considered "living" and subject to evolution throughout the
+  survey. The SCOC continues to engage with the community to finalize its
+  recommendations. At the time of the release of this document, the final phases
+  of construction of Rubin Observatory are ongoing with an expected first light
+  in mid-2024. We expect the SCOC recommendations to be revised as needed, as
+  knowledge of the system as built and the outcome of commissioning and Science
+  Verification mature. This document describes the Phase 2 SCOC recommendations
+  —highlighting elements that can be considered final and elements that remain
+  to be finalized—, the process through which the SCOC has converged on these
+  recommendations, and the working plan for the SCOC starting in January 2023
+  through the start of the survey to finalize the initial implementation of the
+  Legacy Survey of Space and Time.
+doi: 10.71929/rubin/2585249
+osti_id: 2585249
+authors:
+- SCOC
+- bauerfe
+- biancofb
+- broughs
+- hlozekr
+- jonesrl
+- kasliwalmm
+- olsenk
+- peirish
+- schwambme
+- scolnicd
+- slaterct
+- straderj
+relationships:
+  References:
+  - 10.1088/1538-3873/ab121a
+  - 10.1117/12.2056835
+  - 10.1146/annurev-astro-091918-104453
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/1538-4357/ac0b44
+  - 10.3847/1538-4365/ac3bca
+  - 10.3847/1538-4365/ac3e72
+  - 10.3847/1538-4365/ac4602
+  - 10.3847/1538-4365/ac5033
+  - 10.3847/1538-4365/ac617c
+  - 10.3847/1538-4365/acbb09
+  - 10.48550/arXiv.1708.04058
+  - 10.48550/arXiv.1812.04051
+  - 10.48550/arxiv.2210.15690
+  - 10.5281/ZENODO.7195671
+  - 10.71929/rubin/2584021
+  - 10.71929/rubin/2584084
+  - 10.71929/rubin/2584276
+  - 10.71929/rubin/2584366
