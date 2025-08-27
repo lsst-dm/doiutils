@@ -1,0 +1,18 @@
+title: Design of the LSST Alert Distribution System
+handle: DMTN-093
+site_url: https://dmtn-093.lsst.io
+date: 2024-08-23
+abstract: |-
+  We describe the proposed design and implementation of the LSST Alert
+  Distribution System, which provides rapid dissemination of alerts to community
+  alert brokers. At time of writing, this service is still under development;
+  this “living document” describes current thinking, but is expected to evolve
+  over the course of LSST construction.
+doi: 10.71929/rubin/2586493
+osti_id: 2586493
+authors:
+- pattersonmt
+- bellme
+- swinbankjd
+- nelsons
+- smartbm
