@@ -1,0 +1,36 @@
+title: Implementation of Image Difference Decorrelation
+handle: DMTN-021
+site_url: https://dmtn-021.lsst.io
+date: 2016-06-14
+abstract: |-
+  Herein, we describe a method for decorrelating image differences produced by
+  the Alard and Lupton (1998) method of PSF matching. Inspired by the recent
+  work of Zackay et al. (2016) and the prior work of Kaiser [2004], this
+  proposed method uses a single post-subtraction convolution of an image
+  difference to remove the neighboring pixel covariances in the image difference
+  that result from the convolution of the template image by the PSF matching
+  kernel. We describe the method in detail, analyze its effects on image
+  differences (both real and simulated) as well as on detections and photometry
+  of detected sources in decorrelated image differences. We also compare the
+  decorrelated image differences with those resulting from a basic
+  implementation of Zackay et al. (2016). We describe the implementation of the
+  new correction in the LSST image differencing pipeline, and discuss potential
+  issues and areas of future research.
+doi: 10.71929/rubin/2586490
+osti_id: 2586490
+authors:
+- reissdj
+- luptonrh
+relationships:
+  IsOriginalFormOf:
+  - 10.5281/zenodo.192833
+  References:
+  - 10.1051/aas:2000214
+  - 10.1086/305984
+  - 10.3847/0004-637X/830/1/27
+  - 10.3847/1538-4357/836/2/188
+  - 10.3847/1538-4357/ab042c
+  - 10.48550/arXiv.1901.09999
+  - 10.5281/zenodo.192833
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2583432
