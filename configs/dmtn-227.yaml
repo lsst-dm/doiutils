@@ -1,0 +1,21 @@
+title: The Consolidated Database of Image Metadata
+handle: DMTN-227
+site_url: https://dmtn-227.lsst.io
+date: 2025-08-04
+abstract: |-
+  This document proposes a specification for what the content of an image
+  metadata database should be, how it should be managed, how it could be
+  implemented, and how it might be extended.  A phased strategy for bringing it
+  to production is also proposed.
+doi: 10.71929/rubin/2586436
+osti_id: 2586436
+authors:
+- limk
+- omullanew
+relationships:
+  References:
+  - 10.1117/12.2629569
+  - 10.5479/ADS/bib/2017ivoa.spec.0509L
+  - 10.5479/ADS/bib/2019ivoa.spec.0927D
+  - 10.5479/ADS/bib/2021ivoa.spec.0724S
+  - 10.5479/ADS/bib/2023ivoa.spec.1215B
