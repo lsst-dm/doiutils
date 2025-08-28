@@ -1,0 +1,29 @@
+title: "jointcal: Simultaneous Astrometry & Photometry for thousands of Exposures with Large CCD Mosaics"
+handle: DMTN-036
+site_url: https://dmtn-036.lsst.io
+date: 2017-09-18
+abstract: |-
+  The jointcal package simultaneously optimizes the astrometric and photometric
+  calibrations of a set of astronomical images. In principle and often in
+  practice, this approach produces distortion and thoroughput models which are
+  more precise than when fitted independently. This is especially true when the
+  images are deeper than the astrometric reference catalogs. In the "Astromatic"
+  software suite, this simultaneous astrometry functionality is fulfilled by
+  "SCAMP". The code we describe here has similar aims, but follows a slightly
+  different route. Jointcal is built on top of the the LSST Data Management
+  software stack.
+doi: 10.71929/rubin/2586685
+osti_id: 2586685
+authors:
+- parejkojk
+- astierp
+- boschjf
+relationships:
+  References:
+  - 10.1002/asna.19592850507
+  - 10.1051/0004-6361/201629512
+  - 10.1086/524677
+  - 10.1088/0067-0049/205/2/20
+  - 10.1088/1538-3873/aa6c55
+  - 10.1137/0710036
+  - 10.71929/rubin/2570545
