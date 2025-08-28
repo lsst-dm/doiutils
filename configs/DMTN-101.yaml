@@ -1,0 +1,21 @@
+title: Verifying LSST Calibration Data Products
+handle: DMTN-101
+site_url: https://dmtn-101.lsst.io
+date: 2025-01-16
+abstract: |-
+  A description of plans for verifying LSST's Calibration Data Products. This
+  document covers our approach to verification element LVV-57, addressing
+  requirement DMS-REQ-0130.
+doi: 10.71929/rubin/2586569
+osti_id: 2586569
+authors:
+- luptonrh
+- plazasa
+- watersc
+relationships:
+  References:
+  - 10.1051/0004-6361/201935508
+  - 10.1086/668891
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2571930
