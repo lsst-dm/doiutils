@@ -1,0 +1,30 @@
+title: Rubin Observatory Data Security Standards Implementation
+handle: DMTN-199
+site_url: https://dmtn-199.lsst.io
+date: 2024-09-16
+abstract: |-
+  In this document we describe a set of measures that we plan to take, in order
+  to secure the data taken at Rubin Observatory to the standards set by the US
+  funding agencies.
+doi: 10.71929/rubin/2586668
+osti_id: 2586668
+authors:
+- omullanew
+- allberyr
+- alsayyady
+- bellme
+- clementsaw
+- duboisr
+- hoblittj
+- silvac
+- limk
+- marshallp
+- zauderervanderleya
+- marsiskeh
+relationships:
+  References:
+  - 10.6028/NIST.FIPS.200
+  - 10.6028/NIST.SP.800-114r1
+  - 10.6028/NIST.SP.800-171r3
+  - 10.6028/NIST.SP.800-46r2
+  - 10.71929/rubin/2570536
