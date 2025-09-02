@@ -32,6 +32,8 @@ _LOG = logging.getLogger("lsst.doiutils")
 
 
 # This is copied from lsst-texmf bibtools.py
+# ADS require "Technical Note" to appear in the output so they can easily
+# find them for indexing.
 TN_SERIES = {
     "DMTN": "Data Management Technical Note",
     "RTN": "Technical Note",
@@ -42,17 +44,17 @@ TN_SERIES = {
     "SQR": "SQuaRE Technical Note",
     "ITTN": "Information Technology Technical Note",
     "TSTN": "Telescope and Site Technical Note",
-    "DMTR": "Data Management Test Report",
-    "LDM": "Data Management Controlled Document",
-    "LSE": "Systems Engineering Controlled Document",
-    "LCA": "Camera Controlled Document",
-    "LTS": "Telescope & Site Controlled Document",
-    "LPM": "Project Controlled Document",
-    "LEP": "Education and Public Outreach Controlled Document",
+    "DMTR": "Data Management Test Report (Technical Note)",
+    "LDM": "Data Management Controlled Document (Technical Note)",
+    "LSE": "Systems Engineering Controlled Document (Technical Note)",
+    "LCA": "Camera Controlled Document (Technical Note)",
+    "LTS": "Telescope & Site Controlled Document (Technical Note)",
+    "LPM": "Project Controlled Document (Technical Note)",
+    "LEP": "Education and Public Outreach Controlled Document (Technical Note)",
     "CTN": "Camera Technical Note",
-    "RDO": "Data Management Operations Controlled Document",
+    "RDO": "Data Management Operations Controlled Document (Technical Note)",
     "Agreement": "Formal Construction Agreement",
-    "Document": "Informal Construction Document",
+    "Document": "Informal Construction Document (Technical Note)",
     "Publication": "LSST Construction Publication",
     "Report": "Construction Report",
 }
