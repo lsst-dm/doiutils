@@ -1,0 +1,68 @@
+title: Data Management Science Pipelines Design
+handle: LDM-151
+site_url: https://ldm-151.lsst.io
+date: 2020-11-10
+abstract: |-
+  The LSST Science Requirements Document (the LSST SRD) specifies a set of data
+  product guidelines, designed to support science goals envisioned to be enabled
+  by the LSST observing program.  Following these guidelines, the details of
+  these data products have been described in the LSST Data Products Definition
+  Document (DPDD), and captured in a formal flow-down from the SRD via the LSST
+  System Requirements (LSR), Observatory System Specifications (OSS), to the
+  Data Management System Requirements (DMSR).  The LSST Data Management
+  subsystem's responsibilities include the design, implementation, deployment
+  and execution of software pipelines necessary to generate these data products.
+  This document describes the design of the scientific aspects of those
+  pipelines.
+doi: 10.71929/rubin/2587108
+osti_id: 2587108
+authors:
+- swinbankjd
+- axelrodts
+- beckerac
+- beclaj
+- bellme
+- boschjf
+- chiangh
+- ciardidr
+- connollyaj
+- duboisfelsmanngp
+- economouf
+- fisherlevinem
+- grahamml
+- ivezicv
+- juricm
+- jennesst
+- jonesrl
+- kantorjp
+- krughoffks
+- limk
+- luptonrh
+- muellerf
+- petravickdl
+- pricepa
+- reissdj
+- shawra
+- slaterct
+- woodvaseywm
+- wux
+- yoachimp
+relationships:
+  References:
+  - 10.1071/AS07028
+  - 10.1086/133808
+  - 10.1086/305984
+  - 10.1086/323894
+  - 10.1086/587156
+  - 10.1086/668891
+  - 10.1088/0004-6256/141/3/93
+  - 10.1088/0004-6256/147/5/109
+  - 10.1088/0004-637X/719/1/59
+  - 10.1088/0004-637X/733/1/10
+  - 10.1088/1748-0221/10/05/C05010
+  - 10.1093/mnras/stt244
+  - 10.1111/j.1365-2966.2009.16125.x
+  - 10.3847/0004-637X/822/2/67
+  - 10.3847/0004-637X/830/1/27
+  - 10.71929/rubin/2583432
+  - 10.71929/rubin/2586490
