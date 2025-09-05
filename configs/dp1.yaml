@@ -230,5 +230,14 @@ dataset_types:
     osti_id: 2570335
     count: 431
     count2: 3
+- abstract: |-
+    The LSSTComCam filter bandpasses.
+  path: products/bandpasses/index.html
+  butler:
+    name: standard_bandpass
+    doi: 10.71929/rubin/2587407
+    osti_id: 2587407
+    count: 6
+    format: application/vnd.apache.parquet
 doi: 10.71929/rubin/2570308
 osti_id: 2570308
