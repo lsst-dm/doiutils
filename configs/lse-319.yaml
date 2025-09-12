@@ -1,0 +1,42 @@
+title: LSST Science Platform Vision Document
+handle: LSE-319
+site_url: https://lse-319.lsst.io
+date: 2019-07-24
+abstract: |-
+  This document defines and describes the "LSST Science Platform," a set of
+  integrated web applications and services deployed at the LSST Data Access
+  Centers (DACs) through which the scientific community will access, visualize,
+  subset, and perform next-to-the-data analysis of the data collected by the
+  Large Synoptic Survey Telescope (LSST).  These services can be broken down to
+  three different "Aspects": a web Portal, designed to provide essential data
+  access and visualization services through a simple-to-use website, a Notebook
+  environment, that will provide a Jupyter Notebook-like interface, based on
+  JupyterLab, enabling next-to-the-data analysis, and an extensive set of Web
+  APIs that the users will be able to use to remotely examine the LSST data set
+  using tools they're already familiar with.  This document lays out the high-
+  level vision for the aforementioned Aspects and some associated backend
+  services. It is intentionally brief, and meant to generally guide the flow-
+  down of requirements and development of product specifications,
+  prioritization, and plans for the Agile development of the relevant elements
+  of the DM system.
+doi: 10.71929/rubin/2587242
+osti_id: 2587242
+authors:
+- juricm
+- ciardidr
+- duboisfelsmanngp
+- guylp
+relationships:
+  References:
+  - 10.1117/12.2233042
+  - 10.3847/1538-3881/aabc4f
+  - 10.5479/ADS/bib/2008ivoa.specQ0222P
+  - 10.5479/ADS/bib/2015ivoa.spec.1223D
+  - 10.5479/ADS/bib/2017ivoa.spec.0517B
+  - 10.5479/ADS/bib/2018ivoa.spec.0621G
+  - 10.5479/ADS/bib/2019ivoa.spec.0927D
+  - 10.5479/ADS/bib/2023ivoa.spec.1215M
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587200
+  - 10.71929/rubin/2587850

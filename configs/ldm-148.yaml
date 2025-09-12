@@ -1,0 +1,29 @@
+title: Rubin Observatory Data Management System Design
+handle: LDM-148
+site_url: https://ldm-148.lsst.io
+date: 2020-08-20
+abstract: |-
+  The Rubin Observatory LSST Data Management System (DMS) is a set of services
+  employing a variety of software components running on computational and
+  networking infrastructure that combine to deliver science data products to the
+  observatory's users and support observatory operations.  This document
+  describes the components, their service instances, and their deployment
+  environments as well as the interfaces among them, the rest of the LSST
+  system, and the outside world.
+doi: 10.71929/rubin/2587850
+osti_id: 2587850
+authors:
+- limk
+- boschjf
+- duboisfelsmanngp
+- jennesst
+- kantorjp
+- omullanew
+- petravickdl
+- comorettog
+- DMLT
+relationships:
+  References:
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587200

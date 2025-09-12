@@ -1,0 +1,19 @@
+title: Calibration Generation, Verification, Acceptance, and Certification
+handle: DMTN-222
+site_url: https://dmtn-222.lsst.io/
+date: 2025-06-10
+abstract: |-
+  This technote defines the best practices to be used for calibration
+  generation, the verification that that calibration meets requirements, and
+  when deciding if the calibration should be accepted for use in processing at
+  both the summit and USDF.  Other aspects of calibration product management,
+  including the contents of the appropriate "defaults" collection, are also
+  discussed.
+doi: 10.71929/rubin/2586498
+osti_id: 2586498
+authors:
+- watersc
+- rykoffe
+relationships:
+  References:
+  - 10.48550/arXiv.2211.15795

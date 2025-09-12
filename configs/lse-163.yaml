@@ -1,0 +1,70 @@
+title: Data Products Definition Document
+handle: LSE-163
+site_url: https://lse-163.lsst.io
+date: 2023-07-10
+abstract: |-
+  This document describes the data products and processing services to be
+  delivered by the NSF-DOE Vera C. Rubin Observatory whilst performing the
+  Legacy Survey of Space and Time (LSST). LSST will deliver three levels of data
+  products and services. Prompt data products are computed and released within
+  24 hours of observation, and include images, difference images, catalogs of
+  sources and objects detected in difference images, and catalogs of Solar
+  System objects. Their primary purpose is to enable rapid follow-up of time-
+  domain events. Data Release data products are computed during annual
+  processing campaigns, and include well-calibrated single-epoch images, deep
+  coadds, and catalogs of objects, sources, and forced sources, enabling static
+  sky and precision time-domain science.  The Science Platform will allow for
+  the creation of User Generated data products and will enable science cases
+  that greatly benefit from co-location of user processing and/or data within
+  the Rubin Observatory Data Access Center.  LSST will also devote 10% of
+  observing time to programs with special cadence. Their data products will be
+  created using the same software and hardware as Prompt and Data Release
+  products. All data products will be made available using user-friendly
+  databases and web services.
+doi: 10.71929/rubin/2587118
+osti_id: 2587118
+authors:
+- juricm
+- axelrodts
+- beckerac
+- beclaj
+- bellme
+- boschjf
+- ciardidr
+- connollyaj
+- duboisfelsmanngp
+- economouf
+- freemonmd
+- johnsonmw
+- gillr
+- grahamml
+- guylp
+- ivezicv
+- jennesst
+- kantorjp
+- krughoffks
+- limk
+- luptonrh
+- muellerf
+- nideverdl
+- omullanew
+- pattersonmt
+- petravickdl
+- shawra
+- slaterct
+- straussma
+- swinbankjd
+- tysonja
+- woodvaseywm
+- wux
+relationships:
+  References:
+  - 10.1086/338085
+  - 10.1088/0004-637X/733/1/10
+  - 10.1093/mnras/stw879
+  - 10.21105/astro.2303.03947
+  - 10.3847/1538-4357/aa704b
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/1538-4357/abb595
+  - 10.48550/arXiv.1702.02600
+  - 10.71929/rubin/2587108

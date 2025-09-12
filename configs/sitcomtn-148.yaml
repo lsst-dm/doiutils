@@ -1,0 +1,59 @@
+title: LSST Camera Electro-Optical Test (Run 7) Results
+handle: SITCOMTN-148
+site_url: https://sitcomtn-148.lsst.io
+abstract: |-
+  This note collects results from the LSST Camera electro-optical testing prior
+  to installation on the TMA. We describe the focal plane characterization,
+  optimization, and the resulting default settings. Results from eo-pipe are
+  shown for standard runs such as B-protocols, Dense and SuperDense PTCs, gain
+  stability, OpSim runs of Darks, and Darks with variable delays. We also
+  describe features such as e2v Persistence, ITL phosphorescence in coffee
+  stains, remnant charge near Serial register following saturated images,
+  vampire pixels, ITL dips, and other sensor features.
+doi: 10.71929/rubin/2583999
+osti_id: 2583999
+date: 2025-05-10
+authors:
+- CameraTeam
+- antilogusp
+- astierp
+- banovetzj
+- bregeonj
+- chiangj
+- digelsw
+- fanningk
+- farisy
+- guillemint
+- johnsonas
+- juramygillesc
+- lagecs
+- liangs
+- macbrides
+- marshalls
+- nealh
+- polind
+- rasmussenap
+- roodmana
+- rykoffe
+- stalderb
+- thayerjg
+- tysonja
+- parkhy
+- utsumiy
+- zhangz
+relationships:
+  References:
+  - 10.1051/0004-6361/201935508
+  - 10.1051/0004-6361/202245407
+  - 10.1088/1538-3873/ad0a73
+  - 10.1088/1748-0221/12/05/C05015
+  - 10.1117/1.JATIS.6.1.011005
+  - 10.1117/1.JATIS.7.4.048002
+  - 10.1117/12.2056733
+  - 10.1117/12.3019117
+  - 10.1117/12.3019302
+  - 10.1117/12.3019698
+  - 10.1117/12.3020540
+  - 10.48550/arXiv.2002.09439
+  - 10.48550/arXiv.2411.13386
+  - 10.71929/rubin/2571927

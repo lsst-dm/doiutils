@@ -320,6 +320,9 @@ def publish_paper_doi(
 @cli.command("update-paper-info")
 @click.argument("config", type=click.File())
 @click.option("--dry-run/--no-dry-run", default=False, help="Process the configuration without submitting.")
+@click.option(
+    "--update-sponsors/--no-update-sponsors", default=False, help="Force update to sponsoring organizations."
+)
 @click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
 @click.option(
     "--server",
@@ -332,6 +335,7 @@ def update_paper_info(
     ctx: click.Context,
     config: IO[str],
     dry_run: bool,  # noqa: FBT001
+    update_sponsors: bool,  # noqa: FBT001
     token: str,
     server: str,
 ) -> None:
@@ -343,7 +347,7 @@ def update_paper_info(
     """
     paper_config = PaperConfig.from_yaml_fh(config)
     api = elinkapi.Elink(target=server, token=token)
-    update_paper_author_refs(paper_config, api, dry_run=dry_run)
+    update_paper_author_refs(paper_config, api, dry_run=dry_run, update_sponsors=update_sponsors)
 
 
 @cli.command("save-instrument-doi")
@@ -409,13 +413,15 @@ def extract_references(
         print("No DOIs found in source", file=sys.stderr)
 
     # Because we capture within the regex in findall we get tuples of groups
-    # back.
-    dois: set[str] = set()
+    # back. Store DOIs in a dict with a case-insensitive key and the actual
+    # DOI as the value.
+    dois: dict[str, str] = {}
     for m in matches:
         # A DOI can't end with a "." but can have one inside it so if we
         # have matched something where the DOI is in a sentence strip the
         # final period.
-        dois.update({doi.removesuffix(".") for doi in m if doi})
+        found = {doi.removesuffix(".") for doi in m if doi}
+        dois.update({doi.casefold(): doi for doi in found})
 
-    for doi in sorted(dois):
+    for _, doi in sorted(dois.items()):
         print(f"- {doi}")

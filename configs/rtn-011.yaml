@@ -1,0 +1,50 @@
+title: Rubin Observatory Plans for an Early Science Program
+handle: RTN-011
+site_url: https://rtn-011.lsst.io
+abstract: |-
+  This document outlines Rubin Observatory's plans for a dedicated \emph{Early
+  Science Program} to enable high-impact science prior to the first annual data
+  release of the  Legacy Survey of Space and Time (LSST). Components of the
+  Early Science Program include releasing science-grade commissioning data
+  products via a series of ``Data Previews,'' ramping up of the transient alert
+  stream during commissioning,  implementing a program of incremental template
+  generation to augment alert production in the early phases of the survey, and
+  the first LSST Data Release, DR1, based on the first 6 months of data from the
+  LSST. A detailed breakdown of which data products can be expected when is
+  provided. The Rubin Operations team is working closely with the science
+  community to optimize the Early Science Program for the time-domain and solar
+  system science achievable in the first year of operations. This is a living
+  document; both it and the Early Science Program will continue to evolve over
+  the course of commissioning and pre-operations in response to the state of the
+  as-built system and to community guidance.
+doi: 10.71929/rubin/2584021
+osti_id: 2584021
+date: 2025-05-30
+authors:
+- guylp
+- bechtolk
+- bellme
+- blumrd
+- duboisfelsmanngp
+- grahamml
+- ivezicv
+- luptonrh
+- marshallp
+- slaterct
+- straussma
+relationships:
+  IsOriginalFormOf:
+  - 10.5281/zenodo.5683848
+  References:
+  - 10.1093/pasj/psx080
+  - 10.1117/12.3019266
+  - 10.3847/1538-4365/abd62c
+  - 10.3847/2515-5172/ab8129
+  - 10.3847/2515-5172/ab812a
+  - 10.3847/2515-5172/ac090f
+  - 10.48550/arXiv.1812.03248
+  - 10.5281/zenodo.7011229
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2574402

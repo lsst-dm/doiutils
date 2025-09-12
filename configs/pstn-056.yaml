@@ -1,0 +1,58 @@
+title: Survey Cadence Optimization Committee's Phase 3 Recommendations
+handle: PSTN-056
+site_url: https://pstn-056.lsst.io
+date: 2025-01-06
+abstract: |-
+  We present the final planned comprehensive recommendation for Rubin
+  Observatory the Legacy Survey of Space and Time (LSST) survey strategy ahead
+  of the start of LSST. This recommendation is the product of a many-years-long
+  iterative process where community recommendations to maximize the scientific
+  impact of LSST across domains of astrophysics were reviewed, synthesized,
+  aggregated, and merged to define the overall plan for 10 years of LSST
+  observations. The current recommendation builds on Phase 1 (PSTN-053) and
+  Phase 2 recommendations (PSTN-055) and, together, they define a 10-year plan
+  for observing. Here we answer questions left open in PSTN-055, refine
+  additional survey details, and describe the scope of future activities of the
+  SCOC.
+doi: 10.71929/rubin/2585402
+osti_id: 2585402
+authors:
+- SCOC
+- biancofb
+- jonesrl
+- anguitat
+- bauerfe
+- edwardsl
+- jhasw
+- mandelbaumr
+- millera
+- olsenk
+- slaterct
+- smarttsj
+- straderj
+- streetra
+- volkk
+- yoachimp
+relationships:
+  References:
+  - 10.1051/0004-6361/202345844
+  - 10.1088/1475-7516/2023/07/044
+  - 10.1093/mnras/stae198
+  - 10.1103/PhysRevD.105.023520
+  - 10.1103/PhysRevResearch.2.022006
+  - 10.1117/12.2056835
+  - 10.21105/astro.2206.07683
+  - 10.3847/1538-3881/aa99d4
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/1538-4365/ab5e7a
+  - 10.3847/1538-4365/ac3e72
+  - 10.3847/1538-4365/ac5033
+  - 10.3847/1538-4365/ac88ce
+  - 10.3847/1538-4365/ac9e58
+  - 10.3847/1538-4365/ad79f5
+  - 10.3847/2515-5172/ad284a
+  - 10.48550/arXiv.0912.0201
+  - 10.48550/arXiv.1811.06542
+  - 10.48550/arXiv.1812.00516
+  - 10.71929/rubin/2584276
+  - 10.71929/rubin/2585249

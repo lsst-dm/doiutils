@@ -1,0 +1,16 @@
+title: Current status of APDB and PPDB implementation
+handle: DMTN-293
+site_url: https://dmtn-293.lsst.io
+date: 2024-09-18
+abstract: |-
+  The design of the Alert Production DataBase (APDB) and Prompt Products
+  DataBase (PPDB) has been evolving for the past few years as a result of
+  various tests and updated requirements. This technical note describes the
+  current state of these systems, as well as issues related to scalability and
+  performance. It also discusses unresolved issues in the system's architecture
+  and possible future directions.
+doi: 10.71929/rubin/2586676
+osti_id: 2586676
+authors:
+- salnikova
+- mccormickj

@@ -1,0 +1,477 @@
+# DP1 description paper
+title: The Vera C. Rubin Observatory Data Preview 1
+handle: RTN-095
+abstract: |-
+  We present Rubin Data Preview 1 (DP1), the first release of data from
+  the NSF-DOE Vera C. Rubin Observatory, consisting of raw and calibrated
+  single-epoch images, coadds, difference images, detection catalogs, and
+  other derived data products. DP1 is based on 1792 science-grade
+  optical/near-infrared exposures acquired over 48 distinct nights by the
+  Rubin Commissioning Camera, LSSTComCam, on the Simonyi Survey Telescope
+  at the Summit Facility on Cerro Pachón, Chile during the first on-sky
+  commissioning campaign in late 2024. DP1 covers a total of ~15 sq. deg.
+  over seven roughly equally-sized non-contiguous fields, each
+  independently observed in six broad photometric bands, ugrizy, spanning
+  a range of stellar densities and latitudes and overlapping with external
+  reference datasets.  The median image quality across all bands, measured
+  by the FWHM of the point-spread function, is approximately 1.13
+  arcseconds, with the sharpest images reaching about 0.65 arcseconds. DP1
+  contains approximately 2.3 million distinct astrophysical objects, of
+  which 1.6 million are extended in at least one band, and 431 solar
+  system objects, of which 93 are new discoveries. DP1 is approximately
+  3.5 TB in size and available to Rubin data rights holders via the Rubin
+  Science Platform, a cloud-based environment for the analysis of
+  petascale astronomical data. While small compared to future LSST
+  releases, its high quality and diversity of data support a broad range
+  of early science investigations across all four LSST themes, providing a
+  valuable opportunity to engage with Rubin data ahead of the start of
+  full operations in late 2025.
+site_url: https://rtn-095.lsst.io/
+date: 2025-06-27
+doi: 10.71929/rubin/2570536
+osti_id: 2570536
+authors:
+- RubinBuilderPaper
+- acerocuellart
+- acostae
+- adaircl
+- adarip
+- adelmanmccarthyj
+- alexova
+- allberyr
+- allsmanr
+- alsayyady
+- amadoj
+- amourouxn
+- antilogusp
+- aracenaalcayagaa
+- aravenarojasg
+- arayacortesch
+- aubourge
+- axelrodts
+- banovetzj
+- barriac
+- bauerae
+- baumanbj
+- bechtole
+- bechtolk
+- beckerac
+- beckervr
+- beckettmg
+- bellme
+- bernardinelliph
+- biancofb
+- blumrd
+- bogartj
+- boltona
+- boothmt
+- boschjf
+- boucauda
+- boutignyd
+- bovillra
+- bradshawa
+- bregeonj
+- brondelbj
+- broughtona
+- budlonga
+- buffatd
+- calabresed
+- canestrarir
+- caplarn
+- carlinjl
+- ceballor
+- chandlerc
+- changc
+- charlesemersong
+- chiangh
+- chiangj
+- choiy
+- christensenej
+- clavercf
+- clementsaw
+- cockrumjj
+- colleonif
+- combetc
+- connollyaj
+- constanzocordovaje
+- contrerashe
+- crenshawjf
+- dagorets
+- danielsf
+- daruichf
+- daubardg
+- dauesg
+- dennihye
+- deppesj
+- digelsw
+- dohertyp
+- drlicawagnera
+- duboisfelsmanngp
+- economouf
+- eigero
+- eisertl
+- eisneram
+- englerta
+- erbb
+- fabregaja
+- fagreliusp
+- fanningk
+- faustinetoa
+- fergusonps
+- fertea
+- fisherlevinem
+- fonsecaalvarezg
+- fossmd
+- fouchezd
+- fuchsds
+- ganglere
+- gaponenkoi
+- garciaj
+- gatesj
+- gillr
+- giroe
+- glanzmant
+- godoyr
+- goodenowi
+- gorsuchmr
+- gowerm
+- granvikm
+- greenstreets
+- guanw
+- guillemint
+- guylp
+- hascalld
+- hascallpa
+- heinzean
+- hernandezf
+- hernerk
+- herrolda
+- higgscr
+- hoblittj
+- howardel
+- hyunm
+- ingrahamp
+- irvingd
+- ivezicv
+- jacobysh
+- jannuzibt
+- jarugulas
+- jeej
+- jennesst
+- jenningstc
+- jeremiea
+- jernigang
+- jimenezmejiasd
+- johnsonas
+- jonesrl
+- jonesrwl
+- juramygillesc
+- juricm
+- kahnsm
+- kalmbachb
+- kangy
+- kannawadia
+- kantorjp
+- karavakise
+- kelkark
+- kelvinl
+- kotoviv
+- kovacsg
+- kowalikm
+- krabbendamvl
+- krughoffks
+- kubanekp
+- kurlanderja
+- kusuljam
+- lagecs
+- lagopja
+- laliotisk
+- langet
+- laported
+- laur
+- lazartejc
+- leboulchq
+- legetp
+- leguilloul
+- levineb
+- liangm
+- liangs
+- limk
+- lindena
+- linh
+- lopezm
+- lopeztorojj
+- lovep
+- luptonrh
+- lustnb
+- macarthurla
+- macbrides
+- madejskig
+- mainettig
+- margheimsj
+- markiewicztw
+- marshallp
+- marshalls
+- mauleng
+- maym
+- mccormickj
+- mckayd
+- mckercherr
+- megiasg
+- meisnera
+- menanteauf
+- mentzerhr
+- metzgerk
+- meyersj
+- millerm
+- millsdj
+- moeyensj
+- moniezm
+- moolekampfe
+- moralesmarincal
+- muellerf
+- mullaneyjr
+- munozarancibiaf
+- napierk
+- nealh
+- neilsene
+- neveuj
+- nima
+- noblet
+- nourbakhshe
+- olsenk
+- omullanew
+- onoprienkod
+- oriunnom
+- osiers
+- owenre
+- paia
+- parejkojk
+- parkhy
+- parsonsjb
+- pattersonmt
+- pavlovicms
+- penak
+- petersonjr
+- pietrowiczs
+- plazasa
+- polenb
+- pollekhmm
+- pricepa
+- quintb
+- quinteromarinjm
+- rabusm
+- racineb
+- radekav
+- ramelm
+- ranabhata
+- rasmussenap
+- rathfelderdar
+- rawlsml
+- reeds
+- reilka
+- reissdj
+- reuterma
+- ribeirot
+- rigaultm
+- riotvj
+- ritzs
+- riverariveramf
+- robertsonbe
+- robyw
+- rodeghierog
+- roodmana
+- rosignolil
+- roucellec
+- rumoremr
+- russos
+- rykoffe
+- salnikova
+- sanchezbo
+- sanmartimd
+- saundersc
+- schindlerrh
+- schmidts
+- sebagj
+- selvyb
+- sepulvedavalenzuelaee
+- sericheg
+- seronnavarretejc
+- sevillai
+- shugarta
+- sickj
+- silvac
+- simsmc
+- singhalj
+- sirunokb
+- slaterct
+- smartbm
+- snydera
+- soldahlc
+- sotuelai
+- stalderb
+- stockebrandh
+- straussal
+- straussma
+- suberlakc
+- sullivanis
+- swinbankjd
+- tapiad
+- tarantoa
+- taranuds
+- thayerjg
+- thomass
+- thorntonaj
+- tigher
+- toribiol
+- tsait
+- tuckerdl
+- turrim
+- tysonja
+- urbachek
+- utsumiy
+- vanklaverenb
+- vanreevenw
+- vaucherpa
+- venegasp
+- vermaa
+- villarreala
+- voutsinass
+- waltercw
+- wangy
+- watersc
+- williamscc
+- willmanb
+- wittgenm
+- woodvaseywm
+- yangw
+- yangz
+- yannyb
+- yoachimp
+- zhangt
+- zhouc
+relationships:
+  Describes:
+  - 10.71929/rubin/2570308
+  References:
+  - 10.1016/j.ascom.2018.07.001
+  - 10.1017/pasa.2019.27
+  - 10.1046/j.1365-8711.2003.06683.x
+  - 10.1051/0004-6361/201322068
+  - 10.1051/0004-6361/201526075
+  - 10.1051/0004-6361/202140463
+  - 10.1051/0004-6361/202243709
+  - 10.1051/0004-6361/202243940
+  - 10.1051/0004-6361:20066601
+  - 10.1051/aas:2000331
+  - 10.1071/AS05001
+  - 10.1086/150317
+  - 10.1086/158003
+  - 10.1086/160817
+  - 10.1086/18230110.1086/182253
+  - 10.1086/190669
+  - 10.1086/338085
+  - 10.1086/421365
+  - 10.1086/427976
+  - 10.1088/1538-3873/aa6c55
+  - 10.1088/1538-3873/aab820
+  - 10.1088/1538-3873/aabadf
+  - 10.1088/1538-3873/ad0a73
+  - 10.1088/1538-3873/ad3aa2
+  - 10.1088/1748-0221/12/05/C05015
+  - 10.1088/1748-0221/9/03/C03048
+  - 10.1093/mnras/113.2.134
+  - 10.1093/mnras/staa3679
+  - 10.1093/mnras/stac3350
+  - 10.1093/mnras/stv1130
+  - 10.1093/pasj/psab122
+  - 10.1093/pasj/psx080
+  - 10.1103/RevModPhys.82.2307
+  - 10.1111/j.1365-2966.2005.09282.x
+  - 10.1117/1.JATIS.11.1.011209
+  - 10.1117/12.2312684
+  - 10.1117/12.2561132
+  - 10.1117/12.2629569
+  - 10.1117/12.2630184
+  - 10.1117/12.2630185
+  - 10.1117/12.3018005
+  - 10.1117/12.3019031
+  - 10.1117/12.3019266
+  - 10.1117/12.3019302
+  - 10.1117/12.3019698
+  - 10.1117/12.366388
+  - 10.1145/2063348.2063364
+  - 10.1145/3620665.3640366
+  - 10.1146/annurev.astro.41.111302.102207
+  - 10.13009/AO4ELT7-2023-069
+  - 10.1364/AO.54.009045
+  - 10.33232/001c.132299
+  - 10.3847/1538-3881/aa9f22
+  - 10.3847/1538-3881/aabc4f
+  - 10.3847/1538-3881/aad69a
+  - 10.3847/1538-3881/aafece
+  - 10.3847/1538-3881/ab6166
+  - 10.3847/1538-3881/ac0722
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/1538-4357/ac7c74
+  - 10.3847/1538-4357/ad6cdc
+  - 10.3847/1538-4365/ab3853
+  - 10.3847/1538-4365/ab929e
+  - 10.3847/1538-4365/abb82b
+  - 10.3847/1538-4365/abd62c
+  - 10.3847/1538-4365/ac3e72
+  - 10.3847/2515-5172/adecef
+  - 10.48550/arXiv.1606.00841
+  - 10.48550/arXiv.1612.05560
+  - 10.48550/arXiv.2111.15030
+  - 10.48550/arXiv.2303.03313
+  - 10.48550/arXiv.2305.01695
+  - 10.48550/arXiv.2501.00544
+  - 10.48550/arXiv.2501.05739
+  - 10.48550/arXiv.2503.15305
+  - 10.48550/arXiv.2507.01343
+  - 10.5281/zenodo.13985198
+  - 10.5479/ADS/bib/2015ivoa.spec.1223D
+  - 10.5479/ADS/bib/2017ivoa.spec.0509L
+  - 10.5479/ADS/bib/2017ivoa.spec.0517B
+  - 10.5479/ADS/bib/2017ivoa.spec.0519F
+  - 10.5479/ADS/bib/2019ivoa.spec.0927D
+  - 10.71929/RUBIN/2561361
+  - 10.71929/RUBIN/2570308
+  - 10.71929/RUBIN/2570310
+  - 10.71929/RUBIN/2570311
+  - 10.71929/RUBIN/2570312
+  - 10.71929/RUBIN/2570313
+  - 10.71929/RUBIN/2570314
+  - 10.71929/RUBIN/2570315
+  - 10.71929/RUBIN/2570317
+  - 10.71929/RUBIN/2570319
+  - 10.71929/RUBIN/2570321
+  - 10.71929/RUBIN/2570323
+  - 10.71929/RUBIN/2570325
+  - 10.71929/RUBIN/2570327
+  - 10.71929/RUBIN/2570331
+  - 10.71929/RUBIN/2570333
+  - 10.71929/RUBIN/2570335
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2583441
+  - 10.71929/rubin/2583688
+  - 10.71929/rubin/2583846
+  - 10.71929/rubin/2583848
+  - 10.71929/rubin/2583849
+  - 10.71929/rubin/2583850
+  - 10.71929/rubin/2584019
+  - 10.71929/rubin/2584020
+  - 10.71929/rubin/2584021
+  - 10.71929/rubin/2584084
+  - 10.71929/rubin/2584108
+  - 10.71929/rubin/2584109
+  - 10.71929/rubin/2584276
+  - 10.71929/rubin/2585249
+  - 10.71929/rubin/2585402
+  - 10.71929/rubin/2585429
+  - 10.71929/rubin/2586436
+  - 10.71929/rubin/2586490
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587242

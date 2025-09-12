@@ -16,6 +16,7 @@ __all__: list[str] = []
 import datetime
 import logging
 import os
+import re
 import sys
 import typing
 from itertools import zip_longest
@@ -31,6 +32,8 @@ _LOG = logging.getLogger("lsst.doiutils")
 
 
 # This is copied from lsst-texmf bibtools.py
+# ADS require "Technical Note" to appear in the output so they can easily
+# find them for indexing.
 TN_SERIES = {
     "DMTN": "Data Management Technical Note",
     "RTN": "Technical Note",
@@ -41,17 +44,17 @@ TN_SERIES = {
     "SQR": "SQuaRE Technical Note",
     "ITTN": "Information Technology Technical Note",
     "TSTN": "Telescope and Site Technical Note",
-    "DMTR": "Data Management Test Report",
-    "LDM": "Data Management Controlled Document",
-    "LSE": "Systems Engineering Controlled Document",
-    "LCA": "Camera Controlled Document",
-    "LTS": "Telescope & Site Controlled Document",
-    "LPM": "Project Controlled Document",
-    "LEP": "Education and Public Outreach Controlled Document",
+    "DMTR": "Data Management Test Report (Technical Note)",
+    "LDM": "Data Management Controlled Document (Technical Note)",
+    "LSE": "Systems Engineering Controlled Document (Technical Note)",
+    "LCA": "Camera Controlled Document (Technical Note)",
+    "LTS": "Telescope & Site Controlled Document (Technical Note)",
+    "LPM": "Project Controlled Document (Technical Note)",
+    "LEP": "Education and Public Outreach Controlled Document (Technical Note)",
     "CTN": "Camera Technical Note",
-    "RDO": "Data Management Operations Controlled Document",
+    "RDO": "Data Management Operations Controlled Document (Technical Note)",
     "Agreement": "Formal Construction Agreement",
-    "Document": "Informal Construction Document",
+    "Document": "Informal Construction Document (Technical Note)",
     "Publication": "LSST Construction Publication",
     "Report": "Construction Report",
 }
@@ -188,10 +191,21 @@ def _create_related_identifiers(config: PaperConfig) -> list[elinkapi.RelatedIde
     """Create the related identifier information from a paper configuration."""
     related_identifiers: list[elinkapi.RelatedIdentifier] = []
     for relationship, related_dois in config.relationships.items():
-        related_identifiers.extend(
-            elinkapi.RelatedIdentifier(type="DOI", relation=relationship, value=related)
-            for related in related_dois
-        )
+        for related in related_dois:
+            # We do allow non-DOI entries using the type name and a colon.
+            # This is safe because DOIs always start with a number.
+            # e.g., PURL:jy639yg0904
+            # Without a prefix DOI is assumed.
+            relationship_type = "DOI"
+            value = related
+            if match := re.match(r"([A-Z][A-Z0-9]+):(.*)$", related):
+                relationship_type = match.group(1)
+                value = match.group(2)
+
+            related_identifiers.append(
+                elinkapi.RelatedIdentifier(type=relationship_type, relation=relationship, value=value)
+            )
+
     return related_identifiers
 
 
@@ -329,7 +343,47 @@ def _compare_affiliation(old: elinkapi.Affiliation | None, new: elinkapi.Affilia
     return ""
 
 
-def update_paper_author_refs(config: PaperConfig, elink: elinkapi.Elink, *, dry_run: bool = False) -> None:
+def _update_authors(saved_record: elinkapi.Record, config: PaperConfig) -> bool:
+    updated = False
+
+    # Attach entirely new set of authors to record.
+    previous_persons = saved_record.persons
+    saved_record.persons = _create_persons(config)
+
+    # Order does matter as well as content.
+    changes = []
+    for old, new in zip_longest(previous_persons, saved_record.persons):
+        if change_reason := _compare_person(old, new):
+            changes.append(change_reason)
+
+    if changes:
+        _LOG.info("Detected changes to author information:\n%s\n", "\n".join(f"- {c}" for c in changes))
+        updated = True
+    return updated
+
+
+def _update_relationships(saved_record: elinkapi.Record, config: PaperConfig) -> bool:
+    # And any changes to references.
+    updated = False
+    previous_relations = saved_record.related_identifiers
+    saved_record.related_identifiers = _create_related_identifiers(config)
+
+    previous_refs = {f"{rel.relation}:{rel.value}" for rel in previous_relations}
+    new_refs = {f"{rel.relation}:{rel.value}" for rel in saved_record.related_identifiers}
+    if previous_refs != new_refs:
+        updated = True
+        _LOG.info("Relationships were updated.")
+        if removed := (previous_refs - new_refs):
+            _LOG.info("Removed references:\n%s\n", "\n".join(f"- {r}" for r in sorted(removed)))
+        if added := (new_refs - previous_refs):
+            _LOG.info("New references:\n%s\n", "\n".join(f"- {a}" for a in sorted(added)))
+
+    return updated
+
+
+def update_paper_author_refs(
+    config: PaperConfig, elink: elinkapi.Elink, *, dry_run: bool = False, update_sponsors: bool = False
+) -> None:
     """Update the author and references in record for an existing DOI.
 
     Notes
@@ -347,32 +401,22 @@ def update_paper_author_refs(config: PaperConfig, elink: elinkapi.Elink, *, dry_
     updated = False
 
     # Attach entirely new set of authors to record.
-    previous_persons = saved_record.persons
-    saved_record.persons = _create_persons(config)
-
-    # Order does matter as well as content.
-    changes = []
-    for old, new in zip_longest(previous_persons, saved_record.persons):
-        if change_reason := _compare_person(old, new):
-            changes.append(change_reason)
-
-    if changes:
-        _LOG.info("Detected changes to author information:\n%s\n", "\n".join(f"- {c}" for c in changes))
-        updated = True
+    updated |= _update_authors(saved_record, config)
 
     # And any changes to references.
-    previous_relations = saved_record.related_identifiers
-    saved_record.related_identifiers = _create_related_identifiers(config)
+    updated |= _update_relationships(saved_record, config)
 
-    previous_refs = {f"{rel.relation}:{rel.value}" for rel in previous_relations}
-    new_refs = {f"{rel.relation}:{rel.value}" for rel in saved_record.related_identifiers}
-    if previous_refs != new_refs:
+    # Potentially update sponsors.
+    if update_sponsors:
+        # Remove existing sponsoring organizations and replace with new
+        # versions. This can be useful if a grant number has changed.
+        keep: list[elinkapi.Organization] = []
+        if saved_record.organizations:
+            keep.extend(org for org in saved_record.organizations if org.type != "SPONSOR")
+        saved_record.organizations = keep + [
+            org for org in FUNDING_ORGANIZATIONS.values() if org.type == "SPONSOR"
+        ]
         updated = True
-        _LOG.info("Relationships were updated.")
-        if removed := (previous_refs - new_refs):
-            _LOG.info("Removed references:\n%s\n", "\n".join(f"- {r}" for r in sorted(removed)))
-        if added := (new_refs - previous_refs):
-            _LOG.info("New references:\n%s\n", "\n".join(f"- {a}" for a in sorted(added)))
 
     if dry_run:
         print(saved_record.model_dump_json(exclude_unset=True, indent=2))

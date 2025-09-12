@@ -1,0 +1,36 @@
+title: Survey Cadence Optimization Committee's Phase 1 Recommendations
+handle: PSTN-053
+site_url: https://pstn-053.lsst.io
+date: 2022-11-08
+abstract: |-
+  This document is authored by the Survey Cadence Optimization Committee (SCOC),
+  guided by the community input, and it will serve as a roadmap for the
+  concluding round of survey cadence simulations. These simulations, to be
+  delivered during early calendar year 2022, will inform the phase 2 survey
+  strategy recommendation which will define the baseline strategy for starting
+  the Rubin Observatory's Legacy Survey of Space and Time (LSST). The phase 2
+  SCOC recommendation will be delivered to the Rubin Observatory Operations
+  Director before the end of calendar year 2022.
+doi: 10.71929/rubin/2584276
+osti_id: 2584276
+authors:
+- SCOC
+- bauerfe
+- broughs
+- hlozekr
+- ivezicv
+- jonesrl
+- kasliwalmm
+- olsenk
+- peirish
+- schwambme
+- scolnicd
+- slaterct
+- straderj
+- yoachimp
+relationships:
+  References:
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/1538-4365/ac3e72
+  - 10.71929/rubin/2584084
+  - 10.71929/rubin/2584109
