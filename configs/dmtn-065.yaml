@@ -1,0 +1,40 @@
+title: Data Management for LSST Special Programs
+handle: DMTN-065
+site_url: https://dmtn-065.lsst.io
+date: 2024-04-09
+abstract: |-
+  Special Programs are additional survey areas and/or observing strategies that
+  are driven by specific science goals which build on, or are beyond, the core
+  science pillars of the Wide Fast Deep Main Survey. In order to meet the
+  requirements and enable science related to Special Programs, this document
+  provides recommendations for Rubin Data Management regarding processing and
+  serving data products for Special Programs. Hardware and processing boundaries
+  on the potential diversity of data from Special Programs are discussed along
+  with scenarios in which user-generated processing and data products might be
+  needed to meet Special Programs' science goals.
+doi: 10.71929/rubin/2997573
+osti_id: 2997573
+authors:
+- grahamml
+- alsayyady
+- bechtolk
+- bellme
+- boschjf
+- carlinjl
+- duboisfelsmanngp
+- guylp
+- juricm
+- limk
+- rykoffe
+- slaterct
+- DMSST
+relationships:
+  References:
+  - 10.3847/1538-3881/ac8cff
+  - 10.48550/arXiv.1708.04058
+  - 10.71929/rubin/2585249
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587200
+  - 10.71929/rubin/2587242
+  - 10.71929/rubin/2997564
