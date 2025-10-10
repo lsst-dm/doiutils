@@ -1,0 +1,20 @@
+title: Fall 2020 status of crowded field processing with the LSST Alert Production Pipelines
+handle: DMTN-171
+site_url: https://dmtn-171.lsst.io
+date: 2021-08-09
+abstract: |-
+  A report on the Fall 2020 state of the LSST Alert Production Pipelines'
+  ability to process deep images in the galactic bulge.
+doi: 10.71929/rubin/2998003
+osti_id: 2998003
+authors:
+- sullivanis
+- bellme
+relationships:
+  IsOriginalFormOf:
+  - 10.5281/zenodo.5172676
+  References:
+  - 10.1086/305984
+  - 10.3847/1538-4357/ab07ba
+  - 10.3847/1538-4365/aaa3e2
+  - 10.71929/rubin/2570545
