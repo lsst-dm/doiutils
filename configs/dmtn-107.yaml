@@ -1,0 +1,37 @@
+title: Options for Alert Production in LSST Operations Year 1
+handle: DMTN-107
+site_url: https://dmtn-107.lsst.io
+date: 2020-04-14
+abstract: |-
+  This document reviews five options for alert production in LSST Operations
+  Year 1 (LOY1), taking into account any implications on LSST formal
+  requirements including up-scopes, down-scopes or explicit violations. The Data
+  Management System Science Team's preferred option for maximizing LSST science
+  is to generate template images from as much of the data from the commissioning
+  and/or science verification phases as possible and use them to run Difference
+  Image Analysis and alert production during LOY1. A proposal to increase the
+  sky area covered during commissioning via a "filler" scheduler program is also
+  presented. As a potential moderate up-scope, this study presents an option to
+  build interim templates on a $\sim$monthly basis during LOY1, which could
+  increase the accessible sky area by ~1000-2000 deg**2 per month, and should be
+  reconsidered closer to the start of Operations.
+doi: 10.71929/rubin/2997867
+osti_id: 2997867
+authors:
+- grahamml
+- bellme
+- slaterct
+- guylp
+- DMSST
+relationships:
+  References:
+  - 10.1086/491583
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/2515-5172/ab8129
+  - 10.3847/2515-5172/ab812a
+  - 10.71929/rubin/2586490
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587200
+  - 10.71929/rubin/2997858
+  - 10.71929/rubin/2998139
