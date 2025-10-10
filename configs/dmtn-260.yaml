@@ -1,0 +1,29 @@
+title: Failure Modes and Error Handling for Prompt Processing
+handle: DMTN-260
+site_url: https://dmtn-260.lsst.io
+date: 2024-05-08
+abstract: |-
+  The Prompt Processing system will be responsible for processing roughly a
+  thousand visits per night, and distributing the results in near real time, for
+  at least ten years of Rubin Observatory operations. As such, it must be highly
+  robust to algorithmic, network, and infrastructure failures, ranging from
+  momentary glitches to extended downtimes. DMTN-219 introduced the initial
+  design for the Prompt Processing framework; this document expands on the
+  design to address expected failure modes and recovery strategies for each.
+doi: 10.71929/rubin/2998133
+osti_id: 2998133
+authors:
+- findeisenk
+- limk
+- bellme
+- chiangh
+relationships:
+  References:
+  - 10.3847/1538-4357/ab042c
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2571930
+  - 10.71929/rubin/2585429
+  - 10.71929/rubin/2586676
+  - 10.71929/rubin/2587118
