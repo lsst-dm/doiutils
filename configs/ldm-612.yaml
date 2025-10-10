@@ -1,0 +1,41 @@
+title: Plans and Policies for LSST Alert Distribution
+handle: LDM-612
+site_url: https://ldm-612.lsst.io
+date: 2020-07-09
+abstract: |-
+  A major product of the nightly processing of LSST images is a world-public
+  stream of alerts from transient, variable, and moving sources. Science users
+  will access these alerts through community brokers or through a simple
+  filtering service provided by LSST. This document provides a guide to the
+  plans and policies for the alert distribution system to aid science users,
+  broker developers, funding agencies, and LSST Project personnel. It describes
+  the components of the alert distribution system and the data rights required
+  to access specific scientific products. It provides guidelines for
+  organizations developing community brokers and describes the planned
+  capabilities of the LSST simple alert filtering service and Science Platform
+  to aid science users in planning for LSST science.
+doi: 10.71929/rubin/2998139
+osti_id: 2998139
+authors:
+- bellme
+- blumrd
+- grahamml
+- guylp
+- ivezicv
+- omullanew
+- pattersonmt
+- swinbankjd
+- willmanb
+relationships:
+  References:
+  - 10.1117/12.2312293
+  - 10.3847/1538-4357/ab042c
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2586493
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587200
+  - 10.71929/rubin/2587242
+  - 10.71929/rubin/2997573
+  - 10.71929/rubin/2997858
+  - 10.71929/rubin/2997867
