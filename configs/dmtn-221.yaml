@@ -1,0 +1,40 @@
+title: Periodicity Analysis in Alert Production
+handle: DMTN-221
+site_url: https://dmtn-221.lsst.io
+date: 2024-05-03
+abstract: |-
+  The baselined timeseries features to be computed in Alert Production include a
+  Lomb-Scargle periodogram ran on two classes of variable systems: RR Lyrae and
+  Eclipsing Binaries. Based on a simulated LSST-like cadence light curves taken
+  from the Extended LSST Astronomical Time-series Classification Challenge
+  (ELAsTiCC) we perform an end-to-end test to characterize the periodicity
+  recovery on the Alert Production multi-band light curves. In both variable
+  classes, we found that a single-band Lomb-Scargle implementation yields to a
+  low fraction of recovered periods, with a significant preference on the simple
+  periodic phenomena such as RR Lyrae. We also investigated the results from a
+  multi-band Lomb-Scargle and found an increased fraction of recovered
+  periodicities above 15% for the eclipsing binaries, and over 80$\%$ for the RR
+  Lyrae stars. Our findings suggest that a multi-band Lomb-Scargle should be
+  implemented for searching periodic phenomena through AP. We also asses the
+  computational and scientific performance of several configurations on
+  simulated alert data and find that our current configuration scales linearly
+  with the number of detections while assuming an heuristic frequency grid.
+doi: 10.71929/rubin/2998097
+osti_id: 2998097
+authors:
+- tzanidakisa
+- bellme
+relationships:
+  References:
+  - 10.1051/0004-6361/201936905
+  - 10.1086/130812
+  - 10.1086/157581
+  - 10.1088/0004-6256/144/1/9
+  - 10.1088/0004-637X/733/1/10
+  - 10.1088/0004-637X/812/1/18
+  - 10.1093/mnras/stt1700
+  - 10.1093/mnras/stv719
+  - 10.1111/j.1365-2966.2008.12689.x
+  - 10.1111/j.1365-2966.2010.18016.x
+  - 10.1126/science.aau3181
+  - 10.71929/rubin/2997999
