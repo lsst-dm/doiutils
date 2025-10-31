@@ -14,6 +14,7 @@ from __future__ import annotations
 import logging
 import re
 import sys
+import tomllib
 from typing import IO
 
 import click
@@ -425,3 +426,20 @@ def extract_references(
 
     for _, doi in sorted(dois.items()):
         print(f"- {doi}")
+
+
+@cli.command("extract-toml-authors")
+@click.pass_context
+def extract_toml_authors(
+    ctx: click.Context,
+) -> None:
+    """Extract author IDs from technote TOML file.
+
+    Assumes there is a ``technote.toml`` file in the current directory.
+    """
+    with open("technote.toml", "rb") as fd:
+        content = tomllib.load(fd)
+
+    authors = content["technote"]["authors"]
+    for author in authors:
+        print(f"- {author['internal_id']}")
