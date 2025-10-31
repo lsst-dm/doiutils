@@ -9,9 +9,11 @@ abstract: |-
   profiles for the brightest cluster galaxy of Abell 360 and 2dFGRS TGS323Z113
   using Rubin Observatory Commissioning Camera (LSSTComCam) Data Preview 1 in
   the g, r, and z bands. Our results show that the LSSTComCam data can go down
-  to ~28 mag arcsec^-2 in the r band.  Comparison to DECaLS measurements processed
-  with Legacyhalos shows good agreement of surface brightness profiles at small
-  radii while the LSSTComCam data extend deeper at larger radii.
+  to ~28 mag arcsec^-2 in the r band.  Comparison to DECaLS measurements
+  processed with Legacyhalos shows good agreement of surface brightness profiles
+  at small radii while the LSSTComCam data extend deeper at larger radii.
+doi: 10.71929/rubin/3000576
+osti_id: 3000576
 authors:
 - zhouc
 - jeltemat

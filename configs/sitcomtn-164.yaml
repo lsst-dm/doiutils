@@ -9,8 +9,10 @@ abstract: |-
   selection, and the estimation of tangential and cross shear around the cluster
   center. The resulting shear profiles provide key insights into the mass
   distribution of Abell 360 and demonstrate the capabilities of AnaCal in
-  processing early LSST data, with the tangential shear profile detected at
-  5σ significance.
+  processing early LSST data, with the tangential shear profile detected at 5σ
+  significance.
+doi: 10.71929/rubin/3000577
+osti_id: 3000577
 authors:
 - lix2
 - adarip
@@ -30,3 +32,4 @@ relationships:
   - 10.48550/arXiv.2506.16607
   - 10.71929/rubin/2571157
   - 10.71929/rubin/2572986
+  - 10.71929/rubin/3000578
