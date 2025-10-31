@@ -1,0 +1,33 @@
+title: Surface brightness profiles around massive galaxies in LSSTComCam data
+handle: SITCOMTN-165
+site_url: https://sitcomtn-165.lsst.io
+date: 2025-10-22
+abstract: |-
+  Low surface brightness photometry of massive galaxies can probe the extended
+  stellar halos and intracluster light but is often limited by background
+  subtraction and masking systematics. Here we present radial surface brightness
+  profiles for the brightest cluster galaxy of Abell 360 and 2dFGRS TGS323Z113
+  using Rubin Observatory Commissioning Camera (LSSTComCam) Data Preview 1 in
+  the g, r, and z bands. Our results show that the LSSTComCam data can go down
+  to ~28 mag arcsec^-2 in the r band.  Comparison to DECaLS measurements processed
+  with Legacyhalos shows good agreement of surface brightness profiles at small
+  radii while the LSSTComCam data extend deeper at larger radii.
+authors:
+- zhouc
+- jeltemat
+- lindena
+- kelvinl
+- dellantonioi
+- taranuds
+- englerta
+- leauthauda
+relationships:
+  References:
+  - 10.1086/382245
+  - 10.1093/mnras/stac2121
+  - 10.1093/mnras/stx3200
+  - 10.3847/1538-3881/ab089d
+  - 10.3847/1538-4365/acfaa2
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2574402

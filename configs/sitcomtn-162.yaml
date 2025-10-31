@@ -1,0 +1,72 @@
+title: Testing the implementation of Metadetection and Cell-Based Coadds on Abell 360 LSSTComCam data
+handle: SITCOMTN-162
+site_url: https://sitcomtn-162.lsst.io
+date: 2025-10-24
+abstract: |-
+  The purpose of this technote is to test the technical quality of LSSTComCam
+  commissioning data, specifically the Rubin_SV_38_7 field, by utilizing
+  cell-based coadds and Metadetection by measuring the tangential and cross
+  weak lensing shear profiles of the massive cluster Abell 360 (called A360
+  throughout the technote). The process entails generating the cell-based
+  coadds for Metadetection to run on, identifying and removing cluster member
+  galaxies, applying quality cuts, calibrating the shear measurements, and
+  validation.
+
+  Cell-based coadds and Metadetection are both currently in the process of
+  being implemented within the LSST Science Pipelines at the time of this
+  technote. There is substantial technical value in attempting a difficult
+  measurement prior to full implementation. Measuring the tangential shear
+  around A360 will showcase the current abilities of these algorithms, as
+  well as highlight where work is still needed. As seen from the resulting
+  shear profile of A360, the cell-based coadds and Metadetection are able to
+  work in tandem to produce a shear catalog and resulting reduced shear profile.
+
+  This technote is one part of a series studying A360 in order to both stress
+  test the commissioning camera  and demonstrate the technical capabilities
+  of the Vera Rubin Observatory. We study the quality of the PSF modeling and
+  impact it can have on cluster WL in [Combet et al., 2025], implementation
+  of cell-based coadds and subsequent use for Metadetect [Sheldon et al., 2023]
+  in this technote, photometric calibration in (in prep), source selection
+  and photometric redshifts in [Adari et al., 2025], use of Anacal [Li et al.,
+  2024] to produce a cluster shear profile in [Li et al., 2025], and
+  background subtraction in this field and Fornax in [Zhou et al., 2025].
+authors:
+- gorsuchmr
+- kannawadia
+- adarip
+- englerta
+- beckermr
+- combetc
+- guinota
+- mandelbaumr
+- maus
+- pedersene
+- lindena
+relationships:
+  References:
+  - 10.1016/j.ascom.2015.02.002
+  - 10.1046/j.1365-8711.2003.06683.x
+  - 10.1086/192122
+  - 10.1093/mnras/stab2414
+  - 10.1093/mnras/stab2764
+  - 10.1093/mnras/stad3895
+  - 10.1093/mnras/staf1661
+  - 10.1093/mnras/stt2129
+  - 10.1093/mnras/stw857
+  - 10.1093/mnras/stx2666
+  - 10.1093/pasj/psy009
+  - 10.1111/j.1365-2966.2005.09946.x
+  - 10.21105/astro.2303.03947
+  - 10.3847/1538-4357/aa704b
+  - 10.3847/1538-4357/abb595
+  - 10.3847/1538-4365/abd023
+  - 10.48550/arXiv.1702.02600
+  - 10.48550/arXiv.1809.01669
+  - 10.48550/arXiv.2407.01771
+  - 10.71929/RUBIN/2561361
+  - 10.71929/RUBIN/2570308
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2571157
+  - 10.71929/rubin/2572986
+  - 10.71929/rubin/2574402
