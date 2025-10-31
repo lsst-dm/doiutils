@@ -1,0 +1,35 @@
+title: AnaCal Shear Profile of Abell 360 in LSSTComCam Data Preview 1
+handle: SITCOMTN-164
+site_url: https://sitcomtn-164.lsst.io
+date: 2025-08-24
+abstract: |-
+  This technote presents the measurement of the weak-lensing shear profile for
+  the Abell 360 galaxy cluster using LSSTComCam data processed with the AnaCal
+  pipeline. We detail the procedures involved in bright-star masking, source
+  selection, and the estimation of tangential and cross shear around the cluster
+  center. The resulting shear profiles provide key insights into the mass
+  distribution of Abell 360 and demonstrate the capabilities of AnaCal in
+  processing early LSST data, with the tangential shear profile detected at 5σ
+  significance.
+doi: 10.71929/rubin/3000577
+osti_id: 3000577
+authors:
+- lix2
+- adarip
+- lindena
+- mandelbaumr
+relationships:
+  References:
+  - 10.1093/mnras/stab2764
+  - 10.1093/mnras/stac342
+  - 10.1093/mnras/stad890
+  - 10.1093/mnras/stae2764
+  - 10.1093/mnras/staf053
+  - 10.1093/mnras/sty2548
+  - 10.21105/astro.2303.03947
+  - 10.3847/1538-4365/abd023
+  - 10.48550/arXiv.1809.01669
+  - 10.48550/arXiv.2506.16607
+  - 10.71929/rubin/2571157
+  - 10.71929/rubin/2572986
+  - 10.71929/rubin/3000578
