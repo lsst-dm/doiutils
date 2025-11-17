@@ -1,6 +1,7 @@
 title: Coaddition Artifact Rejection and CompareWarp
 handle: DMTN-080
-site_url: https://dmtn-080.lsst.io
+site_url: https://dmtn-080.lsst.io/
+date: 2018-08-31
 abstract: |-
   LSST images will be contaminated with transient artifacts, such as optical
   ghosts, satellite trails, and cosmic rays, and with transient astronomical
@@ -20,7 +21,6 @@ abstract: |-
   Hyper SuprimeCam PDR1 data.
 doi: 10.71929/rubin/2583441
 osti_id: 2583441
-date: 2018-08-31
 authors:
 - alsayyady
 relationships:
@@ -31,3 +31,6 @@ relationships:
   - 10.71929/rubin/2583432
   IsOriginalFormOf:
   - 10.5281/zenodo.2605417
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2586496

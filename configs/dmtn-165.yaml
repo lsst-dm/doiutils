@@ -2,7 +2,7 @@ title: A Hybrid Notification and Alert Retrieval Service
 handle: DMTN-165
 site_url: https://dmtn-165.lsst.io
 date: 2020-12-16
-aabstract: |-
+abstract: |-
   We consider the implications of providing a subset of alert packet contents in
   the alert stream, with the full alert packets available for rate-limited
   retrieval using an identifier included in the "lightweight" alert. This hybrid

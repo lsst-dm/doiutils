@@ -1,15 +1,15 @@
 title: Study of the Linearity of the CCDs of the Vera C. Rubin Observatory
 handle: RTN-055
-site_url: https://rtn-055.lsst.io
+site_url: https://rtn-055.lsst.io/
+date: 2023-03-31
 abstract: |-
   We show our exploration of sets of PTC data for different detectors of the
-  LSSTCam, and inspect how it deviates from polynomial and exponential fits.
-  We present a tutorial on how to connect to the Rubin Science Platform and
-  access the notebooks and other project files. Then we present the approach
-  taken to work with the LSST Science Pipeline's linearizer algorithm and the
-  results obtained by varying the parameters involved in the different fits
-  that can be used.
-date: 2023-03-31
+  LSSTCam, and inspect how it deviates from polynomial and exponential fits. We
+  present a tutorial on how to connect to the Rubin Science Platform and access
+  the notebooks and other project files. Then we present the approach taken to
+  work with the LSST Science Pipeline's linearizer algorithm and the results
+  obtained by varying the parameters involved in the different fits that can be
+  used.
 doi: 10.71929/rubin/2575154
 osti_id: 2575154
 authors:
@@ -23,4 +23,6 @@ relationships:
   - 10.3847/1538-4357/ab042c
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2571927
+  - 10.71929/rubin/2575156
+  IsReferencedBy:
   - 10.71929/rubin/2575156

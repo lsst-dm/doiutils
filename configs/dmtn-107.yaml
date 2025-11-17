@@ -1,6 +1,6 @@
 title: Options for Alert Production in LSST Operations Year 1
 handle: DMTN-107
-site_url: https://dmtn-107.lsst.io
+site_url: https://dmtn-107.lsst.io/
 date: 2020-04-14
 abstract: |-
   This document reviews five options for alert production in LSST Operations
@@ -34,4 +34,6 @@ relationships:
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587200
   - 10.71929/rubin/2997858
+  - 10.71929/rubin/2998139
+  IsReferencedBy:
   - 10.71929/rubin/2998139

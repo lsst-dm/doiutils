@@ -1,33 +1,30 @@
-# DP1 description paper
 title: The Vera C. Rubin Observatory Data Preview 1
 handle: RTN-095
-abstract: |-
-  We present Rubin Data Preview 1 (DP1), the first release of data from
-  the NSF-DOE Vera C. Rubin Observatory, consisting of raw and calibrated
-  single-epoch images, coadds, difference images, detection catalogs, and
-  other derived data products. DP1 is based on 1792 science-grade
-  optical/near-infrared exposures acquired over 48 distinct nights by the
-  Rubin Commissioning Camera, LSSTComCam, on the Simonyi Survey Telescope
-  at the Summit Facility on Cerro Pachón, Chile during the first on-sky
-  commissioning campaign in late 2024. DP1 covers a total of ~15 sq. deg.
-  over seven roughly equally-sized non-contiguous fields, each
-  independently observed in six broad photometric bands, ugrizy, spanning
-  a range of stellar densities and latitudes and overlapping with external
-  reference datasets.  The median image quality across all bands, measured
-  by the FWHM of the point-spread function, is approximately 1.13
-  arcseconds, with the sharpest images reaching about 0.65 arcseconds. DP1
-  contains approximately 2.3 million distinct astrophysical objects, of
-  which 1.6 million are extended in at least one band, and 431 solar
-  system objects, of which 93 are new discoveries. DP1 is approximately
-  3.5 TB in size and available to Rubin data rights holders via the Rubin
-  Science Platform, a cloud-based environment for the analysis of
-  petascale astronomical data. While small compared to future LSST
-  releases, its high quality and diversity of data support a broad range
-  of early science investigations across all four LSST themes, providing a
-  valuable opportunity to engage with Rubin data ahead of the start of
-  full operations in late 2025.
 site_url: https://rtn-095.lsst.io/
 date: 2025-06-27
+abstract: |-
+  We present Rubin Data Preview 1 (DP1), the first release of data from the NSF-
+  DOE Vera C. Rubin Observatory, consisting of raw and calibrated single-epoch
+  images, coadds, difference images, detection catalogs, and other derived data
+  products. DP1 is based on 1792 science-grade optical/near-infrared exposures
+  acquired over 48 distinct nights by the Rubin Commissioning Camera,
+  LSSTComCam, on the Simonyi Survey Telescope at the Summit Facility on Cerro
+  Pachón, Chile during the first on-sky commissioning campaign in late 2024. DP1
+  covers a total of ~15 sq. deg. over seven roughly equally-sized non-contiguous
+  fields, each independently observed in six broad photometric bands, ugrizy,
+  spanning a range of stellar densities and latitudes and overlapping with
+  external reference datasets.  The median image quality across all bands,
+  measured by the FWHM of the point-spread function, is approximately 1.13
+  arcseconds, with the sharpest images reaching about 0.65 arcseconds. DP1
+  contains approximately 2.3 million distinct astrophysical objects, of which
+  1.6 million are extended in at least one band, and 431 solar system objects,
+  of which 93 are new discoveries. DP1 is approximately 3.5 TB in size and
+  available to Rubin data rights holders via the Rubin Science Platform, a
+  cloud-based environment for the analysis of petascale astronomical data. While
+  small compared to future LSST releases, its high quality and diversity of data
+  support a broad range of early science investigations across all four LSST
+  themes, providing a valuable opportunity to engage with Rubin data ahead of
+  the start of full operations in late 2025.
 doi: 10.71929/rubin/2570536
 osti_id: 2570536
 authors:
@@ -238,7 +235,6 @@ authors:
 - nealh
 - neilsene
 - neveuj
-- nima
 - noblet
 - nourbakhshe
 - olsenk
@@ -295,6 +291,7 @@ authors:
 - schindlerrh
 - schmidts
 - sebagj
+- sedaghatn
 - selvyb
 - sepulvedavalenzuelaee
 - sericheg
@@ -477,3 +474,13 @@ relationships:
   - 10.71929/rubin/2587108
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587242
+  IsReferencedBy:
+  - 10.71929/rubin/2570850
+  - 10.71929/rubin/2571157
+  - 10.71929/rubin/2571480
+  - 10.71929/rubin/2572986
+  - 10.71929/rubin/2574402
+  - 10.71929/rubin/2583847
+  - 10.71929/rubin/2586668
+  - 10.71929/rubin/3000576
+  - 10.71929/rubin/3000578

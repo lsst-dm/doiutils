@@ -1,6 +1,7 @@
-title: Rubin Observatory Processing of Gravitational Wave TOO Data in the Early Operations Era
+title: Rubin Observatory Processing of Gravitational Wave TOO Data in the Early
+  Operations Era
 handle: RTN-008
-site_url: https://rtn-008.lsst.io
+site_url: https://rtn-008.lsst.io/
 date: 2022-08-03
 abstract: |-
   Since the watershed discovery of an electromagnetic counterpart to the
@@ -29,4 +30,6 @@ relationships:
   - 10.3847/2041-8213/aa920c
   - 10.48550/arXiv.1812.04051
   - 10.71929/rubin/2584021
+  - 10.71929/rubin/2997573
+  IsReferencedBy:
   - 10.71929/rubin/2997573

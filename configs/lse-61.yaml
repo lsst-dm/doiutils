@@ -1,6 +1,6 @@
 title: Rubin Observatory Data Management System (DMS) Requirements
 handle: LSE-61
-site_url: https://lse-61.lsst.io
+site_url: https://lse-61.lsst.io/
 date: 2024-09-29
 abstract: |-
   This document contains the top-level requirements for the Data Management
@@ -15,3 +15,10 @@ authors:
 relationships:
   References:
   - 10.71929/rubin/2587118
+  IsReferencedBy:
+  - 10.71929/rubin/2587242
+  - 10.71929/rubin/2587850
+  - 10.71929/rubin/2997573
+  - 10.71929/rubin/2997858
+  - 10.71929/rubin/2997867
+  - 10.71929/rubin/2998139

@@ -1,6 +1,6 @@
 title: Data Products Definition Document
 handle: LSE-163
-site_url: https://lse-163.lsst.io
+site_url: https://lse-163.lsst.io/
 date: 2023-07-10
 abstract: |-
   This document describes the data products and processing services to be
@@ -68,3 +68,15 @@ relationships:
   - 10.3847/1538-4357/abb595
   - 10.48550/arXiv.1702.02600
   - 10.71929/rubin/2587108
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2587200
+  - 10.71929/rubin/2587242
+  - 10.71929/rubin/2587850
+  - 10.71929/rubin/2997573
+  - 10.71929/rubin/2997858
+  - 10.71929/rubin/2997867
+  - 10.71929/rubin/2997999
+  - 10.71929/rubin/2998133
+  - 10.71929/rubin/2998139

@@ -1,6 +1,6 @@
 title: Implementation of Image Difference Decorrelation
 handle: DMTN-021
-site_url: https://dmtn-021.lsst.io
+site_url: https://dmtn-021.lsst.io/
 date: 2016-06-14
 abstract: |-
   Herein, we describe a method for decorrelating image differences produced by
@@ -34,3 +34,7 @@ relationships:
   - 10.5281/zenodo.192833
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2583432
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2997867

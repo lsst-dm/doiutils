@@ -1,6 +1,6 @@
 title: Current status of APDB and PPDB implementation
 handle: DMTN-293
-site_url: https://dmtn-293.lsst.io
+site_url: https://dmtn-293.lsst.io/
 date: 2024-09-18
 abstract: |-
   The design of the Alert Production DataBase (APDB) and Prompt Products

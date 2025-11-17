@@ -1,6 +1,6 @@
 title: Data Management Science Pipelines Design
 handle: LDM-151
-site_url: https://ldm-151.lsst.io
+site_url: https://ldm-151.lsst.io/
 date: 2020-11-10
 abstract: |-
   The LSST Science Requirements Document (the LSST SRD) specifies a set of data
@@ -68,3 +68,11 @@ relationships:
   - 10.71929/rubin/2586490
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587850
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587850
+  - 10.71929/rubin/2997573
+  - 10.71929/rubin/2997867
+  - 10.71929/rubin/2997999
+  - 10.71929/rubin/2998139

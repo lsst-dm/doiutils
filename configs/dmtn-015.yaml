@@ -1,9 +1,10 @@
 title: Flavors of Coadds
 handle: DMTN-015
-site_url: https://dmtn-015.lsst.io
-abstract: |-
-  A glossary of different kinds of coadded images, with brief descriptions of the algorithms behind them.
+site_url: https://dmtn-015.lsst.io/
 date: 2016-05-31
+abstract: |-
+  A glossary of different kinds of coadded images, with brief descriptions of
+  the algorithms behind them.
 doi: 10.71929/rubin/2583432
 osti_id: 2583432
 authors:
@@ -14,3 +15,7 @@ relationships:
   - 10.1086/305984
   - 10.1086/660137
   - 10.3847/1538-4357/836/2/188
+  IsReferencedBy:
+  - 10.71929/rubin/2583441
+  - 10.71929/rubin/2586490
+  - 10.71929/rubin/2587108

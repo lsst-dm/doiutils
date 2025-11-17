@@ -1,6 +1,6 @@
 title: LSST Science Platform Vision Document
 handle: LSE-319
-site_url: https://lse-319.lsst.io
+site_url: https://lse-319.lsst.io/
 date: 2019-07-24
 abstract: |-
   This document defines and describes the "LSST Science Platform," a set of
@@ -40,3 +40,7 @@ relationships:
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587200
   - 10.71929/rubin/2587850
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2997573
+  - 10.71929/rubin/2998139

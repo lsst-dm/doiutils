@@ -1,6 +1,8 @@
-title: Survey Strategy and Cadence Choices for the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST)
+title: Survey Strategy and Cadence Choices for the Vera C. Rubin Observatory
+  Legacy Survey of Space and Time (LSST)
 handle: PSTN-051
-site_url: https://pstn-051.lsst.io
+site_url: https://pstn-051.lsst.io/
+date: 2021-03-11
 abstract: |-
   A summary of survey strategy and cadence choices, simulated and evaluated by
   the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST) Scheduler
@@ -25,7 +27,6 @@ abstract: |-
   enable the SCOC to make its recommendation for the preferred survey strategy.
 doi: 10.71929/rubin/2584084
 osti_id: 2584084
-date: 2021-03-11
 authors:
 - jonesrl
 - yoachimp
@@ -51,3 +52,7 @@ relationships:
   - 10.3847/1538-3881/aafece
   - 10.3847/1538-4357/ab042c
   - 10.48550/arXiv.1503.07170
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2584276
+  - 10.71929/rubin/2585249

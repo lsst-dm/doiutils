@@ -1,6 +1,7 @@
 title: Rubin Observatory Plans for an Early Science Program
 handle: RTN-011
-site_url: https://rtn-011.lsst.io
+site_url: https://rtn-011.lsst.io/
+date: 2025-05-30
 abstract: |-
   This document outlines Rubin Observatory's plans for a dedicated \emph{Early
   Science Program} to enable high-impact science prior to the first annual data
@@ -19,7 +20,6 @@ abstract: |-
   as-built system and to community guidance.
 doi: 10.71929/rubin/2584021
 osti_id: 2584021
-date: 2025-05-30
 authors:
 - guylp
 - bechtolk
@@ -48,3 +48,7 @@ relationships:
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2571927
   - 10.71929/rubin/2574402
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2585249
+  - 10.71929/rubin/2997564

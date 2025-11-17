@@ -1,12 +1,12 @@
 title: Astrometric Calibration in the LSST Pipeline
 handle: DMTN-266
-site_url: https://dmtn-266.lsst.io
+site_url: https://dmtn-266.lsst.io/
+date: 2024-10-02
 abstract: |-
   We describe our procedure for fitting an astrometric solution in the LSST Data
   Release Production.
 doi: 10.71929/rubin/2583846
 osti_id: 2583846
-date: 2024-10-02
 authors:
 - saundersc
 relationships:
@@ -17,3 +17,5 @@ relationships:
   - 10.3847/1538-3881/ac0722
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2583688
+  IsReferencedBy:
+  - 10.71929/rubin/2570536

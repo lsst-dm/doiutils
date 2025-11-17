@@ -1,9 +1,10 @@
 title: DOI usage for LSST Data Releases
 handle: DMTN-318
-site_url: https://dmtn-318.lsst.io
-abstract: |-
-  Each LSST Data Release has to be associated with dataset DOIs. This document will describe the motivation and policy for issuing DOIs for Data Releases.
+site_url: https://dmtn-318.lsst.io/
 date: 2025-06-10
+abstract: |-
+  Each LSST Data Release has to be associated with dataset DOIs. This document
+  will describe the motivation and policy for issuing DOIs for Data Releases.
 doi: 10.71929/rubin/2583847
 osti_id: 2583847
 authors:
@@ -18,3 +19,5 @@ relationships:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2571927
   - 10.71929/rubin/2571930
+  IsReferencedBy:
+  - 10.71929/rubin/2583848

@@ -1,6 +1,6 @@
 title: AnaCal Shear Profile of Abell 360 in LSSTComCam Data Preview 1
 handle: SITCOMTN-164
-site_url: https://sitcomtn-164.lsst.io
+site_url: https://sitcomtn-164.lsst.io/
 date: 2025-08-24
 abstract: |-
   This technote presents the measurement of the weak-lensing shear profile for
@@ -32,4 +32,6 @@ relationships:
   - 10.48550/arXiv.2506.16607
   - 10.71929/rubin/2571157
   - 10.71929/rubin/2572986
+  - 10.71929/rubin/3000578
+  IsReferencedBy:
   - 10.71929/rubin/3000578

@@ -1,6 +1,6 @@
 title: The Consolidated Database of Image Metadata
 handle: DMTN-227
-site_url: https://dmtn-227.lsst.io
+site_url: https://dmtn-227.lsst.io/
 date: 2025-08-04
 abstract: |-
   This document proposes a specification for what the content of an image
@@ -19,3 +19,5 @@ relationships:
   - 10.5479/ADS/bib/2019ivoa.spec.0927D
   - 10.5479/ADS/bib/2021ivoa.spec.0724S
   - 10.5479/ADS/bib/2023ivoa.spec.1215B
+  IsReferencedBy:
+  - 10.71929/rubin/2570536

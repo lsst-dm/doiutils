@@ -1,6 +1,7 @@
-title: "Survey Strategy: Rolling Cadence"
+title: 'Survey Strategy: Rolling Cadence'
 handle: PSTN-052
-site_url: https://pstn-052.lsst.io
+site_url: https://pstn-052.lsst.io/
+date: 2021-06-27
 abstract: |-
   We cover the basics of how a rolling cadence survey strategy can work, and
   review the results of a variety of rolling simulations. We find that Type Ia
@@ -8,6 +9,5 @@ abstract: |-
   microlensing events are dominated by footprint coverage.
 doi: 10.71929/rubin/2584109
 osti_id: 2584109
-date: 2021-06-27
 authors:
 - yoachimp

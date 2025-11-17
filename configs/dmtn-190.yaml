@@ -1,6 +1,7 @@
 title: Consistent galaxy colors with Gaussian-Aperture and PSF photometry
 handle: DMTN-190
-site_url: https://dmtn-190.lsst.io
+site_url: https://dmtn-190.lsst.io/
+date: 2022-02-23
 abstract: |-
   Gaussian-Aperture and PSF photometry algorithm measures consistent colors for
   extended sources such as galaxies that are largely independent of seeing. This
@@ -10,7 +11,6 @@ abstract: |-
   tested in the unit tests.
 doi: 10.71929/rubin/2583849
 osti_id: 2583849
-date: 2022-02-23
 authors:
 - kannawadia
 relationships:
@@ -18,3 +18,5 @@ relationships:
   - 10.1093/mnras/stt244
   - 10.1093/mnras/stv2140
   - 10.71929/rubin/2570545
+  IsReferencedBy:
+  - 10.71929/rubin/2570536

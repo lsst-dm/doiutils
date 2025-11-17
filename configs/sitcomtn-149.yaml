@@ -1,6 +1,7 @@
 title: An Interim Report on the LSSTComCam On-Sky Campaign
 handle: SITCOMTN-149
-site_url: https://sitcomtn-149.lsst.io
+site_url: https://sitcomtn-149.lsst.io/
+date: 2025-01-14
 abstract: |-
   From 24 October to 11 December 2024, the NSF-DOE Vera C. Rubin Observatory
   conducted an on-sky campaign using the engineering LSST Commissioning Camera
@@ -19,7 +20,6 @@ abstract: |-
   are refined.
 doi: 10.71929/rubin/2574402
 osti_id: 2574402
-date: 2025-01-14
 authors:
 - Rubin
 relationships:
@@ -31,3 +31,7 @@ relationships:
   - 10.71929/RUBIN/2561361
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2571927
+  IsReferencedBy:
+  - 10.71929/rubin/2584021
+  - 10.71929/rubin/3000576
+  - 10.71929/rubin/3000578

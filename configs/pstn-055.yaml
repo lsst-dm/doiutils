@@ -1,6 +1,6 @@
 title: Survey Cadence Optimization Committee's Phase 2 Recommendations
 handle: PSTN-055
-site_url: https://pstn-055.lsst.io
+site_url: https://pstn-055.lsst.io/
 date: 2023-02-02
 abstract: |-
   This document describes the recommendations formulated by the Survey Cadence
@@ -68,3 +68,7 @@ relationships:
   - 10.71929/rubin/2584084
   - 10.71929/rubin/2584276
   - 10.71929/rubin/2584366
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2585402
+  - 10.71929/rubin/2997573

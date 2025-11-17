@@ -1,10 +1,10 @@
-title: "LSST Alerts: Key Numbers"
+title: 'LSST Alerts: Key Numbers'
 handle: DMTN-102
-site_url: https://dmtn-102.lsst.io
+site_url: https://dmtn-102.lsst.io/
 date: 2024-04-24
 abstract: |-
-  A quantitative review of the key numbers associated with the Legacy Survey of Space
-  and Time (LSST) Alert Stream.
+  A quantitative review of the key numbers associated with the Legacy Survey of
+  Space and Time (LSST) Alert Stream.
 doi: 10.71929/rubin/2997858
 osti_id: 2997858
 authors:
@@ -22,4 +22,7 @@ relationships:
   - 10.48550/arXiv.0912.0201
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587200
+  - 10.71929/rubin/2998139
+  IsReferencedBy:
+  - 10.71929/rubin/2997867
   - 10.71929/rubin/2998139
