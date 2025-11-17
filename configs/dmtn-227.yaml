@@ -19,3 +19,5 @@ relationships:
   - 10.5479/ADS/bib/2019ivoa.spec.0927D
   - 10.5479/ADS/bib/2021ivoa.spec.0724S
   - 10.5479/ADS/bib/2023ivoa.spec.1215B
+  IsReferencedBy:
+  - 10.71929/rubin/2570536

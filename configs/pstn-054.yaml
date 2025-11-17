@@ -37,3 +37,5 @@ relationships:
   - 10.3847/1538-4357/ab042c
   - 10.3847/1538-4365/ac3e72
   - 10.71929/rubin/2584276
+  IsReferencedBy:
+  - 10.71929/rubin/2585249

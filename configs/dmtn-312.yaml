@@ -17,3 +17,5 @@ relationships:
   - 10.1093/mnras/stw3039
   - 10.21105/joss.02338
   - 10.71929/rubin/2570545
+  IsReferencedBy:
+  - 10.71929/rubin/2570536

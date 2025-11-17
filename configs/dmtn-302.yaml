@@ -19,3 +19,5 @@ relationships:
   - 10.5479/ADS/bib/2017ivoa.spec.0509L
   - 10.5479/ADS/bib/2017ivoa.spec.0519F
   - 10.71929/rubin/2583847
+  IsReferencedBy:
+  - 10.71929/rubin/2570536

@@ -18,3 +18,5 @@ relationships:
   - 10.1093/mnras/stt244
   - 10.1093/mnras/stv2140
   - 10.71929/rubin/2570545
+  IsReferencedBy:
+  - 10.71929/rubin/2570536

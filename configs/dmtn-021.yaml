@@ -34,3 +34,7 @@ relationships:
   - 10.5281/zenodo.192833
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2583432
+  IsReferencedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2587108
+  - 10.71929/rubin/2997867
