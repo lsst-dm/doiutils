@@ -1,6 +1,7 @@
 title: LSSTCam and LSSTComCam Focal Plane Layouts
 handle: CTN-001
-site_url: https://ctn-001.lsst.io
+site_url: https://ctn-001.lsst.io/
+date: 2025-03-15
 abstract: |-
   This document includes figures depicting the layouts of the LSST Camera and
   LSST Commissioning Camera, highlighting the arrangement and identification of
@@ -8,7 +9,6 @@ abstract: |-
   image segments.
 doi: 10.71929/rubin/2584019
 osti_id: 2584019
-date: 2025-03-15
 authors:
 - plazasa
 - digelsw

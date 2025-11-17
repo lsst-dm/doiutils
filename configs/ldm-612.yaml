@@ -1,6 +1,6 @@
 title: Plans and Policies for LSST Alert Distribution
 handle: LDM-612
-site_url: https://ldm-612.lsst.io
+site_url: https://ldm-612.lsst.io/
 date: 2020-07-09
 abstract: |-
   A major product of the nightly processing of LSST images is a world-public

@@ -1,6 +1,8 @@
-title: "The Monster: A reference catalog with synthetic ugrizy-band fluxes for the Vera C. Rubin observatory"
+title: 'The Monster: A reference catalog with synthetic ugrizy-band fluxes for the
+  Vera C. Rubin observatory'
 handle: DMTN-277
-site_url: https://dmtn-277.lsst.io
+site_url: https://dmtn-277.lsst.io/
+date: 2025-05-09
 abstract: |-
   In order to facilitate bootstrap photometric calibrations of early Rubin
   Observatory data we have created an all sky reference catalog called The
@@ -12,7 +14,6 @@ abstract: |-
   Monster.
 doi: 10.71929/rubin/2583688
 osti_id: 2583688
-date: 2025-05-09
 authors:
 - fergusonps
 - rykoffe

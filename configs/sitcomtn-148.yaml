@@ -1,6 +1,7 @@
 title: LSST Camera Electro-Optical Test (Run 7) Results
 handle: SITCOMTN-148
-site_url: https://sitcomtn-148.lsst.io
+site_url: https://sitcomtn-148.lsst.io/
+date: 2025-05-10
 abstract: |-
   This note collects results from the LSST Camera electro-optical testing prior
   to installation on the TMA. We describe the focal plane characterization,
@@ -12,7 +13,6 @@ abstract: |-
   vampire pixels, ITL dips, and other sensor features.
 doi: 10.71929/rubin/2583999
 osti_id: 2583999
-date: 2025-05-10
 authors:
 - CameraTeam
 - antilogusp

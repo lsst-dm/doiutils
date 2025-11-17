@@ -1,6 +1,6 @@
 title: Implementation of Image Difference Decorrelation
 handle: DMTN-021
-site_url: https://dmtn-021.lsst.io
+site_url: https://dmtn-021.lsst.io/
 date: 2016-06-14
 abstract: |-
   Herein, we describe a method for decorrelating image differences produced by

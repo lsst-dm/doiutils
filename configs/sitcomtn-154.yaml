@@ -1,6 +1,7 @@
 title: Initial studies of photometric redshifts with LSSTComCam from DP1
 handle: SITCOMTN-154
 site_url: https://sitcomtn-154.lsst.io/
+date: 2025-06-23
 abstract: |-
   This technote holds reports based on the first analyses of the Data Preview 1
   (DP1) data by the Science Unit for photometric redshifts.  Although
@@ -16,7 +17,6 @@ abstract: |-
   optimized configurations of the algorithms and tested the performance of those
   configurations. This work, the resulting data products and expected data
   distribution mechanism are all described there.
-date: 2025-06-23
 doi: 10.71929/rubin/2571480
 osti_id: 2571480
 authors:

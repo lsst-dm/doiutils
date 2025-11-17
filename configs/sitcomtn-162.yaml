@@ -1,6 +1,7 @@
-title: Testing the implementation of Metadetection and Cell-Based Coadds on Abell 360 LSSTComCam data
+title: Testing the implementation of Metadetection and Cell-Based Coadds on
+  Abell 360 LSSTComCam data
 handle: SITCOMTN-162
-site_url: https://sitcomtn-162.lsst.io
+site_url: https://sitcomtn-162.lsst.io/
 date: 2025-10-24
 abstract: |-
   The purpose of this technote is to test the technical quality of LSSTComCam

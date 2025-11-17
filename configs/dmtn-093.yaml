@@ -1,6 +1,6 @@
 title: Design of the LSST Alert Distribution System
 handle: DMTN-093
-site_url: https://dmtn-093.lsst.io
+site_url: https://dmtn-093.lsst.io/
 date: 2024-08-23
 abstract: |-
   We describe the proposed design and implementation of the LSST Alert

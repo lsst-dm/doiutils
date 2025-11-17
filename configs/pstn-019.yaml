@@ -1,15 +1,16 @@
-title: "The LSST Science Pipelines Software: Optical Survey Pipeline Reduction and Analysis Environment"
+title: 'The LSST Science Pipelines Software: Optical Survey Pipeline Reduction and
+  Analysis Environment'
 handle: PSTN-019
 site_url: https://pstn-019.lsst.io/
 date: 2025-06-27
 abstract: |-
   The NSF-DOE Vera C. Rubin Observatory will produce the Legacy Survey of Space
-  and Time (LSST), producing 11 data releases over the ten-year survey. The
-  LSST Science Pipelines Software, the Optical Survey Pipeline Reduction and
-  Analysis Environment (OSPRAE), will be used to create these data releases
-  and to perform the nightly alert production. This paper provides an overview
-  of the LSST Science Pipelines Software, describing the components and how
-  they are combined to form pipelines
+  and Time (LSST), producing 11 data releases over the ten-year survey. The LSST
+  Science Pipelines Software, the Optical Survey Pipeline Reduction and Analysis
+  Environment (OSPRAE), will be used to create these data releases and to
+  perform the nightly alert production. This paper provides an overview of the
+  LSST Science Pipelines Software, describing the components and how they are
+  combined to form pipelines
 doi: 10.71929/rubin/2570545
 osti_id: 2570545
 authors:

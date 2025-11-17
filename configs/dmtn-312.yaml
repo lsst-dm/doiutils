@@ -1,13 +1,13 @@
 title: The MultiProFit astronomical source modelling code
 handle: DMTN-312
-site_url: https://dmtn-312.lsst.io
+site_url: https://dmtn-312.lsst.io/
+date: 2025-05-21
 abstract: |-
   This note describes the MultiProFit astronomical source modelling code, and
   particularly its development and use for modelling coadded objects in the LSST
   Science Pipelines.
 doi: 10.71929/rubin/2584108
 osti_id: 2584108
-date: 2025-05-21
 authors:
 - taranuds
 relationships:

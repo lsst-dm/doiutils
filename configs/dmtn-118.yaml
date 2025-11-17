@@ -1,6 +1,6 @@
 title: Review of Timeseries Features
 handle: DMTN-118
-site_url: https://dmtn-118.lsst.io
+site_url: https://dmtn-118.lsst.io/
 date: 2021-05-28
 abstract: |-
   Rubin Observatory will compute timeseries variability features on lightcurves

@@ -1,6 +1,6 @@
 title: Rubin Observatory Data Management System Design
 handle: LDM-148
-site_url: https://ldm-148.lsst.io
+site_url: https://ldm-148.lsst.io/
 date: 2020-08-20
 abstract: |-
   The Rubin Observatory LSST Data Management System (DMS) is a set of services
