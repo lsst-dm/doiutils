@@ -11,6 +11,8 @@
 
 from __future__ import annotations
 
+import contextlib
+import glob
 import logging
 import re
 import sys
@@ -443,3 +445,53 @@ def extract_toml_authors(
     authors = content["technote"]["authors"]
     for author in authors:
         print(f"- {author['internal_id']}")
+
+
+@cli.command("find-internal-citations")
+@click.pass_context
+def find_internal_citations(
+    ctx: click.Context,
+) -> None:
+    """Scan all paper configs and determine missing IsReferenceBy
+    relationships.
+
+    Assumes a configs/ directory exists. The YAML files are updated with
+    new relationships.
+
+    The command reads all the configs and determines which tech notes cite
+    other tech notes and adds the inverse relationship if it is missing.
+    """
+    papers: dict[str, PaperConfig] = {}
+    for file in glob.glob("configs/*.yaml"):
+        with contextlib.suppress(ValueError):
+            with open(file) as fh:
+                paper = PaperConfig.from_yaml_fh(fh)
+                assert paper.doi is not None  # noqa: S101
+                papers[paper.doi] = paper
+
+    modified: set[str] = set()
+
+    forward = "References"
+    inverse = "IsReferencedBy"
+    for paper in papers.values():
+        if forward not in paper.relationships:
+            continue
+        references = paper.relationships[forward]
+        for ref in references:
+            if ref in papers:
+                # This paper cites another paper we know about.
+                other = papers[ref]
+                if inverse not in other.relationships:
+                    other.relationships[inverse] = []
+                if ref not in other.relationships[inverse]:
+                    paper_doi = paper.doi
+                    assert paper_doi is not None  # noqa: S101
+                    other.relationships[inverse].append(paper_doi)
+                    other.relationships[inverse] = sorted(other.relationships[inverse])
+                    modified.add(ref)
+
+    for to_update in modified:
+        paper = papers[to_update]
+        outfile = f"configs/{paper.handle.lower()}.yaml"
+        with open(outfile, "w") as fh:
+            paper.write_yaml_fh(fh)
