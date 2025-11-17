@@ -346,6 +346,10 @@ def _compare_affiliation(old: elinkapi.Affiliation | None, new: elinkapi.Affilia
 def _update_authors(saved_record: elinkapi.Record, config: PaperConfig) -> bool:
     updated = False
 
+    if config.authors == ["Rubin"]:
+        # Special-cased organizational author. Nothing to update.
+        return updated
+
     # Attach entirely new set of authors to record.
     previous_persons = saved_record.persons
     saved_record.persons = _create_persons(config)
