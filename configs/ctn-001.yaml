@@ -16,11 +16,11 @@ authors:
 - broughtona
 - CameraTeam
 relationships:
-  References:
+  Cites:
   - 10.71929/RUBIN/2561361
   - 10.71929/rubin/2571927
   - 10.71929/rubin/2583999
   IsOriginalFormOf:
   - 10.5281/zenodo.14984001
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536

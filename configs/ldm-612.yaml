@@ -27,7 +27,7 @@ authors:
 - swinbankjd
 - willmanb
 relationships:
-  References:
+  Cites:
   - 10.1117/12.2312293
   - 10.3847/1538-4357/ab042c
   - 10.71929/rubin/2570545
@@ -39,6 +39,6 @@ relationships:
   - 10.71929/rubin/2997573
   - 10.71929/rubin/2997858
   - 10.71929/rubin/2997867
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2997858
   - 10.71929/rubin/2997867

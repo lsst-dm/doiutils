@@ -24,7 +24,7 @@ authors:
 - lorenzon
 - plazasa
 relationships:
-  References:
+  Cites:
   - 10.1016/j.ascom.2019.100362
   - 10.1046/j.1365-8711.2003.06683.x
   - 10.1051/0004-6361:20066601
@@ -51,7 +51,7 @@ relationships:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2571480
   - 10.71929/rubin/2572986
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2572986
   - 10.71929/rubin/3000577
   - 10.71929/rubin/3000578

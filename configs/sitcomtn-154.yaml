@@ -36,7 +36,7 @@ authors:
 - solomonr
 - taranuds
 relationships:
-  References:
+  Cites:
   - 10.1007/978-94-011-3250-3_10
   - 10.1046/j.1365-8711.1999.02978.x
   - 10.1046/j.1365-8711.2001.04902.x
@@ -75,6 +75,6 @@ relationships:
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2570325
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2571157
   - 10.71929/rubin/2572986

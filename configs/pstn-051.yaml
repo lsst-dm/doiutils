@@ -36,7 +36,7 @@ authors:
 relationships:
   IsOriginalFormOf:
   - 10.5281/zenodo.4048837
-  References:
+  Cites:
   - 10.1007/978-3-642-18418-5_17
   - 10.1016/j.icarus.2018.04.018
   - 10.1051/0004-6361:20042352
@@ -52,7 +52,7 @@ relationships:
   - 10.3847/1538-3881/aafece
   - 10.3847/1538-4357/ab042c
   - 10.48550/arXiv.1503.07170
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2584276
   - 10.71929/rubin/2585249

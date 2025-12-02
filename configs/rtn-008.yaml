@@ -17,7 +17,7 @@ osti_id: 2997564
 authors:
 - bellme
 relationships:
-  References:
+  Cites:
   - 10.1093/mnras/stab3141
   - 10.1093/mnras/stab872
   - 10.1093/mnras/stz3457
@@ -31,5 +31,5 @@ relationships:
   - 10.48550/arXiv.1812.04051
   - 10.71929/rubin/2584021
   - 10.71929/rubin/2997573
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2997573

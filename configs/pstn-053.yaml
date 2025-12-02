@@ -29,12 +29,12 @@ authors:
 - straderj
 - yoachimp
 relationships:
-  References:
+  Cites:
   - 10.3847/1538-4357/ab042c
   - 10.3847/1538-4365/ac3e72
   - 10.71929/rubin/2584084
   - 10.71929/rubin/2584109
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2584366
   - 10.71929/rubin/2585249

@@ -43,7 +43,7 @@ authors:
 - pedersene
 - lindena
 relationships:
-  References:
+  Cites:
   - 10.1016/j.ascom.2015.02.002
   - 10.1046/j.1365-8711.2003.06683.x
   - 10.1086/192122
@@ -72,5 +72,5 @@ relationships:
   - 10.71929/rubin/2574402
   - 10.71929/rubin/3000576
   - 10.71929/rubin/3000577
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/3000577

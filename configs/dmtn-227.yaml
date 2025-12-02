@@ -13,11 +13,11 @@ authors:
 - limk
 - omullanew
 relationships:
-  References:
+  Cites:
   - 10.1117/12.2629569
   - 10.5479/ADS/bib/2017ivoa.spec.0509L
   - 10.5479/ADS/bib/2019ivoa.spec.0927D
   - 10.5479/ADS/bib/2021ivoa.spec.0724S
   - 10.5479/ADS/bib/2023ivoa.spec.1215B
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536

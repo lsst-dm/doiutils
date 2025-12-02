@@ -29,7 +29,7 @@ authors:
 - slaterct
 - DMSST
 relationships:
-  References:
+  Cites:
   - 10.3847/1538-3881/ac8cff
   - 10.48550/arXiv.1708.04058
   - 10.71929/rubin/2585249
@@ -38,7 +38,7 @@ relationships:
   - 10.71929/rubin/2587200
   - 10.71929/rubin/2587242
   - 10.71929/rubin/2997564
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2997564
   - 10.71929/rubin/2997999
   - 10.71929/rubin/2998139

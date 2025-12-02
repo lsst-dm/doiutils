@@ -42,7 +42,7 @@ authors:
 - utsumiy
 - zhangz
 relationships:
-  References:
+  Cites:
   - 10.1051/0004-6361/201935508
   - 10.1051/0004-6361/202245407
   - 10.1088/1538-3873/ad0a73
@@ -57,5 +57,5 @@ relationships:
   - 10.48550/arXiv.2002.09439
   - 10.48550/arXiv.2411.13386
   - 10.71929/rubin/2571927
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2584019

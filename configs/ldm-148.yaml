@@ -23,10 +23,10 @@ authors:
 - comorettog
 - DMLT
 relationships:
-  References:
+  Cites:
   - 10.71929/rubin/2587108
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587200
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2587108
   - 10.71929/rubin/2587242

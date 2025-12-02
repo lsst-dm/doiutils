@@ -19,7 +19,7 @@ authors:
 - astierp
 - boschjf
 relationships:
-  References:
+  Cites:
   - 10.1002/asna.19592850507
   - 10.1051/0004-6361/201629512
   - 10.1086/524677

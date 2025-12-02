@@ -22,7 +22,7 @@ osti_id: 2586496
 authors:
 - saundersc
 relationships:
-  References:
+  Cites:
   - 10.1016/j.patcog.2007.04.003
   - 10.1145/361237.361242
   - 10.71929/rubin/2583441

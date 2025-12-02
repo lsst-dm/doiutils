@@ -17,7 +17,7 @@ osti_id: 2997999
 authors:
 - bellme
 relationships:
-  References:
+  Cites:
   - 10.1007/BF00648343
   - 10.1016/j.ascom.2016.05.006
   - 10.1016/j.ascom.2017.12.001
@@ -123,5 +123,5 @@ relationships:
   - 10.71929/rubin/2587108
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2997573
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2998097
