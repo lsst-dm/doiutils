@@ -471,8 +471,8 @@ def find_internal_citations(
 
     modified: set[str] = set()
 
-    forward = "References"
-    inverse = "IsReferencedBy"
+    forward = "Cites"
+    inverse = "IsCitedBy"
     for paper in papers.values():
         if forward not in paper.relationships:
             continue
