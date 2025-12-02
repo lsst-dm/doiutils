@@ -15,5 +15,5 @@ authors:
 - watersc
 - rykoffe
 relationships:
-  References:
+  Cites:
   - 10.48550/arXiv.2211.15795

@@ -24,7 +24,7 @@ authors:
 - englerta
 - leauthauda
 relationships:
-  References:
+  Cites:
   - 10.1086/382245
   - 10.1093/mnras/stac2121
   - 10.1093/mnras/stx3200
@@ -33,5 +33,5 @@ relationships:
   - 10.71929/RUBIN/2561361
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2574402
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/3000578

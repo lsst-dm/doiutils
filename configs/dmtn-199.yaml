@@ -22,7 +22,7 @@ authors:
 - zauderervanderleya
 - marsiskeh
 relationships:
-  References:
+  Cites:
   - 10.6028/NIST.FIPS.200
   - 10.6028/NIST.SP.800-114r1
   - 10.6028/NIST.SP.800-171r3

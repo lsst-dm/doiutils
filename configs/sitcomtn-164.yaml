@@ -19,7 +19,7 @@ authors:
 - lindena
 - mandelbaumr
 relationships:
-  References:
+  Cites:
   - 10.1093/mnras/stab2764
   - 10.1093/mnras/stac342
   - 10.1093/mnras/stad890
@@ -33,5 +33,5 @@ relationships:
   - 10.71929/rubin/2571157
   - 10.71929/rubin/2572986
   - 10.71929/rubin/3000578
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/3000578

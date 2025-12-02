@@ -25,7 +25,7 @@ authors:
 - tzanidakisa
 - bellme
 relationships:
-  References:
+  Cites:
   - 10.1051/0004-6361/201936905
   - 10.1086/130812
   - 10.1086/157581

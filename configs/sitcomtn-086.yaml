@@ -12,7 +12,7 @@ authors:
 - fagreliusp
 - rykoffe
 relationships:
-  References:
+  Cites:
   - 10.1051/0004-6361/201935508
   - 10.1086/117915
   - 10.1088/1538-3873/aa858e
@@ -22,5 +22,5 @@ relationships:
   - 10.48550/arXiv.2001.03223
   - 10.48550/arXiv.2305.01695
   - PURL:https://purl.stanford.edu/jy639yg0904
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536

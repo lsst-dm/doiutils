@@ -18,11 +18,11 @@ authors:
 - lagecs
 - plazasa
 relationships:
-  References:
+  Cites:
   - 10.1051/0004-6361/201935508
   - 10.3847/1538-4357/ab042c
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2571927
   - 10.71929/rubin/2575156
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2575156

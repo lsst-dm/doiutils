@@ -24,7 +24,7 @@ authors:
 - guylp
 - DMSST
 relationships:
-  References:
+  Cites:
   - 10.1086/491583
   - 10.3847/1538-4357/ab042c
   - 10.3847/2515-5172/ab8129
@@ -35,5 +35,5 @@ relationships:
   - 10.71929/rubin/2587200
   - 10.71929/rubin/2997858
   - 10.71929/rubin/2998139
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2998139

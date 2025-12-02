@@ -13,9 +13,9 @@ authors:
 - duboisfelsmanngp
 - jennesst
 relationships:
-  References:
+  Cites:
   - 10.71929/rubin/2587118
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2587242
   - 10.71929/rubin/2587850
   - 10.71929/rubin/2997573

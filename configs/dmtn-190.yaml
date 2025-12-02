@@ -14,9 +14,9 @@ osti_id: 2583849
 authors:
 - kannawadia
 relationships:
-  References:
+  Cites:
   - 10.1093/mnras/stt244
   - 10.1093/mnras/stv2140
   - 10.71929/rubin/2570545
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536

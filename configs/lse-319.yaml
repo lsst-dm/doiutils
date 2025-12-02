@@ -27,7 +27,7 @@ authors:
 - duboisfelsmanngp
 - guylp
 relationships:
-  References:
+  Cites:
   - 10.1117/12.2233042
   - 10.3847/1538-3881/aabc4f
   - 10.5479/ADS/bib/2008ivoa.specQ0222P
@@ -40,7 +40,7 @@ relationships:
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587200
   - 10.71929/rubin/2587850
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2997573
   - 10.71929/rubin/2998139

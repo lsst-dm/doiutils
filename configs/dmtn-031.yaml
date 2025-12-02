@@ -12,7 +12,7 @@ osti_id: 2586578
 authors:
 - morrisoncb
 relationships:
-  References:
+  Cites:
   - 10.1051/0004-6361/201629512
   - 10.1071/AS07028
   - 10.3847/0004-637X/832/2/155

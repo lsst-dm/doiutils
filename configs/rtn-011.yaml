@@ -35,7 +35,7 @@ authors:
 relationships:
   IsOriginalFormOf:
   - 10.5281/zenodo.5683848
-  References:
+  Cites:
   - 10.1093/pasj/psx080
   - 10.1117/12.3019266
   - 10.3847/1538-4365/abd62c
@@ -48,7 +48,7 @@ relationships:
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2571927
   - 10.71929/rubin/2574402
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2585249
   - 10.71929/rubin/2997564

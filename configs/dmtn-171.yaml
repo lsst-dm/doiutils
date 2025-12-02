@@ -13,7 +13,7 @@ authors:
 relationships:
   IsOriginalFormOf:
   - 10.5281/zenodo.5172676
-  References:
+  Cites:
   - 10.1086/305984
   - 10.3847/1538-4357/ab07ba
   - 10.3847/1538-4365/aaa3e2

@@ -19,7 +19,7 @@ sponsoring:
 doi: 10.71929/rubin/2571930
 osti_id: 2571930
 relationships:  # IsDescribedBy is more correct but is mostly ignored by citation trackers. So double up.
-  References:
+  Cites:
   - 10.71929/rubin/2571927  # LSSTCam
   - 10.1117/12.2561112
   IsDescribedBy:

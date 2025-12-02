@@ -34,7 +34,7 @@ authors:
 - volkk
 - yoachimp
 relationships:
-  References:
+  Cites:
   - 10.1051/0004-6361/202345844
   - 10.1088/1475-7516/2023/07/044
   - 10.1093/mnras/stae198
@@ -56,5 +56,5 @@ relationships:
   - 10.48550/arXiv.1812.00516
   - 10.71929/rubin/2584276
   - 10.71929/rubin/2585249
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536

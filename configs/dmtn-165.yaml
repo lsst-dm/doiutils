@@ -22,7 +22,7 @@ authors:
 - bellme
 - nelsons
 relationships:
-  References:
+  Cites:
   - 10.1088/1538-3873/aae904
   - 10.71929/rubin/2586493
   - 10.71929/rubin/2587118

@@ -48,7 +48,7 @@ authors:
 - wux
 - yoachimp
 relationships:
-  References:
+  Cites:
   - 10.1071/AS07028
   - 10.1086/133808
   - 10.1086/305984
@@ -68,7 +68,7 @@ relationships:
   - 10.71929/rubin/2586490
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587850
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587850

@@ -16,7 +16,7 @@ osti_id: 2570545
 authors:
 - Rubin
 relationships:
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2571480
@@ -35,7 +35,7 @@ relationships:
   - 10.71929/rubin/2998133
   - 10.71929/rubin/2998139
   - 10.71929/rubin/3000578
-  References:
+  Cites:
   - 10.1086/305984
   - 10.3847/1538-3881/aabc4f
   - 10.3847/1538-4357/ac7c74

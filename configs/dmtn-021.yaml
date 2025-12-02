@@ -24,7 +24,7 @@ authors:
 relationships:
   IsOriginalFormOf:
   - 10.5281/zenodo.192833
-  References:
+  Cites:
   - 10.1051/aas:2000214
   - 10.1086/305984
   - 10.3847/0004-637X/830/1/27
@@ -34,7 +34,7 @@ relationships:
   - 10.5281/zenodo.192833
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2583432
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2587108
   - 10.71929/rubin/2997867

@@ -18,11 +18,11 @@ authors:
 relationships:
   IsOriginalFormOf:
   - 10.5281/zenodo.11062349
-  References:
+  Cites:
   - 10.48550/arXiv.0912.0201
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587200
   - 10.71929/rubin/2998139
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2997867
   - 10.71929/rubin/2998139

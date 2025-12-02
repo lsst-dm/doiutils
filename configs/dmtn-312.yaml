@@ -11,11 +11,11 @@ osti_id: 2584108
 authors:
 - taranuds
 relationships:
-  References:
+  Cites:
   - 10.1007/978-0-387-40065-5
   - 10.1086/671228
   - 10.1093/mnras/stw3039
   - 10.21105/joss.02338
   - 10.71929/rubin/2570545
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536

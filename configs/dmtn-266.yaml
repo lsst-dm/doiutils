@@ -10,12 +10,12 @@ osti_id: 2583846
 authors:
 - saundersc
 relationships:
-  References:
+  Cites:
   - 10.1051/0004-6361/202140463
   - 10.1051/0004-6361/202243940
   - 10.1088/1538-3873/aa6c55
   - 10.3847/1538-3881/ac0722
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2583688
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536

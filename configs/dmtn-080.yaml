@@ -24,13 +24,13 @@ osti_id: 2583441
 authors:
 - alsayyady
 relationships:
-  References:
+  Cites:
   - 10.1002/asna.200410285
   - 10.1016/j.ascom.2016.04.002
   - 10.1093/pasj/psx080
   - 10.71929/rubin/2583432
   IsOriginalFormOf:
   - 10.5281/zenodo.2605417
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2586496

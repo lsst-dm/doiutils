@@ -48,7 +48,7 @@ authors:
 - slaterct
 - straderj
 relationships:
-  References:
+  Cites:
   - 10.1088/1538-3873/ab121a
   - 10.1117/12.2056835
   - 10.1146/annurev-astro-091918-104453
@@ -68,7 +68,7 @@ relationships:
   - 10.71929/rubin/2584084
   - 10.71929/rubin/2584276
   - 10.71929/rubin/2584366
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2585402
   - 10.71929/rubin/2997573

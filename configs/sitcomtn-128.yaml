@@ -17,7 +17,7 @@ authors:
 - adarip
 - lindena
 relationships:
-  References:
+  Cites:
   - 10.3847/0004-637x/816/1/11
   - 10.1086/176071
   - 10.1088/0067-0049/197/2/35

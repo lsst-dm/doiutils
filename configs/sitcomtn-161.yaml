@@ -35,7 +35,7 @@ authors:
 - lindena
 - zhangy
 relationships:
-  References:
+  Cites:
   - 10.1046/j.1365-8711.2003.06683.x
   - 10.1088/0067-0049/212/1/5
   - 10.1093/mnras/staa3679
@@ -59,7 +59,7 @@ relationships:
   - 10.71929/rubin/2570545
   - 10.71929/rubin/2571157
   - 10.71929/rubin/2571480
-  IsReferencedBy:
+  IsCitedBy:
   - 10.71929/rubin/2571157
   - 10.71929/rubin/3000577
   - 10.71929/rubin/3000578
