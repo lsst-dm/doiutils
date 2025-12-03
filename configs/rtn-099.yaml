@@ -1,0 +1,27 @@
+title: Photometric Transformation Relations for the LSST Data Preview 1
+handle: RTN-099
+site_url: https://rtn-099.lsst.io/
+date: 2025-08-26
+abstract: |-
+  This technical note provides photometric transformation relations between the
+  Vera C. Rubin Observatory's LSSTCam and LSSTComCam systems and other
+  photometric systems. These transformations are derived using both synthetic
+  and empirical data and are intended to support calibration and comparison
+  across survey systems. We present both polynomial equations and lookup-table-
+  based methods, depending on the available data and desired accuracy. The
+  transformations are generally valid for stars with typical spectral energy
+  distributions (SEDs), and caution should be used when applying them to objects
+  with strong emission lines or atypical colors.
+doi: 10.71929/rubin/3006074
+osti_id: 3006074
+authors:
+- porterm
+- tuckerdl
+- smithja
+- adaircl
+relationships:
+  Cites:
+  - 10.1086/316197
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2571927
