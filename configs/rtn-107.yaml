@@ -1,0 +1,23 @@
+title: The Rubin Observatory Target-of-Opportunity Mock Data Challenge
+handle: RTN-107
+site_url: https://rtn-107.lsst.io
+date: 2025-09-19
+abstract: |-
+  We describe the activities of the Target-of-Opportunity mock data challenge,
+  taking place from Sep 22 2025 - Oct 18 2025. We center this activity in four
+  questions that are critical for maximizing the scientific output of the ToO
+  system: (1) How quickly can Rubin Observatory start observing after a ToO
+  alert is received? (2) How efficient is Rubin Observatory at recovering the
+  host of a ToO event? (3) How accurate are the observing strategies that the
+  community has created for the ToO program? (4) How can expert ToO scientists
+  interact effectively with the ToO system, where many processes are fully
+  automated?  In this challenge, and the report summarized herein, we aim to
+  answer the aforementioned questions to better the Rubin ToO program.
+doi: 10.71929/rubin/3010871
+osti_id: 3010871
+authors:
+- macbrides
+relationships:
+  Cites:
+  - 10.48550/arXiv.2411.04793
+  - 10.71929/rubin/2585402
