@@ -1,0 +1,21 @@
+title: Target-of-Opportunity Operations During the Science Verification Surveys
+handle: RTN-098
+site_url: https://rtn-098.lsst.io/
+date: 2025-12-24
+abstract: |-
+  We describe the technical implementation of the Rubin Target-of-Opportunity
+  system, the workflow during the early commissioning and science verification
+  period, the responses to real and mock alerts, and lessons learned.
+doi: 10.71929/rubin/3010894
+osti_id: 3010894
+authors:
+- macbrides
+relationships:
+  Cites:
+  - 10.33232/001c.146158
+  - 10.3847/1538-4365/ac00b3
+  - 10.3847/1538-4365/ac78eb
+  - 10.3847/2041-8213/adf49a
+  - 10.48550/arXiv.2411.04793
+  - 10.71929/rubin/2585402
+  - 10.71929/rubin/3010871
