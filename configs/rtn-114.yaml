@@ -1,0 +1,14 @@
+title: Alert Production with the Vera C. Rubin Observatory
+handle: RTN-114
+site_url: https://rtn-114.lsst.io/
+date: 2026-01-23
+abstract: |-
+  Describes the LSST Alert Production pipelines, data products, execution
+  environment, and early performance.
+authors:
+- RubinBuilderPaper
+relationships:
+  Cites:
+  - 10.3847/1538-4357/ab042c
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2570545
