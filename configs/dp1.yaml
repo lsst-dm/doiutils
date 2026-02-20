@@ -16,7 +16,7 @@ abstract: |-
   in six broad photometric bands, ugrizy, spanning a range of stellar densities
   and latitudes and overlapping with external reference datasets.
 instrument_doi: 10.71929/rubin/2561361
-description_paper:
+description_paper: 10.71929/rubin/2570536
 product_size: 4.75 TiB; 1,421,990 files
 dataset_types:
 - abstract: |-
