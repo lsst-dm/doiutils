@@ -5,6 +5,8 @@ date: 2026-01-23
 abstract: |-
   Describes the LSST Alert Production pipelines, data products, execution
   environment, and early performance.
+doi: 10.71929/rubin/3019817
+osti_id: 3019817
 authors:
 - RubinBuilderPaper
 relationships:
