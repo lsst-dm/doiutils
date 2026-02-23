@@ -1,0 +1,20 @@
+title: Vera C. Rubin Observatory Prompt Products
+site_url: https://prompt-products.lsst.io
+date: 2025-02-24
+abstract: |-
+  Data products produced by prompt and daily processing of images obtained in
+  the Legacy Survey of Space and Time.  These include realtime alerts sent to
+  community alert brokers, newly-discovered Solar System Objects reported to
+  the Minor Planet Center, processed visit and difference images, and source
+  catalogs.  Prompt Products are not a static single data release but
+  continually grow throughout the ten-year LSST survey.
+instrument_doi: 10.71929/rubin/2571927
+description_paper: 10.71929/rubin/3019817
+dataset_types:
+- abstract: |-
+    Measurements for 5-sigma sources detected in difference images that were
+    issued to the community brokers.
+  path: products/alerts/index.html
+  misc:
+    name: alert packets
+    format: application/avro

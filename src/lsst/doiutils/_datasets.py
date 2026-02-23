@@ -23,7 +23,7 @@ from functools import cached_property
 from typing import IO, Self
 
 import elinkapi
-from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer
+from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer, model_validator
 
 from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, LOCATION, ORGANIZATION_AUTHORS
 from ._utils import strip_newlines
@@ -71,7 +71,7 @@ _LOG = logging.getLogger("lsst.doiutils")
 
 
 class DatasetTypeSource(BaseModel):
-    """Specific description of butler vs TAP dataset."""
+    """Specific description of butler vs TAP vs misc dataset."""
 
     name: str
     """Name of the dataset type to use in the DOI record."""
@@ -102,7 +102,7 @@ class DatasetTypeSource(BaseModel):
         Parameters
         ----------
         variant : `str`
-            "tap" or "butler".
+            "tap" or "butler" or "misc".
 
         Returns
         -------
@@ -110,11 +110,11 @@ class DatasetTypeSource(BaseModel):
             The string to add to the main dataset title. A leading colon is
             assumed to be added by the caller.
         """
-        if variant == "butler":
-            return f"{self.name} dataset type"
-        elif variant == "tap":
-            return f"{self.name} searchable catalog"
-        raise RuntimeError(f"Unrecognized variant {variant} for subtitle calculation.")
+        alternatives = {"butler": "dataset type", "tap": "searchable catalog", "misc": "data"}
+        try:
+            return f"{self.name} {alternatives[variant]}"
+        except KeyError:
+            raise RuntimeError(f"Unrecognized variant {variant} for subtitle calculation.") from None
 
 
 class DataReleaseDatasetType(BaseModel):
@@ -128,30 +128,15 @@ class DataReleaseDatasetType(BaseModel):
     """Details of butler datasets associated with this dataset type."""
     tap: DatasetTypeSource | None = None
     """Details of TAP catalogs associated with this dataset type."""
+    misc: DatasetTypeSource | None = None
+    """Details of miscellaneous dataset not associated with TAP or Butler."""
 
-    def get_record_key(self, variant: str) -> str:
-        """Return a key to associate with an OSTI record prior to assigning
-        an OSTI ID.
-
-        Parameters
-        ----------
-        variant : `str`
-            "tap" or "butler"
-
-        Returns
-        -------
-        key : `str`
-            Key to use in `dict` of records.
-        """
-        if variant == "butler":
-            if not self.butler:
-                raise ValueError("Butler key requested but not a butler dataset type.")
-            return self.butler.name
-        elif variant == "tap":
-            if not self.tap:
-                raise ValueError("Tap key requested but not a butler dataset type.")
-            return self.tap.name
-        raise RuntimeError(f"Unrecognized variant {variant} for key calculation.")
+    @model_validator(mode="after")
+    def validate_misc_exclusivity(self) -> Self:
+        """Ensure miscellaneous datasets are exclusive with Butler/TAP."""
+        if self.misc is not None and (self.butler is not None or self.tap is not None):
+            raise ValueError("If 'misc' is defined, 'butler' and 'tap' must not be defined.")
+        return self
 
     def set_saved_metadata(self, key: str, osti_id: int, doi: str) -> bool:
         """Try to set the DOI for the given key.
@@ -178,9 +163,26 @@ class DataReleaseDatasetType(BaseModel):
         elif self.tap and self.tap.name == key:
             self.tap.doi = doi
             self.tap.osti_id = osti_id
+        elif self.misc and self.misc.name == key:
+            self.misc.doi = doi
+            self.misc.osti_id = osti_id
         else:
             return False
         return True
+
+    def num_variants(self) -> int:
+        """Calculate the number of variants (tap vs butler vs misc).
+
+        Returns
+        -------
+        n : `int`
+            Number of variants.
+        """
+        counter = 0
+        for k in ("tap", "butler", "misc"):
+            if getattr(self, k):
+                counter += 1
+        return counter
 
 
 class DataReleaseConfig(BaseModel):
@@ -238,6 +240,13 @@ class DataReleaseConfig(BaseModel):
                         f"TAP entry exists for {dtype} but no OSTI ID found. Was this configuration uploaded?"
                     )
                 osti_id_map[tap.osti_id] = dtype
+            if misc := dtype.misc:
+                if not misc.osti_id:
+                    raise ValueError(
+                        f"Misc entry exists for {dtype} but no OSTI ID found. "
+                        "Was this configuration uploaded?"
+                    )
+                osti_id_map[misc.osti_id] = dtype
 
         return osti_id_map
 
@@ -420,6 +429,37 @@ def _make_tap_record(
     return None, None
 
 
+def _make_misc_record(
+    base_record: dict[str, typing.Any],
+    misc: DatasetTypeSource,
+    dtype_abstract: str,
+    dtype_path: str,
+    uniquify_paths: bool,  # noqa: FBT001
+) -> tuple[str | None, elinkapi.Record | None]:
+    extra_text = (
+        f"This dataset is a subset of the full data release consisting of a dataset named {misc.name}. "
+        "This dataset contains "
+    )
+    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+
+    # No counts or size supported.
+
+    fragment = "#misc" if uniquify_paths else ""
+
+    if not misc.osti_id:
+        record = _make_sub_record(
+            base_record,
+            f": {misc.get_subtitle('misc')}",
+            abstract,
+            dtype_path + fragment,
+            format_information=misc.format,
+        )
+        return misc.name, record
+    else:
+        _LOG.info("DOI already assigned for %s: %d", misc.name, misc.osti_id)
+    return None, None
+
+
 def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]:
     """Given a configuration, construct DOI records suitable for submission."""
     related_identifiers: list[elinkapi.RelatedIdentifier] = []
@@ -474,24 +514,23 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
         dtype_abstract = dtype_abstract[0].lower() + dtype_abstract[1:]
 
         uniquify_paths = False
-        if dataset_type.butler and dataset_type.tap:
-            # Both datasets exist and will be given distinct DOIs but we
+        if dataset_type.num_variants() >= 2:
+            # Multiple datasets exist and will be given distinct DOIs but we
             # should ensure that they have different target URLs.
             uniquify_paths = True
 
-        if dataset_type.butler:
-            key, record = _make_butler_record(
-                record_content, dataset_type.butler, dtype_abstract, dataset_type.path, uniquify_paths
-            )
-            if record:
-                records[key] = record
-
-        if dataset_type.tap:
-            key, record = _make_tap_record(
-                record_content, dataset_type.tap, dtype_abstract, dataset_type.path, uniquify_paths
-            )
-            if record:
-                records[key] = record
+        variants = {
+            "butler": _make_butler_record,
+            "tap": _make_tap_record,
+            "misc": _make_misc_record,
+        }
+        for variant, record_maker in variants.items():
+            if dtype := getattr(dataset_type, variant):
+                key, record = record_maker(
+                    record_content, dtype, dtype_abstract, dataset_type.path, uniquify_paths
+                )
+                if record:
+                    records[key] = record
 
     return records
 
