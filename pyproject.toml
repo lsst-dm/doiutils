@@ -51,7 +51,7 @@ Source = "https://github.com/lsst-dm/doiutils"
 requires = [
     "setuptools>=61",
     "wheel",
-    "setuptools_scm[toml]>=6.2"
+    "setuptools_scm[toml]>=10.0.5"
 ]
 build-backend = "setuptools.build_meta"
 
