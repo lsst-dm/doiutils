@@ -49,7 +49,7 @@ Source = "https://github.com/lsst-dm/doiutils"
 
 [build-system]
 requires = [
-    "setuptools>=61",
+    "setuptools>=82.0.1",
     "wheel",
     "setuptools_scm[toml]>=6.2"
 ]
