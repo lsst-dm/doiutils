@@ -3,28 +3,27 @@ handle: RTN-095
 site_url: https://rtn-095.lsst.io/
 date: 2025-06-27
 abstract: |-
-  We present Rubin Data Preview 1 (DP1), the first release of data from the NSF-
-  DOE Vera C. Rubin Observatory, consisting of raw and calibrated single-epoch
-  images, coadds, difference images, detection catalogs, and other derived data
-  products. DP1 is based on 1792 science-grade optical/near-infrared exposures
-  acquired over 48 distinct nights by the Rubin Commissioning Camera,
-  LSSTComCam, on the Simonyi Survey Telescope at the Summit Facility on Cerro
-  Pachón, Chile during the first on-sky commissioning campaign in late 2024. DP1
-  covers a total of ~15 sq. deg. over seven roughly equally-sized non-contiguous
-  fields, each independently observed in six broad photometric bands, ugrizy,
-  spanning a range of stellar densities and latitudes and overlapping with
-  external reference datasets.  The median image quality across all bands,
-  measured by the FWHM of the point-spread function, is approximately 1.13
-  arcseconds, with the sharpest images reaching about 0.65 arcseconds. DP1
-  contains approximately 2.3 million distinct astrophysical objects, of which
-  1.6 million are extended in at least one band, and 431 solar system objects,
-  of which 93 are new discoveries. DP1 is approximately 3.5 TB in size and
-  available to Rubin data rights holders via the Rubin Science Platform, a
-  cloud-based environment for the analysis of petascale astronomical data. While
-  small compared to future LSST releases, its high quality and diversity of data
-  support a broad range of early science investigations across all four LSST
-  themes, providing a valuable opportunity to engage with Rubin data ahead of
-  the start of full operations in late 2025.
+  We present Rubin Data Preview 1 (DP1), the first data from the NSF-DOE Vera C.
+  Rubin Observatory, comprising raw and calibrated single epoch images, coadds,
+  difference images, detection catalogs, and ancillary data products. DP1 is
+  based on 1792 optical near infrared exposures acquired over 48 distinct nights
+  by the Rubin Commissioning Camera LSSTComCam on the Simonyi Survey Telescope
+  at the Summit Facility on Cerro Pachón Chile in late 2024. DP1 covers ∼15
+  deg^2 distributed across seven roughly equal-sized non-contiguous fields, each
+  independently observed in six broad photometric bands, ugrizy. The median FWHM
+  of the point spread function across all bands is approximately 1.14
+  arcseconds, with the sharpest images reaching about 0.58 arcseconds. The 5σ
+  point source depths for coadded images in the deepest field the Extended
+  Chandra Deep Field South are u = 24.55, g = 26.18, r = 25.96, i = 25.71, z =
+  25.07, y = 23.1. Other fields are no more than 2.2 magnitudes shallower in any
+  band where they have nonzero coverage. DP1 contains approximately 2.3 million
+  distinct astrophysical objects, of which 1.6 million are extended in at least
+  one band in coadds and 431 solar system objects of which 93 are new
+  discoveries. DP1 is approximately 3.5 TB in size and is available to Rubin
+  data rights holders via the Rubin Science Platform a cloud based environment
+  for the analysis of petascale astronomical data. While small compared to
+  future LSST releases its high quality and diversity of data support a broad
+  range of early science investigations ahead of full operations in 2026.
 doi: 10.71929/rubin/2570536
 osti_id: 2570536
 authors:
@@ -104,8 +103,10 @@ authors:
 - deppesj
 - digelsw
 - dohertyp
+- douxc
 - drlicawagnera
 - duboisfelsmanngp
+- ebazkiaeia
 - economouf
 - eigero
 - eisertl
@@ -118,11 +119,13 @@ authors:
 - faustinetoa
 - fergusonps
 - fertea
+- findeisenk
 - fisherlevinem
 - fonsecaalvarezg
 - fossmd
 - fouchezd
 - fuchsds
+- fus
 - ganglere
 - gaponenkoi
 - garciaj
@@ -134,6 +137,7 @@ authors:
 - goodenowi
 - gorsuchmr
 - gowerm
+- grahamml
 - granvikm
 - greenstreets
 - guanw
@@ -149,6 +153,7 @@ authors:
 - hoblittj
 - howardel
 - hyunm
+- ibsena
 - ingrahamp
 - irvingd
 - ivezicv
@@ -174,6 +179,7 @@ authors:
 - karavakise
 - kelkark
 - kelvinl
+- kleinmansj
 - kotoviv
 - kovacsg
 - kowalikm
@@ -212,6 +218,7 @@ authors:
 - marshallp
 - marshalls
 - mauleng
+- maus
 - maym
 - mccormickj
 - mckayd
@@ -349,6 +356,7 @@ authors:
 - yoachimp
 - zhangt
 - zhouc
+- zilkovad
 relationships:
   Describes:
   - 10.71929/rubin/2570308
@@ -369,7 +377,9 @@ relationships:
   - 10.1086/160817
   - 10.1086/18230110.1086/182253
   - 10.1086/190669
+  - 10.1086/307852
   - 10.1086/338085
+  - 10.1086/382245
   - 10.1086/421365
   - 10.1086/427976
   - 10.1088/1538-3873/aa6c55
@@ -402,8 +412,10 @@ relationships:
   - 10.1145/2063348.2063364
   - 10.1145/3620665.3640366
   - 10.1146/annurev.astro.41.111302.102207
+  - 10.11578/rubin/dc.20250909.20
   - 10.13009/AO4ELT7-2023-069
   - 10.1364/AO.54.009045
+  - 10.26624/XCPI7375
   - 10.33232/001c.132299
   - 10.3847/1538-3881/aa9f22
   - 10.3847/1538-3881/aabc4f
@@ -440,7 +452,6 @@ relationships:
   - 10.71929/RUBIN/2570310
   - 10.71929/RUBIN/2570311
   - 10.71929/RUBIN/2570312
-  - 10.71929/RUBIN/2570313
   - 10.71929/RUBIN/2570314
   - 10.71929/RUBIN/2570315
   - 10.71929/RUBIN/2570317
@@ -469,11 +480,11 @@ relationships:
   - 10.71929/rubin/2585249
   - 10.71929/rubin/2585402
   - 10.71929/rubin/2585429
-  - 10.71929/rubin/2586436
   - 10.71929/rubin/2586490
   - 10.71929/rubin/2587108
   - 10.71929/rubin/2587118
   - 10.71929/rubin/2587242
+  - 10.71929/rubin/3006074
   IsCitedBy:
   - 10.71929/rubin/2570850
   - 10.71929/rubin/2571157
@@ -484,3 +495,5 @@ relationships:
   - 10.71929/rubin/2586668
   - 10.71929/rubin/3000576
   - 10.71929/rubin/3000578
+  IsOriginalFormOf:
+  - 10.48550/arXiv.2603.23786
