@@ -1,0 +1,24 @@
+title: 'Lessons learned commissioning the NSF-DOE Vera C. Rubin Observatory - the
+  nighttime perspective: A Deep Dive'
+handle: SOTN-008
+site_url: https://sotn-008.lsst.io/
+date: 2026-07-13
+abstract: |-
+  The Vera C. Rubin Observatory completed construction and transitioned to
+  operations on October 25, 2025. This paper summarizes key lessons from the
+  System Integration, Test, and Commissioning (SIT-Com) phase. Early project-
+  wide staffing ramp-up proved essential for the intensive testing campaigns,
+  including formalized shift structures and on-site roles. The Auxiliary
+  Telescope served as a critical pathfinder, reducing risk and accelerating
+  commissioning of the Simonyi Survey Telescope. Effective commissioning
+  required a targeted surge of staff and careful planning of on-site presence.
+  Tools such as Google Sheets support workflow management, scheduling, and
+  evolving automation. The nearly year-long sprint of commissioning highlighted
+  challenges in staffing, fatigue, and coordination, informing Rubin’s
+  transition from an unsustainable sprint mode to a sustainable 10-year LSST
+  operations model. This is an expanded version of the document submitted to
+  SPIE.
+doi: 10.71929/rubin/3377432
+osti_id: 3377432
+authors:
+- alexova
