@@ -354,7 +354,7 @@ def _make_butler_record(
         f" consisting of the {butler.name} dataset type. These are "
     )
 
-    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+    abstract = typing.cast("str", base_record["description"]) + "\n\n" + extra_text + dtype_abstract
     product_size: str | None = None
     if count := butler.count:
         s = "" if count == 1 else "s"
@@ -388,7 +388,7 @@ def _make_tap_record(
         "This dataset is a subset of the full data release consisting of "
         f"a searchable catalog named {tap.name}. This catalog contains "
     )
-    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+    abstract = typing.cast("str", base_record["description"]) + "\n\n" + extra_text + dtype_abstract
 
     product_texts: list[str] = []
     count_text: str | None = None
@@ -440,7 +440,7 @@ def _make_misc_record(
         f"This dataset is a subset of the full data release consisting of a dataset named {misc.name}. "
         "This dataset contains "
     )
-    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+    abstract = typing.cast("str", base_record["description"]) + "\n\n" + extra_text + dtype_abstract
 
     # No counts or size supported.
 
