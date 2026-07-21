@@ -171,7 +171,7 @@ def count_butler_datasets(
     COLLECTION is the Butler collection to search for datasets
     """
     # Optional butler dependency.
-    from lsst.daf.butler import Butler, MissingDatasetTypeError
+    from lsst.daf.butler import Butler, MissingDatasetTypeError  # noqa: PLC0415
 
     dr_config = DataReleaseConfig.from_yaml_fh(config)
     butler = Butler.from_config(repo)

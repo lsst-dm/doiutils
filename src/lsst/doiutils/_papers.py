@@ -151,7 +151,7 @@ def _create_persons(config: PaperConfig) -> list[elinkapi.Person]:
     if not texmf_dir:
         raise RuntimeError("Unable to find lsst-texmf dir. Please set LSST_TEXMF_DIR.")
     sys.path.append(os.path.join(texmf_dir, "bin"))
-    from db2authors import AuthorFactory, latex2text
+    from db2authors import AuthorFactory, latex2text  # noqa: PLC0415
 
     with open(os.path.join(texmf_dir, "etc", "authordb.yaml")) as fh:
         authordb = load_yaml_fh(fh)
