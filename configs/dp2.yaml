@@ -52,7 +52,7 @@ dataset_types:
   tap:
     name: DiaSource
     count: 1000825975
-    count2: 92
+    count2: 90
 - abstract: Derived properties for transient and variable objects.
   path: products/catalogs/dia_object.html
   butler:
@@ -74,7 +74,7 @@ dataset_types:
   tap:
     name: ForcedSourceOnDiaObject
     count: 24259599059
-    count2: 28
+    count2: 26
 - abstract: Measurements for detected sources in processed visit images.
   path: products/catalogs/source.html
   butler:
@@ -84,7 +84,7 @@ dataset_types:
   tap:
     name: Source
     count: 17566180086
-    count2: 156
+    count2: 154
 - abstract: Detections from deep co-adds.
   path: products/catalogs/object.html
   butler:
