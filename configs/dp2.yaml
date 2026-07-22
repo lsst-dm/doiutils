@@ -39,7 +39,7 @@ dataset_types:
     count: 925460
     format: application/fits
 - abstract: HealSparse property maps for the survey.
-  path: products/spmaps/index.html
+  path: products/maps/sp_maps.html
   butler:
     name: survey property
     alias: deepCoadd_*_consolidated_map_*
@@ -136,7 +136,7 @@ dataset_types:
     count: 44727948693
     count2: 28
 - abstract: Metadata, including dates and filters for every visit.
-  path: products/catalogs/visit_table.html
+  path: products/catalogs/visit.html
   butler:
     name: visit_table
     doi: 10.71929/rubin/3382543
@@ -150,7 +150,7 @@ dataset_types:
     count: 28698
     count2: 15
 - abstract: Per-detector visit metadata.
-  path: products/catalogs/visit_detector_table.html
+  path: products/catalogs/visit_detector.html
   butler:
     name: visit_detector_table
     doi: 10.71929/rubin/3382545
@@ -230,7 +230,7 @@ dataset_types:
 - abstract: |-
     Descriptions of shear objects detected and measured on coadds with
     metadetection.
-  path: products/catalogs/object_shear_all.html
+  path: products/catalogs/object_shear.html
   butler:
     name: object_shear_all
     doi: 10.71929/rubin/3382555
@@ -244,7 +244,7 @@ dataset_types:
     count: 2530178491
     count2: 67
 - abstract: Coordinates and regions for the patches of the all-sky map.
-  path: products/coadd_patches/index.html
+  path: products/catalogs/coadd_patches.html
   tap:
     name: CoaddPatches
     doi: 10.71929/rubin/3382557
