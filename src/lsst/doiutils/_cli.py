@@ -23,7 +23,13 @@ import click
 import elinkapi
 
 from . import __version__
-from ._datasets import DataReleaseConfig, publish_records, submit_records, update_record_relationships
+from ._datasets import (
+    DataReleaseConfig,
+    make_bibtex_entries,
+    publish_records,
+    submit_records,
+    update_record_relationships,
+)
 from ._instruments import InstrumentConfig, submit_instrument
 from ._papers import PaperConfig, publish_paper, submit_paper, update_paper_author_refs
 
@@ -257,6 +263,27 @@ def generate_rst_replacements(
             _print_replacement(f"{name}_doi", _doi_to_rst(tap.doi, _make_title(tap.get_subtitle("tap"))))
             _print_replacement(f"{name}_rows", tap.count)
             _print_replacement(f"{name}_columns", tap.count2)
+
+
+@cli.command("create-dataset-bibs")
+@click.argument("config", type=click.File())
+@click.pass_context
+def create_dataset_bibs(
+    ctx: click.Context,
+    config: IO[str],
+) -> None:
+    """Create BibTeX entries for the DOIs in a data release.
+
+    CONFIG is the configuration file containing a full description of all
+    the datasets that are part of this data release and their associated
+    DOIs and OSTI IDs from a previous upload.
+
+    A BibTeX '@misc' entry is written to standard output for the primary
+    data release DOI and for each dataset type that has an assigned DOI.
+    """
+    dr_config = DataReleaseConfig.from_yaml_fh(config)
+
+    print("\n\n".join(make_bibtex_entries(dr_config)))
 
 
 @cli.command("save-paper-doi")
