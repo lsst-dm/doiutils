@@ -27,6 +27,7 @@ abstract: |-
   science investigations ahead of LSST Data Release
 instrument_doi: 10.71929/rubin/2571927
 description_paper: 10.71929/rubin/3377440
+product_size: Approximately 60 TB and 1.7 million files
 dataset_types:
 - abstract: |-
     The combination of multiple processed, calibrated, and background-
