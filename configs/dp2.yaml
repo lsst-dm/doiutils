@@ -1,0 +1,263 @@
+title: Legacy Survey of Space and Time Data Preview 2
+site_url: https://dp2.lsst.io/
+date: 2026-06-27
+abstract: |-
+  We present Rubin Data Preview 2 (DP2), the second data preview from the NDF-
+  DOE Vera C. Rubin Observatory. Data Preview 2 (DP2) comprises coadds,
+  detection catalogs, and ancillary data products; and when fully released will
+  also include single-epoch images and difference images. DP2 is derived from
+  observations acquired by the LSST Science Camera (LSSTCam) on the Simonyi
+  Survey Telescope at the Summit Facility on Cerro Pachón, Chile, primarily
+  during the on-sky commissioning campaign between 2025-04-16 and 2025-09-21,
+  supplemented by observations taken between 2025-10-25 and 2026-01-06 that
+  overlap the commissioning footprint. The DP2 footprint comprises the Science
+  Validation wide-area survey, five Deep Drilling Fields, and a number of
+  targeted small-field regions, including Trifid and Lagoon, Prawn, M49, and New
+  Horizons, all observed as part of the Rubin First Look campaign. Each field
+  was imaged in up to six broad photometric bands, ugrizy, and coadded to
+  produce deep imaging covering an estimated 3,000 deg2. The addition of single-
+  visit-only areas expands the total DP2 footprint to an estimated 15,000 deg2,
+  with coverage in at least one filter. The median per-visit PSF FWHM across the
+  wide-area survey ranges from 1.17 arcsec in the z band to 1.26 arcsec in g and
+  r bands. The deepest field, reaches estimated coadded 5σ depths of u=26 mag,
+  g=26.8 mag, r=26.3 mag, i=26.1 mag, z=25.3 mag, y=23.9 mag. Based on a roughly
+  five-month primary observing baseline and covering only part of the eventual
+  LSST footprint, DP2's area, depth, and multiband coverage nonetheless support
+  a broad range of early science investigations ahead of LSST Data Release
+instrument_doi: 10.71929/rubin/2571927
+description_paper: 10.71929/rubin/3377440
+product_size: Approximately 60 TB and 1.7 million files
+dataset_types:
+- abstract: |-
+    The combination of multiple processed, calibrated, and background-
+    subtracted images, for a patch of sky, for each of the six filters.
+  path: products/images/deep_coadd.html
+  butler:
+    name: deep_coadd
+    doi: 10.71929/rubin/3382529
+    osti_id: 3382529
+    count: 925460
+    format: application/fits
+- abstract: HealSparse property maps for the survey.
+  path: products/maps/sp_maps.html
+  butler:
+    name: survey property
+    alias: deepCoadd_*_consolidated_map_*
+    doi: 10.71929/rubin/3382530
+    osti_id: 3382530
+    count: 84
+    format: application/fits
+- abstract: Measurements for detected sources in difference images.
+  path: products/catalogs/dia_source.html
+  butler:
+    name: dia_source
+    doi: 10.71929/rubin/3382531
+    osti_id: 3382531
+    count: 2112
+    format: application/vnd.apache.parquet
+  tap:
+    name: DiaSource
+    doi: 10.71929/rubin/3382532
+    osti_id: 3382532
+    count: 1000825975
+    count2: 90
+- abstract: Derived properties for transient and variable objects.
+  path: products/catalogs/dia_object.html
+  butler:
+    name: dia_object
+    doi: 10.71929/rubin/3382533
+    osti_id: 3382533
+    count: 2112
+    format: application/vnd.apache.parquet
+  tap:
+    name: DiaObject
+    doi: 10.71929/rubin/3382534
+    osti_id: 3382534
+    count: 232004216
+    count2: 64
+- abstract: |-
+    Forced measurements in visit and difference images, at the coordinates of
+    all DIA objects.
+  path: products/catalogs/dia_forced_source.html
+  butler:
+    name: dia_object_forced_source
+    doi: 10.71929/rubin/3382535
+    osti_id: 3382535
+    count: 183169
+    format: application/vnd.apache.parquet
+  tap:
+    name: ForcedSourceOnDiaObject
+    doi: 10.71929/rubin/3382536
+    osti_id: 3382536
+    count: 24259599059
+    count2: 26
+- abstract: Measurements for detected sources in processed visit images.
+  path: products/catalogs/source.html
+  butler:
+    name: source
+    doi: 10.71929/rubin/3382537
+    osti_id: 3382537
+    count: 28589
+    format: application/vnd.apache.parquet
+  tap:
+    name: Source
+    doi: 10.71929/rubin/3382538
+    osti_id: 3382538
+    count: 17566180086
+    count2: 154
+- abstract: Detections from deep co-adds.
+  path: products/catalogs/object.html
+  butler:
+    name: object
+    doi: 10.71929/rubin/3382539
+    osti_id: 3382539
+    count: 2174
+    format: application/vnd.apache.parquet
+  tap:
+    name: Object
+    doi: 10.71929/rubin/3382540
+    osti_id: 3382540
+    count: 786420720
+    count2: 1248
+- abstract: |-
+    Forced measurements in visit and difference images, at the coordinates of
+    all objects.
+  path: products/catalogs/forced_source.html
+  butler:
+    name: object_forced_source
+    doi: 10.71929/rubin/3382541
+    osti_id: 3382541
+    count: 192147
+    format: application/vnd.apache.parquet
+  tap:
+    name: ForcedSource
+    doi: 10.71929/rubin/3382542
+    osti_id: 3382542
+    count: 44727948693
+    count2: 28
+- abstract: Metadata, including dates and filters for every visit.
+  path: products/catalogs/visit.html
+  butler:
+    name: visit_table
+    doi: 10.71929/rubin/3382543
+    osti_id: 3382543
+    count: 1
+    format: application/vnd.apache.parquet
+  tap:
+    name: Visit
+    doi: 10.71929/rubin/3382544
+    osti_id: 3382544
+    count: 28698
+    count2: 15
+- abstract: Per-detector visit metadata.
+  path: products/catalogs/visit_detector.html
+  butler:
+    name: visit_detector_table
+    doi: 10.71929/rubin/3382545
+    osti_id: 3382545
+    count: 1
+    format: application/vnd.apache.parquet
+  tap:
+    name: VisitDetector
+    doi: 10.71929/rubin/3382546
+    osti_id: 3382546
+    count: 5150198
+    count2: 56
+- abstract: |-
+    Instantaneous physical parameters for moving objects at the time of every
+    observation.
+  path: products/catalogs/ss_source.html
+  butler:
+    name: ss_source
+    doi: 10.71929/rubin/3382547
+    osti_id: 3382547
+    count: 1
+    format: application/vnd.apache.parquet
+  tap:
+    name: SSSource
+    doi: 10.71929/rubin/3382548
+    osti_id: 3382548
+    count: 8136150
+    count2: 39
+- abstract: Derived parameters for moving objects.
+  path: products/catalogs/ss_object.html
+  butler:
+    name: ss_object
+    doi: 10.71929/rubin/3382549
+    osti_id: 3382549
+    count: 1
+    format: application/vnd.apache.parquet
+  tap:
+    name: SSObject
+    doi: 10.71929/rubin/3382550
+    osti_id: 3382550
+    count: 299343
+    count2: 80
+- abstract: |-
+    Summary of the visit images that contribute to each deep coadd patch.
+  path: products/catalogs/deep_coadd_input_summary.html
+  butler:
+    name: deep_coadd_input_summary
+    doi: 10.71929/rubin/3382551
+    osti_id: 3382551
+    count: 1
+    format: application/vnd.apache.parquet
+- abstract: |-
+    Position, proper motion, and parallax for isolated stars, fit using
+    associated source measurements, with positions for associated reference
+    objects if available.
+  path: products/catalogs/isolated_star_stellar_motions.html
+  butler:
+    name: isolated_star_stellar_motions
+    doi: 10.71929/rubin/3382552
+    osti_id: 3382552
+    count: 7809
+    format: application/vnd.apache.parquet
+  tap:
+    name: IsolatedStarStellarMotions
+    doi: 10.71929/rubin/3382553
+    osti_id: 3382553
+    count: 318429415
+    count2: 28
+- abstract: Scarlet deblender models for detected sources in the deep coadds.
+  path: products/catalogs/object_scarlet_models.html
+  butler:
+    name: object_scarlet_models
+    doi: 10.71929/rubin/3382554
+    osti_id: 3382554
+    count: 195366
+    format: application/vnd.apache.parquet
+- abstract: |-
+    Descriptions of shear objects detected and measured on coadds with
+    metadetection.
+  path: products/catalogs/object_shear.html
+  butler:
+    name: object_shear_all
+    doi: 10.71929/rubin/3382555
+    osti_id: 3382555
+    count: 1699
+    format: application/vnd.apache.parquet
+  tap:
+    name: ShearObject
+    doi: 10.71929/rubin/3382556
+    osti_id: 3382556
+    count: 2530178491
+    count2: 67
+- abstract: Coordinates and regions for the patches of the all-sky map.
+  path: products/catalogs/coadd_patches.html
+  tap:
+    name: CoaddPatches
+    doi: 10.71929/rubin/3382557
+    osti_id: 3382557
+    count: 197105
+    count2: 5
+- abstract: The LSSTCam filter bandpasses.
+  path: products/bandpasses/index.html
+  butler:
+    name: standard_passband
+    doi: 10.71929/rubin/3382558
+    osti_id: 3382558
+    count: 6
+    format: application/vnd.apache.parquet
+doi: 10.71929/rubin/3382528
+osti_id: 3382528

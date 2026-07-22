@@ -25,7 +25,7 @@ from typing import IO, Self
 import elinkapi
 from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer, model_validator
 
-from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, LOCATION, ORGANIZATION_AUTHORS
+from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, LOCATION, ORGANIZATION_AUTHORS, SUBJECT_CATEGORY
 from ._utils import strip_newlines
 from ._yaml import load_yaml_fh, prepare_block_text_for_writing, write_to_yaml_fh
 
@@ -354,7 +354,7 @@ def _make_butler_record(
         f" consisting of the {butler.name} dataset type. These are "
     )
 
-    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+    abstract = typing.cast("str", base_record["description"]) + "\n\n" + extra_text + dtype_abstract
     product_size: str | None = None
     if count := butler.count:
         s = "" if count == 1 else "s"
@@ -388,7 +388,7 @@ def _make_tap_record(
         "This dataset is a subset of the full data release consisting of "
         f"a searchable catalog named {tap.name}. This catalog contains "
     )
-    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+    abstract = typing.cast("str", base_record["description"]) + "\n\n" + extra_text + dtype_abstract
 
     product_texts: list[str] = []
     count_text: str | None = None
@@ -440,7 +440,7 @@ def _make_misc_record(
         f"This dataset is a subset of the full data release consisting of a dataset named {misc.name}. "
         "This dataset contains "
     )
-    abstract = typing.cast(str, base_record["description"]) + "\n\n" + extra_text + dtype_abstract
+    abstract = typing.cast("str", base_record["description"]) + "\n\n" + extra_text + dtype_abstract
 
     # No counts or size supported.
 
@@ -533,6 +533,79 @@ def make_records(config: DataReleaseConfig) -> dict[str | None, elinkapi.Record]
                     records[key] = record
 
     return records
+
+
+def _format_bibtex_entry(doi: str, osti_id: int, title: str, year: int) -> str:
+    """Format a single BibTeX ``@misc`` entry for a dataset DOI.
+
+    Parameters
+    ----------
+    doi : `str`
+        DOI of the dataset. Used verbatim as both the citation key and the
+        ``doi`` field.
+    osti_id : `int`
+        OSTI ID used to construct the record URL.
+    title : `str`
+        Full title of the dataset, including any ``[Data set]`` suffix.
+    year : `int`
+        Publication year.
+
+    Returns
+    -------
+    entry : `str`
+        The formatted BibTeX entry.
+    """
+    # Organization authors and publishers are wrapped in an extra set of
+    # braces so that BibTeX treats the name literally rather than parsing it
+    # as a personal "First Last" name.
+    rubin = ORGANIZATION_AUTHORS["Rubin"].name
+    return f"""\
+@misc{{{doi},
+  doi = {{{doi}}},
+  url = {{https://www.osti.gov//servlets/purl/{osti_id}}},
+  author = {{{{{rubin}}}}},
+  keywords = {{{SUBJECT_CATEGORY}}},
+  title = "{{{title}}}",
+  publisher = {{{rubin}}},
+  year = {{{year}}}
+}}"""
+
+
+def make_bibtex_entries(config: DataReleaseConfig) -> list[str]:
+    """Generate BibTeX ``@misc`` entries for every DOI in a data release.
+
+    Parameters
+    ----------
+    config : `DataReleaseConfig`
+        Data release configuration. DOIs and OSTI IDs must have been assigned
+        (for example, by a previous upload) for entries to be generated.
+
+    Returns
+    -------
+    entries : `list` [ `str` ]
+        A BibTeX entry for the primary data release DOI followed by an entry
+        for each dataset type source (butler, TAP, then miscellaneous) that has
+        an assigned DOI. Sources without a DOI are skipped.
+    """
+    year = config.date.year
+    entries: list[str] = []
+
+    def _append(doi: str | None, osti_id: int | None, title: str, label: str) -> None:
+        if not doi or not osti_id:
+            _LOG.warning("No DOI assigned for %s; skipping BibTeX entry.", label)
+            return
+        entries.append(_format_bibtex_entry(doi, osti_id, f"{title} [Data set]", year))
+
+    # Primary data release DOI.
+    _append(config.doi, config.osti_id, config.title, "primary data release")
+
+    for dataset_type in config.dataset_types:
+        for variant in ("butler", "tap", "misc"):
+            if source := getattr(dataset_type, variant):
+                title = f"{config.title}: {source.get_subtitle(variant)}"
+                _append(source.doi, source.osti_id, title, source.name)
+
+    return entries
 
 
 def get_records(config: DataReleaseConfig, elink: elinkapi.Elink) -> dict[int, elinkapi.Record]:

@@ -19,9 +19,13 @@ __all__: list[str] = [
     "LOCATION",
     "NSF_IDENTIFIERS",
     "ORGANIZATION_AUTHORS",
+    "SUBJECT_CATEGORY",
 ]
 
 import elinkapi
+
+# Label for subject category code "79" used in DOI records.
+SUBJECT_CATEGORY = "79 ASTRONOMY AND ASTROPHYSICS"
 
 LOCATION = elinkapi.Geolocation(
     type="POINT",
