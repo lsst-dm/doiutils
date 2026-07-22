@@ -186,15 +186,6 @@ dataset_types:
     name: ShearObject
     count: 2530178491
     count2: 67
-- abstract: |-
-    Provenance metadata describing the software versions and configuration
-    used to produce the data release and datasets that went into other
-    datasets.
-  path: products/catalogs/run_provenance.html
-  butler:
-    name: run_provenance
-    count: 53
-    format: application/vnd.apache.parquet
 - abstract: Coordinates and regions for the patches of the all-sky map.
   path: products/coadd_patches/index.html
   tap:
