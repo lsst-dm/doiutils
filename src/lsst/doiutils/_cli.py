@@ -14,6 +14,7 @@ from __future__ import annotations
 import contextlib
 import glob
 import logging
+import pathlib
 import re
 import sys
 import tomllib
@@ -267,10 +268,17 @@ def generate_rst_replacements(
 
 @cli.command("create-dataset-bibs")
 @click.argument("config", type=click.File())
+@click.option(
+    "--create-per-type/--no-create-per-type",
+    default=False,
+    help="Write each BibTeX entry to its own file in the current working directory "
+    "instead of writing all the entries to standard output.",
+)
 @click.pass_context
 def create_dataset_bibs(
     ctx: click.Context,
     config: IO[str],
+    create_per_type: bool,  # noqa: FBT001
 ) -> None:
     """Create BibTeX entries for the DOIs in a data release.
 
@@ -280,10 +288,24 @@ def create_dataset_bibs(
 
     A BibTeX '@misc' entry is written to standard output for the primary
     data release DOI and for each dataset type that has an assigned DOI.
+
+    With --create-per-type each entry is instead written to its own file in
+    the current working directory: 'dataset.bib' for the data release itself
+    and '<variant>-<name>.bib' (for example 'butler-visit_image.bib' or
+    'tap-Object.bib') for each dataset type.
     """
     dr_config = DataReleaseConfig.from_yaml_fh(config)
 
-    print("\n\n".join(make_bibtex_entries(dr_config)))
+    entries = make_bibtex_entries(dr_config)
+
+    if not create_per_type:
+        print("\n\n".join(entries.values()))
+        return
+
+    for name, entry in entries.items():
+        path = pathlib.Path(f"{name}.bib")
+        path.write_text(entry + "\n")
+        click.echo(f"Wrote {path}")
 
 
 @cli.command("save-paper-doi")

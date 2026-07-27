@@ -571,7 +571,7 @@ def _format_bibtex_entry(doi: str, osti_id: int, title: str, year: int) -> str:
 }}"""
 
 
-def make_bibtex_entries(config: DataReleaseConfig) -> list[str]:
+def make_bibtex_entries(config: DataReleaseConfig) -> dict[str, str]:
     """Generate BibTeX ``@misc`` entries for every DOI in a data release.
 
     Parameters
@@ -582,28 +582,32 @@ def make_bibtex_entries(config: DataReleaseConfig) -> list[str]:
 
     Returns
     -------
-    entries : `list` [ `str` ]
-        A BibTeX entry for the primary data release DOI followed by an entry
-        for each dataset type source (butler, TAP, then miscellaneous) that has
-        an assigned DOI. Sources without a DOI are skipped.
+    entries : `dict` [ `str`, `str` ]
+        BibTeX entries indexed by a name suitable for use as the stem of a
+        per-entry ``.bib`` file. The primary data release DOI uses the name
+        ``dataset`` and each dataset type source is named
+        ``<variant>-<name>``, where any spaces in the dataset type name are
+        replaced by hyphens. Entries are ordered with the primary DOI first
+        followed by each dataset type source (butler, TAP, then
+        miscellaneous). Sources without a DOI are skipped.
     """
     year = config.date.year
-    entries: list[str] = []
+    entries: dict[str, str] = {}
 
-    def _append(doi: str | None, osti_id: int | None, title: str, label: str) -> None:
+    def _add(name: str, doi: str | None, osti_id: int | None, title: str) -> None:
         if not doi or not osti_id:
-            _LOG.warning("No DOI assigned for %s; skipping BibTeX entry.", label)
+            _LOG.warning("No DOI assigned for %s; skipping BibTeX entry.", name)
             return
-        entries.append(_format_bibtex_entry(doi, osti_id, f"{title} [Data set]", year))
+        entries[name] = _format_bibtex_entry(doi, osti_id, f"{title} [Data set]", year)
 
     # Primary data release DOI.
-    _append(config.doi, config.osti_id, config.title, "primary data release")
+    _add("dataset", config.doi, config.osti_id, config.title)
 
     for dataset_type in config.dataset_types:
         for variant in ("butler", "tap", "misc"):
             if source := getattr(dataset_type, variant):
                 title = f"{config.title}: {source.get_subtitle(variant)}"
-                _append(source.doi, source.osti_id, title, source.name)
+                _add(f"{variant}-{source.name.replace(' ', '-')}", source.doi, source.osti_id, title)
 
     return entries
 

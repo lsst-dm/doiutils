@@ -41,6 +41,24 @@ def _make_bibtex_config() -> DataReleaseConfig:
                     "path": "products/catalogs/source.html",
                     "butler": {"name": "source"},
                 },
+                {
+                    "abstract": "A dataset type whose name contains a space.",
+                    "path": "products/images/survey_property.html",
+                    "butler": {
+                        "name": "survey property",
+                        "doi": "10.71929/rubin/1003",
+                        "osti_id": 1003,
+                    },
+                },
+                {
+                    "abstract": "A dataset that is neither a butler dataset type nor a TAP catalog.",
+                    "path": "products/misc/extra.html",
+                    "misc": {
+                        "name": "extra",
+                        "doi": "10.71929/rubin/1004",
+                        "osti_id": 1004,
+                    },
+                },
             ],
         },
         strict=True,
@@ -53,11 +71,18 @@ def test_make_bibtex_entries() -> None:
 
     entries = make_bibtex_entries(config)
 
-    # Primary release plus butler and tap for the first dataset type. The
-    # second dataset type has no DOI so it is skipped.
-    assert len(entries) == 3
+    # Primary release plus every dataset type source with an assigned DOI.
+    # The "source" dataset type has no DOI so it is skipped, and spaces in a
+    # name become hyphens so that the name can be used as a file name.
+    assert list(entries) == [
+        "dataset",
+        "butler-object",
+        "tap-Object",
+        "butler-survey-property",
+        "misc-extra",
+    ]
 
-    assert entries[0] == (
+    assert entries["dataset"] == (
         "@misc{10.71929/rubin/1000,\n"
         "  doi = {10.71929/rubin/1000},\n"
         "  url = {https://www.osti.gov//servlets/purl/1000},\n"
@@ -69,7 +94,7 @@ def test_make_bibtex_entries() -> None:
         "}"
     )
 
-    assert entries[1] == (
+    assert entries["butler-object"] == (
         "@misc{10.71929/rubin/1001,\n"
         "  doi = {10.71929/rubin/1001},\n"
         "  url = {https://www.osti.gov//servlets/purl/1001},\n"
@@ -81,7 +106,7 @@ def test_make_bibtex_entries() -> None:
         "}"
     )
 
-    assert entries[2] == (
+    assert entries["tap-Object"] == (
         "@misc{10.71929/rubin/1002,\n"
         "  doi = {10.71929/rubin/1002},\n"
         "  url = {https://www.osti.gov//servlets/purl/1002},\n"
@@ -100,7 +125,8 @@ def test_make_bibtex_entries_skips_unassigned() -> None:
 
     entries = make_bibtex_entries(config)
 
-    assert not any("source dataset type" in entry for entry in entries)
+    assert "butler-source" not in entries
+    assert not any("source dataset type" in entry for entry in entries.values())
 
 
 def test_record_creation() -> None:
