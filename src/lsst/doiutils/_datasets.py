@@ -559,6 +559,11 @@ def _format_bibtex_entry(doi: str, osti_id: int, title: str, year: int) -> str:
     # braces so that BibTeX treats the name literally rather than parsing it
     # as a personal "First Last" name.
     rubin = ORGANIZATION_AUTHORS["Rubin"].name
+    # Bibtex needs to write latex strings and not unicode.
+    # We do not expect any unicode in our dataset types but
+    # we do expect underscores. Rather than depending on
+    # pylatexenc we fix the underscores as a special case.
+    title = title.replace("_", "\\_")
     return f"""\
 @misc{{{doi},
   doi = {{{doi}}},
