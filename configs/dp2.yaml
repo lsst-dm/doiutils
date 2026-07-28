@@ -259,5 +259,13 @@ dataset_types:
     osti_id: 3382558
     count: 6
     format: application/vnd.apache.parquet
+- abstract: Metadata summarizing a visit.
+  path: products/catalogs/visit_summary.html
+  butler:
+    name: visit_summary
+    doi: 10.71929/rubin/3388544
+    osti_id: 3388544
+    count: 28698
+    format: application/fits
 doi: 10.71929/rubin/3382528
 osti_id: 3382528
