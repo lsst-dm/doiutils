@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Run tox
-        uses: lsst-sqre/run-tox@v1
+        uses: lsst-sqre/run-tox@v1.4.5
         with:
           python-version: ${{ matrix.python }}
           tox-envs: "py,typing"
@@ -75,7 +75,7 @@ jobs:
         run: sudo apt-get install graphviz
 
       - name: Run tox
-        uses: lsst-sqre/run-tox@v1
+        uses: lsst-sqre/run-tox@v1.4.5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           tox-envs: "docs"
