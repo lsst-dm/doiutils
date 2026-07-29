@@ -72,4 +72,3 @@ jobs:
         uses: lsst-sqre/build-and-publish-to-pypi@v3
         with:
           upload: false
-
