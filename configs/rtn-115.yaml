@@ -9,3 +9,6 @@ doi: 10.71929/rubin/3377440
 osti_id: 3377440
 authors:
 - RubinBuilderPaper
+relationships:
+  Describes:
+  - 10.71929/rubin/3382528
