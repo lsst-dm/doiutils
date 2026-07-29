@@ -5,6 +5,8 @@ repos:
       - id: check-toml
       - id: check-yaml
       - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.9.6
@@ -19,3 +21,7 @@ repos:
       - id: blacken-docs
         additional_dependencies: [black==25.1.0]
         args: [-l, '79', -t, py313]
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
