@@ -3,7 +3,7 @@
 # Developed for the LSST Data Management System.
 # This product includes software developed by the LSST Project
 # (http://www.lsst.org).
-# See the LICENSE file at the top-level directory of this distribution
+# See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
 # Use of this source code is governed by a 3-clause BSD-style
@@ -14,6 +14,7 @@ from __future__ import annotations
 import contextlib
 import glob
 import logging
+import pathlib
 import re
 import sys
 import tomllib
@@ -23,7 +24,13 @@ import click
 import elinkapi
 
 from . import __version__
-from ._datasets import DataReleaseConfig, publish_records, submit_records, update_record_relationships
+from ._datasets import (
+    DataReleaseConfig,
+    make_bibtex_entries,
+    publish_records,
+    submit_records,
+    update_record_relationships,
+)
 from ._instruments import InstrumentConfig, submit_instrument
 from ._papers import PaperConfig, publish_paper, submit_paper, update_paper_author_refs
 
@@ -171,7 +178,7 @@ def count_butler_datasets(
     COLLECTION is the Butler collection to search for datasets
     """
     # Optional butler dependency.
-    from lsst.daf.butler import Butler, MissingDatasetTypeError
+    from lsst.daf.butler import Butler, MissingDatasetTypeError  # noqa: PLC0415
 
     dr_config = DataReleaseConfig.from_yaml_fh(config)
     butler = Butler.from_config(repo)
@@ -257,6 +264,48 @@ def generate_rst_replacements(
             _print_replacement(f"{name}_doi", _doi_to_rst(tap.doi, _make_title(tap.get_subtitle("tap"))))
             _print_replacement(f"{name}_rows", tap.count)
             _print_replacement(f"{name}_columns", tap.count2)
+
+
+@cli.command("create-dataset-bibs")
+@click.argument("config", type=click.File())
+@click.option(
+    "--create-per-type/--no-create-per-type",
+    default=False,
+    help="Write each BibTeX entry to its own file in the current working directory "
+    "instead of writing all the entries to standard output.",
+)
+@click.pass_context
+def create_dataset_bibs(
+    ctx: click.Context,
+    config: IO[str],
+    create_per_type: bool,  # noqa: FBT001
+) -> None:
+    """Create BibTeX entries for the DOIs in a data release.
+
+    CONFIG is the configuration file containing a full description of all
+    the datasets that are part of this data release and their associated
+    DOIs and OSTI IDs from a previous upload.
+
+    A BibTeX '@misc' entry is written to standard output for the primary
+    data release DOI and for each dataset type that has an assigned DOI.
+
+    With --create-per-type each entry is instead written to its own file in
+    the current working directory: 'dataset.bib' for the data release itself
+    and '<variant>-<name>.bib' (for example 'butler-visit_image.bib' or
+    'tap-Object.bib') for each dataset type.
+    """
+    dr_config = DataReleaseConfig.from_yaml_fh(config)
+
+    entries = make_bibtex_entries(dr_config)
+
+    if not create_per_type:
+        print("\n\n".join(entries.values()))
+        return
+
+    for name, entry in entries.items():
+        path = pathlib.Path(f"{name}.bib")
+        path.write_text(entry + "\n")
+        click.echo(f"Wrote {path}")
 
 
 @cli.command("save-paper-doi")

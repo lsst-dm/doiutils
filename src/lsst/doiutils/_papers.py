@@ -3,7 +3,7 @@
 # Developed for the LSST Data Management System.
 # This product includes software developed by the LSST Project
 # (http://www.lsst.org).
-# See the LICENSE file at the top-level directory of this distribution
+# See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
 # Use of this source code is governed by a 3-clause BSD-style
@@ -145,13 +145,49 @@ class PaperConfig(BaseModel):
         self.osti_id = osti_id
 
 
+def _make_person(
+    first_name: str, last_name: str, orcid: str | None, affiliations: list[elinkapi.Affiliation]
+) -> elinkapi.Person:
+    """Create an author from name, ORCID, and affiliation information.
+
+    Parameters
+    ----------
+    first_name : `str`
+        Given name of the author. Can be empty for organizational authors.
+    last_name : `str`
+        Family name of the author.
+    orcid : `str` or `None`
+        ORCID of the author, if known.
+    affiliations : `list` [ `elinkapi.Affiliation` ]
+        Affiliations to attach to this author.
+
+    Returns
+    -------
+    person : `elinkapi.Person`
+        The author record.
+    """
+    # The model does not allow None to be given explicitly for the optional
+    # fields even though that is the default. An empty first name must be
+    # left unset rather than sent as an empty string: ELink stores that as
+    # null and every subsequent comparison would report a spurious change.
+    extras: dict[str, str] = {}
+    if first_name:
+        extras["first_name"] = first_name
+    if orcid:
+        extras["orcid"] = orcid
+    person = elinkapi.Person(type="AUTHOR", last_name=last_name, **extras)
+    for affil in affiliations:
+        person.add_affiliation(affil)
+    return person
+
+
 def _create_persons(config: PaperConfig) -> list[elinkapi.Person]:
     # Currently only option is to use the author code from lsst-texmf.
     texmf_dir = os.getenv("LSST_TEXMF_DIR")
     if not texmf_dir:
         raise RuntimeError("Unable to find lsst-texmf dir. Please set LSST_TEXMF_DIR.")
     sys.path.append(os.path.join(texmf_dir, "bin"))
-    from db2authors import AuthorFactory, latex2text
+    from db2authors import AuthorFactory, latex2text  # noqa: PLC0415
 
     with open(os.path.join(texmf_dir, "etc", "authordb.yaml")) as fh:
         authordb = load_yaml_fh(fh)
@@ -161,17 +197,7 @@ def _create_persons(config: PaperConfig) -> list[elinkapi.Person]:
     affiliations: dict[str, elinkapi.Affiliation] = {}
     persons: list[elinkapi.Person] = []
     for author in authors:
-        # Model doesn't allow None for orcid even though it defaults
-        # to None.
-        extras: dict[str, str] = {}
-        if author.orcid:
-            extras["orcid"] = author.orcid
-        person = elinkapi.Person(
-            type="AUTHOR",
-            first_name=latex2text(author.given_name),
-            last_name=latex2text(author.family_name),
-            **extras,
-        )
+        author_affiliations: list[elinkapi.Affiliation] = []
         for affil in author.affiliations:
             if affil not in affiliations:
                 institute = affil.get_department_and_institute()
@@ -182,8 +208,15 @@ def _create_persons(config: PaperConfig) -> list[elinkapi.Person]:
                 if affil.ror_id:
                     affil_extras["ror_id"] = f"https://ror.org/{affil.ror_id}"
                 affiliations[affil] = elinkapi.Affiliation(name=latex2text(institute), **affil_extras)
-            person.add_affiliation(affiliations[affil])
-        persons.append(person)
+            author_affiliations.append(affiliations[affil])
+        persons.append(
+            _make_person(
+                latex2text(author.given_name),
+                latex2text(author.family_name),
+                author.orcid,
+                author_affiliations,
+            )
+        )
     return persons
 
 
@@ -318,7 +351,8 @@ def _compare_person(old: elinkapi.Person | None, new: elinkapi.Person | None) ->
         if old_orcid != new_orcid:
             return f"{name}: {old_orcid} != {new_orcid}"
 
-        for oldaffil, newaffil in zip_longest(old.affiliations, new.affiliations):
+        # A person with no affiliations has None rather than an empty list.
+        for oldaffil, newaffil in zip_longest(old.affiliations or (), new.affiliations or ()):
             changed = _compare_affiliation(oldaffil, newaffil)
             if changed:
                 return changed

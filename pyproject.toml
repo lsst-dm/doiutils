@@ -126,6 +126,12 @@ extend = "ruff-shared.toml"
 known-first-party = ["lsst", "tests"]
 split-on-trailing-comma = false
 
+# The standard header points at the LICENSE file for details of code ownership
+# instead of naming a copyright holder and year, so the default notice pattern
+# never matches. Look for the first line of that header instead.
+[tool.ruff.lint.flake8-copyright]
+notice-rgx = '# This file is part of \S+\.'
+
 [tool.scriv]
 categories = [
     "Backwards-incompatible changes",

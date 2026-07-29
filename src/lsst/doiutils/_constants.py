@@ -3,7 +3,7 @@
 # Developed for the LSST Data Management System.
 # This product includes software developed by the LSST Project
 # (http://www.lsst.org).
-# See the LICENSE file at the top-level directory of this distribution
+# See the COPYRIGHT file at the top-level directory of this distribution
 # for details of code ownership.
 #
 # Use of this source code is governed by a 3-clause BSD-style
@@ -19,9 +19,13 @@ __all__: list[str] = [
     "LOCATION",
     "NSF_IDENTIFIERS",
     "ORGANIZATION_AUTHORS",
+    "SUBJECT_CATEGORY",
 ]
 
 import elinkapi
+
+# Label for subject category code "79" used in DOI records.
+SUBJECT_CATEGORY = "79 ASTRONOMY AND ASTROPHYSICS"
 
 LOCATION = elinkapi.Geolocation(
     type="POINT",
