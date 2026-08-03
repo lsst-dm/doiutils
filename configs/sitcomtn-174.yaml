@@ -1,0 +1,31 @@
+title: Impact of Including Wavelength-dependent PSF Modeling in Rubin Commissioning Data
+handle: SITCOMTN-174
+site_url: https://sitcomtn-174.lsst.io/
+date: 2026-04-26
+abstract: |-
+  We present the results from enabling chromatic modelling of the Point Spread
+  Function (PSF) during the commissioning of the Vera C. Rubin Observatory.
+doi: 10.71929/rubin/3398709
+osti_id: 3398709
+authors:
+- paia
+- legetp
+- agarwals
+- changc
+relationships:
+  Cites:
+  - 10.1046/j.1365-8711.2003.06683.x
+  - 10.1086/668294
+  - 10.1088/0004-637X/807/2/182
+  - 10.1088/1475-7516/2020/05/010
+  - 10.1093/mnras/staa3679
+  - 10.1093/mnras/stab918
+  - 10.1093/mnras/stx1261
+  - 10.1093/mnras/sty2420
+  - 10.1111/j.1365-2966.2004.07926.x
+  - 10.1111/j.1365-2966.2005.09282.x
+  - 10.21105/astro.2302.01942
+  - 10.33232/001c.132299
+  - 10.3847/1538-3881/aa9f22
+  - 10.48550/arXiv.1809.01669
+  - 10.71929/rubin/2570545
