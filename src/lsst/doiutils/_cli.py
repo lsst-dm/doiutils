@@ -496,6 +496,35 @@ def extract_toml_authors(
         print(f"- {author['internal_id']}")
 
 
+def _normalize_relationships(papers: dict[str, PaperConfig]) -> set[str]:
+    """Sort the relationships of the given papers and remove repeated DOIs.
+
+    Parameters
+    ----------
+    papers : `dict` [ `str`, `PaperConfig` ]
+        Paper configurations, indexed by DOI. Modified in place.
+
+    Returns
+    -------
+    modified : `set` [ `str` ]
+        The DOIs of the papers that were modified.
+
+    Notes
+    -----
+    A DOI only needs to be listed once per relationship. The DOIs are sorted
+    so that the order written to the configuration is predictable and easy to
+    compare.
+    """
+    modified: set[str] = set()
+    for doi, paper in papers.items():
+        for relationship, related in paper.relationships.items():
+            normalized = sorted(set(related))
+            if normalized != related:
+                paper.relationships[relationship] = normalized
+                modified.add(doi)
+    return modified
+
+
 @cli.command("find-internal-citations")
 @click.pass_context
 def find_internal_citations(
@@ -518,25 +547,26 @@ def find_internal_citations(
                 assert paper.doi is not None  # noqa: S101
                 papers[paper.doi] = paper
 
-    modified: set[str] = set()
+    modified = _normalize_relationships(papers)
 
     forward = "Cites"
     inverse = "IsCitedBy"
     for paper in papers.values():
         if forward not in paper.relationships:
             continue
+        paper_doi = paper.doi
+        assert paper_doi is not None  # noqa: S101
         references = paper.relationships[forward]
         for ref in references:
             if ref in papers:
                 # This paper cites another paper we know about.
                 other = papers[ref]
-                if inverse not in other.relationships:
-                    other.relationships[inverse] = []
-                if ref not in other.relationships[inverse]:
-                    paper_doi = paper.doi
-                    assert paper_doi is not None  # noqa: S101
-                    other.relationships[inverse].append(paper_doi)
-                    other.relationships[inverse] = sorted(other.relationships[inverse])
+                cited_by = other.relationships.get(inverse, [])
+                if paper_doi not in cited_by:
+                    # Assign to the field rather than modifying the dict in
+                    # place so that the model knows the field has been set and
+                    # includes it when the model is dumped.
+                    other.relationships = other.relationships | {inverse: sorted({*cited_by, paper_doi})}
                     modified.add(ref)
 
     for to_update in modified:
