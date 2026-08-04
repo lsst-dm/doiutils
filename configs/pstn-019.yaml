@@ -4,14 +4,13 @@ handle: PSTN-019
 site_url: https://pstn-019.lsst.io/
 date: 2025-06-27
 abstract: |-
-  The NSF-DOE Vera C. Rubin Observatory is executing the Legacy Survey of
-  Space and Time (LSST) as its prime mission,  producing a series of data
-  releases over the ten-year survey.
-  The LSST Science Pipelines Software will be used to create these data
-  releases and to perform the nightly prompt processing and alert production.
-  This paper provides an overview of the LSST Science Pipelines Software,
-  describing the components and their integration into pipelines that generate
-  science-ready data products.
+  The NSF-DOE Vera C. Rubin Observatory is executing the Legacy Survey of Space
+  and Time (LSST) as its prime mission,  producing a series of data releases
+  over the ten-year survey. The LSST Science Pipelines Software will be used to
+  create these data releases and to perform the nightly prompt processing and
+  alert production. This paper provides an overview of the LSST Science
+  Pipelines Software, describing the components and their integration into
+  pipelines that generate science-ready data products.
 doi: 10.71929/rubin/2570545
 osti_id: 2570545
 authors:
