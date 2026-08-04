@@ -1,0 +1,27 @@
+title: Bulk Cutout Service Implementation Options
+handle: DMTN-326
+site_url: https://dmtn-326.lsst.io/
+date: 2026-03-06
+abstract: |-
+  The bulk cutout service is a deliverable required to support Data Preview 2.
+  This document explains our implementation options regarding how to perform the
+  cutouts at scale and in what form the resulting cutouts should be returned.
+doi: 10.71929/rubin/3399549
+osti_id: 3399549
+authors:
+- jennesst
+- duboisfelsmanngp
+- boschjf
+relationships:
+  Cites:
+  - 10.1016/j.ascom.2016.02.003
+  - 10.26624/SKGZ6035
+  - 10.3847/1538-3881/ae521f
+  - 10.48550/arXiv.2511.04429
+  - 10.5281/ZENODO.3773449
+  - 10.5479/ADS/bib/2016ivoa.spec.1024H
+  - 10.5479/ADS/bib/2017ivoa.spec.0517B
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2583848
+  - 10.71929/rubin/2587200
+  - 10.71929/rubin/3377440
