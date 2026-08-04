@@ -119,6 +119,35 @@ def test_find_internal_citations() -> None:
         assert "IsCitedBy:\n  - 10.71929/rubin/1\n" in _read_config("TSTN-003")
 
 
+def test_find_internal_citations_reports_self_citation() -> None:
+    """A paper that cites itself is reported rather than quietly skipped."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config(
+            "TSTN-001",
+            "10.71929/rubin/1",
+            "relationships:\n  Cites:\n  - 10.71929/rubin/1\n",
+        )
+
+        result = runner.invoke(cli, ["find-internal-citations"])
+
+        assert result.exit_code != 0
+        assert "refers to itself" in str(result.exception)
+
+
+def test_find_internal_citations_ignores_non_paper_configs() -> None:
+    """Configurations that are not papers are skipped without error."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config("TSTN-001", "10.71929/rubin/1")
+        # A data release config lives in the same directory but has no handle.
+        with open(pathlib.Path("configs") / "release.yaml", "w") as fh:
+            _make_bibtex_config().write_yaml_fh(fh)
+
+        result = runner.invoke(cli, ["find-internal-citations"])
+        assert result.exit_code == 0, result.output
+
+
 def test_find_internal_citations_no_trailing_whitespace() -> None:
     """Folded long titles are written without trailing whitespace."""
     runner = CliRunner()

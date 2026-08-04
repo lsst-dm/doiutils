@@ -22,10 +22,10 @@ import typing
 from itertools import zip_longest
 
 import elinkapi
-from pydantic import AfterValidator, AnyHttpUrl, BaseModel, Field, field_serializer
+from pydantic import AfterValidator, AnyHttpUrl, BaseModel, Field, field_serializer, model_validator
 
 from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, ORGANIZATION_AUTHORS
-from ._utils import strip_newlines
+from ._utils import check_self_reference, strip_newlines
 from ._yaml import load_yaml_fh, prepare_block_text_for_writing, write_to_yaml_fh
 
 _LOG = logging.getLogger("lsst.doiutils")
@@ -91,6 +91,12 @@ class PaperConfig(BaseModel):
     type and the values are DOIs. It is allowed for there to be no
     relationships.
     """
+
+    @model_validator(mode="after")
+    def validate_no_self_reference(self) -> typing.Self:
+        """Ensure this paper is not related to its own DOI."""
+        check_self_reference(self.doi, self.relationships)
+        return self
 
     def get_series(self) -> str:
         """Return the document series for this paper.

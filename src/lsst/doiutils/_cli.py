@@ -11,7 +11,6 @@
 
 from __future__ import annotations
 
-import contextlib
 import glob
 import logging
 import pathlib
@@ -34,6 +33,7 @@ from ._datasets import (
 )
 from ._instruments import InstrumentConfig, submit_instrument
 from ._papers import PaperConfig, publish_paper, submit_paper, update_paper_author_refs
+from ._yaml import load_yaml_fh
 
 _LOG = logging.getLogger("lsst.doiutils")
 
@@ -559,11 +559,16 @@ def find_internal_citations(
     """
     papers: dict[str, PaperConfig] = {}
     for file in glob.glob("configs/*.yaml"):
-        with contextlib.suppress(ValueError):
-            with open(file) as fh:
-                paper = PaperConfig.from_yaml_fh(fh)
-                assert paper.doi is not None  # noqa: S101
-                papers[paper.doi] = paper
+        with open(file) as fh:
+            config_dict = load_yaml_fh(fh)
+        # Data release and instrument configurations share this directory and
+        # are not papers. Only papers have a handle, so use that to select
+        # them rather than relying on validation failing.
+        if "handle" not in config_dict:
+            continue
+        paper = PaperConfig.model_validate(config_dict, strict=True)
+        assert paper.doi is not None  # noqa: S101
+        papers[paper.doi] = paper
 
     modified = _normalize_relationships(papers)
 

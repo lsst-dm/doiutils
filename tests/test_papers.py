@@ -18,6 +18,7 @@ import logging
 import typing
 
 import elinkapi
+import pydantic
 import pytest
 
 from lsst.doiutils import _papers
@@ -135,6 +136,12 @@ def _make_paper_config(relationships: dict[str, list[str]]) -> PaperConfig:
         authors=["lovelace"],
         relationships=relationships,
     )
+
+
+def test_paper_config_rejects_self_citation() -> None:
+    """A paper may not be related to its own DOI."""
+    with pytest.raises(pydantic.ValidationError, match=r"10\.71929/rubin/1 refers to itself"):
+        _make_paper_config({"Cites": ["10.71929/rubin/2", "10.71929/rubin/1"]})
 
 
 def _make_saved_record() -> elinkapi.Record:

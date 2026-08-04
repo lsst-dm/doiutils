@@ -16,9 +16,44 @@ from __future__ import annotations
 import datetime
 import os.path
 
+import pydantic
+import pytest
+
 from lsst.doiutils._datasets import DataReleaseConfig, make_bibtex_entries, make_records
 
 TESTDIR = os.path.abspath(os.path.dirname(__file__))
+
+
+def _make_release_config(**overrides: str) -> DataReleaseConfig:
+    """Construct a minimal data release config with an assigned DOI."""
+    return DataReleaseConfig.model_validate(
+        {
+            "title": "Test Data Release",
+            "site_url": "https://example.test/",
+            "date": datetime.date(2026, 1, 1),
+            "abstract": "A test data release.",
+            "instrument_doi": "10.71929/rubin/9999",
+            "doi": "10.71929/rubin/1000",
+            "osti_id": 1000,
+            "dataset_types": [{"abstract": "A dataset type.", "path": "object.html"}],
+            **overrides,
+        },
+        strict=True,
+    )
+
+
+def test_release_config_accepts_other_dois() -> None:
+    """A release referring only to other DOIs is accepted."""
+    config = _make_release_config(description_paper="10.71929/rubin/2570536")
+
+    assert config.description_paper == "10.71929/rubin/2570536"
+
+
+@pytest.mark.parametrize("field", ["instrument_doi", "description_paper"])
+def test_release_config_rejects_self_reference(field: str) -> None:
+    """A release may not refer to its own DOI."""
+    with pytest.raises(pydantic.ValidationError, match=rf"10\.71929/rubin/1000 refers to itself.*{field}"):
+        _make_release_config(**{field: "10.71929/rubin/1000"})
 
 
 def _make_bibtex_config() -> DataReleaseConfig:

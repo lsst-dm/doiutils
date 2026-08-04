@@ -19,10 +19,10 @@ import typing
 from typing import IO, Self
 
 import elinkapi
-from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer
+from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer, model_validator
 
 from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, LOCATION, ORGANIZATION_AUTHORS
-from ._utils import strip_newlines
+from ._utils import check_self_reference, strip_newlines
 from ._yaml import load_yaml_fh, prepare_block_text_for_writing, write_to_yaml_fh
 
 """
@@ -74,6 +74,12 @@ class InstrumentConfig(BaseModel):
     """OSTI ID of the data release (required to retrieve and edit the record
     in ELink).
     """
+
+    @model_validator(mode="after")
+    def validate_no_self_reference(self) -> Self:
+        """Ensure this instrument is not related to its own DOI."""
+        check_self_reference(self.doi, self.relationships)
+        return self
 
     @field_serializer("site_url")
     def serialize_url(self, url: AnyHttpUrl) -> str:
