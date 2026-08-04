@@ -375,6 +375,12 @@ def publish_paper_doi(
 @click.option(
     "--update-sponsors/--no-update-sponsors", default=False, help="Force update to sponsoring organizations."
 )
+@click.option(
+    "--update-authors/--no-update-authors",
+    default=True,
+    help="Update the authors in the record. Disable this to update only the relationships and retain the "
+    "author affiliations recorded at publication time.",
+)
 @click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
 @click.option(
     "--server",
@@ -388,6 +394,7 @@ def update_paper_info(
     config: IO[str],
     dry_run: bool,  # noqa: FBT001
     update_sponsors: bool,  # noqa: FBT001
+    update_authors: bool,  # noqa: FBT001
     token: str,
     server: str,
 ) -> None:
@@ -399,7 +406,13 @@ def update_paper_info(
     """
     paper_config = PaperConfig.from_yaml_fh(config)
     api = elinkapi.Elink(target=server, token=token)
-    update_paper_author_refs(paper_config, api, dry_run=dry_run, update_sponsors=update_sponsors)
+    update_paper_author_refs(
+        paper_config,
+        api,
+        dry_run=dry_run,
+        update_sponsors=update_sponsors,
+        update_authors=update_authors,
+    )
 
 
 @cli.command("save-instrument-doi")

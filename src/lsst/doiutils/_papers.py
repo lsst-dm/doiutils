@@ -420,7 +420,12 @@ def _update_relationships(saved_record: elinkapi.Record, config: PaperConfig) ->
 
 
 def update_paper_author_refs(
-    config: PaperConfig, elink: elinkapi.Elink, *, dry_run: bool = False, update_sponsors: bool = False
+    config: PaperConfig,
+    elink: elinkapi.Elink,
+    *,
+    dry_run: bool = False,
+    update_sponsors: bool = False,
+    update_authors: bool = True,
 ) -> None:
     """Update the author and references in record for an existing DOI.
 
@@ -432,14 +437,16 @@ def update_paper_author_refs(
     If authors are updated then affiliations for those authors will be updated
     to the current database entries. This raises the possibility that an
     affiliation will no longer match the affiliation that was originally
-    associated with the publication.
+    associated with the publication. Set ``update_authors`` to `False` to
+    retain the author information already stored in the record.
     """
     saved_record = _get_paper_record(config, elink)
 
     updated = False
 
     # Attach entirely new set of authors to record.
-    updated |= _update_authors(saved_record, config)
+    if update_authors:
+        updated |= _update_authors(saved_record, config)
 
     # And any changes to references.
     updated |= _update_relationships(saved_record, config)
@@ -465,4 +472,4 @@ def update_paper_author_refs(
         _LOG.info("Submitting updated information for %s", saved_record.doi)
         elink.update_record(saved_record.osti_id, saved_record, state)
     else:
-        _LOG.info("No change in authors or references detected. Nothing to do.")
+        _LOG.info("No changes detected in record. Nothing to do.")
