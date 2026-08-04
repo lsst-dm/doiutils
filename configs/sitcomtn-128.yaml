@@ -1,16 +1,16 @@
 title: Unrecognized Blends in LSSTComCam Data Preview 1 ECDFS
 handle: SITCOMTN-128
 site_url: https://sitcomtn-128.lsst.io/
-abstract: |-
-  Unrecognized blends are a class of blended objects where two (or more)
-  objects are so close on the sky that they are mistakenly identified as a
-  single object. These objects can cause a variety of issues for science and
-  simple validation. We can identify such objects by using higher resolution
-  imaging from a space based telescope that will not be affected by ground
-  based seeing and then label detected objects as isolated, recognized blends,
-  or unrecognized blends. We find that for objects with 23 < i < 24.5, 18% of
-  objects are unrecognized blends.
 date: 2025-07-01
+abstract: |-
+  Unrecognized blends are a class of blended objects where two (or more) objects
+  are so close on the sky that they are mistakenly identified as a single
+  object. These objects can cause a variety of issues for science and simple
+  validation. We can identify such objects by using higher resolution imaging
+  from a space based telescope that will not be affected by ground based seeing
+  and then label detected objects as isolated, recognized blends, or
+  unrecognized blends. We find that for objects with 23 < i < 24.5, 18% of
+  objects are unrecognized blends.
 doi: 10.71929/rubin/2570850
 osti_id: 2570850
 authors:
