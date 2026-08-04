@@ -1,0 +1,36 @@
+title: Impact of CCD Non-Flatness In Rubin LSSTCam PSF Measurements and Modeling
+handle: RTN-108
+site_url: https://rtn-108.lsst.io/
+date: 2026-03-24
+abstract: |-
+  Modeling the point-spread function (PSF) precisely is essential for achieving
+  optimal science with the NSF-DOE Vera C. Rubin Observatory. In this work, we inspect a PSF
+  residual pattern present in both Rubin's LSSTComCam and LSSTCam observations. We
+  show that it is likely due to effects from CCD non-flatness and explain the
+  physical mechanism by which height offsets could influence the PSF. Finally,
+  we demonstrate that incorporating height information into PSF modeling greatly
+  reduces the observed residual.
+doi: 10.71929/rubin/3399537
+osti_id: 3399537
+authors:
+- laliotisk
+- legetp
+- roodmana
+- rasmussenap
+- schuttt
+- meyersj
+relationships:
+  Cites:
+  - 10.1046/j.1365-8711.2003.06683.x
+  - 10.1088/1538-3873/aa6c55
+  - 10.1093/mnras/staa3679
+  - 10.1111/j.1365-2966.2005.09282.x
+  - 10.21105/astro.2209.09253
+  - 10.3847/1538-3881/ae521f
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/1538-4365/ac3e72
+  - 10.48550/arXiv.1809.01669
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2584019
