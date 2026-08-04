@@ -14,6 +14,7 @@
 from __future__ import annotations
 
 import datetime
+import logging
 import typing
 
 import elinkapi
@@ -90,6 +91,21 @@ def test_compare_person_affiliation_removed() -> None:
     assert _compare_person(stored, generated) == "Remove Test Institute?"
 
 
+def test_compare_person_ignoring_affiliations() -> None:
+    """An affiliation change is not reported when only the author identity is
+    being compared.
+    """
+    affiliation = elinkapi.Affiliation(name="Test Institute", ror_id="https://ror.org/048g3cy84")
+    stored = elinkapi.Person(
+        type="AUTHOR", first_name="Ada", last_name="Lovelace", affiliations=[affiliation]
+    )
+    renamed = elinkapi.Affiliation(name="Other Institute", ror_id="https://ror.org/048g3cy84")
+    generated = _make_person("Ada", "Lovelace", None, [renamed])
+
+    assert _compare_person(stored, generated, compare_affiliations=False) == ""
+    assert _compare_person(stored, generated) == "Test Institute != Other Institute"
+
+
 class _FakeElink:
     """Stand-in for the ELink API that serves one record and remembers the
     record given back to it.
@@ -157,15 +173,19 @@ def new_affiliation(monkeypatch: pytest.MonkeyPatch) -> list[elinkapi.Person]:
     return persons
 
 
-def test_update_paper_info_retains_authors(new_affiliation: list[elinkapi.Person]) -> None:
-    """Disabling author updates leaves the stored affiliations alone but still
-    updates the relationships.
+def test_update_paper_info_retains_authors(
+    new_affiliation: list[elinkapi.Person], caplog: pytest.LogCaptureFixture
+) -> None:
+    """By default the stored affiliations are left alone, without comment,
+    but the relationships are still updated.
     """
     config = _make_paper_config({"Cites": ["10.71929/rubin/2"], "IsCitedBy": ["10.71929/rubin/3"]})
     elink = _FakeElink(_make_saved_record())
 
-    update_paper_author_refs(config, typing.cast("elinkapi.Elink", elink), update_authors=False)
+    with caplog.at_level(logging.WARNING, logger="lsst.doiutils"):
+        update_paper_author_refs(config, typing.cast("elinkapi.Elink", elink))
 
+    assert caplog.records == []
     assert len(elink.updates) == 1
     osti_id, updated, state = elink.updates[0]
     assert osti_id == 1234
@@ -178,13 +198,13 @@ def test_update_paper_info_retains_authors(new_affiliation: list[elinkapi.Person
 
 
 def test_update_paper_info_updates_authors(new_affiliation: list[elinkapi.Person]) -> None:
-    """By default the authors are replaced with the current database
-    entries.
+    """Requesting author updates replaces the authors with the current
+    database entries.
     """
     config = _make_paper_config({"Cites": ["10.71929/rubin/2"]})
     elink = _FakeElink(_make_saved_record())
 
-    update_paper_author_refs(config, typing.cast("elinkapi.Elink", elink))
+    update_paper_author_refs(config, typing.cast("elinkapi.Elink", elink), update_authors=True)
 
     assert len(elink.updates) == 1
     _, updated, _ = elink.updates[0]
@@ -201,3 +221,49 @@ def test_update_paper_info_no_changes(new_affiliation: list[elinkapi.Person]) ->
     update_paper_author_refs(config, typing.cast("elinkapi.Elink", elink), update_authors=False)
 
     assert elink.updates == []
+
+
+def test_update_paper_info_warns_on_new_author(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """A change in author membership is reported when the authors are being
+    retained by default.
+    """
+    monkeypatch.setattr(
+        _papers,
+        "_create_persons",
+        lambda config: [
+            _make_person("Ada", "Lovelace", None, [elinkapi.Affiliation(name="New Institute")]),
+            _make_person("Charles", "Babbage", None, []),
+        ],
+    )
+    config = _make_paper_config({"Cites": ["10.71929/rubin/2"]})
+    elink = _FakeElink(_make_saved_record())
+
+    with caplog.at_level(logging.WARNING, logger="lsst.doiutils"):
+        update_paper_author_refs(config, typing.cast("elinkapi.Elink", elink))
+
+    assert "Added new author: Babbage" in caplog.text
+    # The warning does not change the record.
+    assert elink.updates == []
+    assert elink.record.persons[0].affiliations == [elinkapi.Affiliation(name="Old Institute")]
+
+
+def test_update_paper_info_no_warning_when_explicit(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+) -> None:
+    """No warning is issued when author updates have been turned off
+    explicitly.
+    """
+    monkeypatch.setattr(
+        _papers,
+        "_create_persons",
+        lambda config: [_make_person("Charles", "Babbage", None, [])],
+    )
+    config = _make_paper_config({"Cites": ["10.71929/rubin/2"]})
+    elink = _FakeElink(_make_saved_record())
+
+    with caplog.at_level(logging.WARNING, logger="lsst.doiutils"):
+        update_paper_author_refs(config, typing.cast("elinkapi.Elink", elink), update_authors=False)
+
+    assert caplog.records == []

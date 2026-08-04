@@ -15,8 +15,10 @@ from __future__ import annotations
 
 import pathlib
 
+import pytest
 from click.testing import CliRunner
 
+from lsst.doiutils import _cli
 from lsst.doiutils._cli import cli
 from lsst.doiutils._yaml import load_yaml_fh
 
@@ -147,3 +149,31 @@ def test_find_internal_citations_no_trailing_whitespace() -> None:
 def _read_config(handle: str) -> str:
     """Read the configuration file for the given handle."""
     return (pathlib.Path("configs") / f"{handle.lower()}.yaml").read_text()
+
+
+@pytest.mark.parametrize(
+    ("options", "expected"),
+    [([], None), (["--update-authors"], True), (["--no-update-authors"], False)],
+)
+def test_update_paper_info_author_option(
+    monkeypatch: pytest.MonkeyPatch,
+    options: list[str],
+    expected: bool | None,  # noqa: FBT001
+) -> None:
+    """The author update option is passed on as given, with the default
+    reported distinctly from an explicit choice.
+    """
+    calls: list[bool | None] = []
+    monkeypatch.setattr(
+        _cli,
+        "update_paper_author_refs",
+        lambda config, api, *, dry_run, update_sponsors, update_authors: calls.append(update_authors),
+    )
+
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config("TSTN-001", "10.71929/rubin/1")
+        result = runner.invoke(cli, ["update-paper-info", "configs/tstn-001.yaml", *options])
+        assert result.exit_code == 0, result.output
+
+    assert calls == [expected]

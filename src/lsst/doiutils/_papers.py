@@ -334,8 +334,29 @@ def publish_paper(config: PaperConfig, elink: elinkapi.Elink, *, dry_run: bool =
         elink.update_record(saved_record.osti_id, saved_record, "submit")
 
 
-def _compare_person(old: elinkapi.Person | None, new: elinkapi.Person | None) -> str:
-    """Compare two Person instances and report on relevant difference."""
+def _compare_person(
+    old: elinkapi.Person | None, new: elinkapi.Person | None, *, compare_affiliations: bool = True
+) -> str:
+    """Compare two Person instances and report on relevant difference.
+
+    Parameters
+    ----------
+    old : `elinkapi.Person` or `None`
+        The author currently stored in the record, or `None` if there is no
+        author at this position.
+    new : `elinkapi.Person` or `None`
+        The author derived from the configuration, or `None` if there is no
+        author at this position.
+    compare_affiliations : `bool`, optional
+        If `True` a difference in affiliation is reported. If `False` only
+        differences in author identity, membership, or ordering are reported.
+
+    Returns
+    -------
+    change : `str`
+        Description of the first difference found, or an empty string if the
+        authors match.
+    """
     if old is None and new is not None:
         return f"Added new author: {new.last_name}"
     elif new is None and old is not None:
@@ -351,11 +372,12 @@ def _compare_person(old: elinkapi.Person | None, new: elinkapi.Person | None) ->
         if old_orcid != new_orcid:
             return f"{name}: {old_orcid} != {new_orcid}"
 
-        # A person with no affiliations has None rather than an empty list.
-        for oldaffil, newaffil in zip_longest(old.affiliations or (), new.affiliations or ()):
-            changed = _compare_affiliation(oldaffil, newaffil)
-            if changed:
-                return changed
+        if compare_affiliations:
+            # A person with no affiliations has None rather than an empty list.
+            for oldaffil, newaffil in zip_longest(old.affiliations or (), new.affiliations or ()):
+                changed = _compare_affiliation(oldaffil, newaffil)
+                if changed:
+                    return changed
 
     return ""
 
@@ -400,6 +422,33 @@ def _update_authors(saved_record: elinkapi.Record, config: PaperConfig) -> bool:
     return updated
 
 
+def _author_identity_changes(saved_record: elinkapi.Record, config: PaperConfig) -> list[str]:
+    """Report the author changes that are not solely changes of affiliation.
+
+    Parameters
+    ----------
+    saved_record : `elinkapi.Record`
+        The record as currently stored by ELink.
+    config : `PaperConfig`
+        The configuration describing the current author list.
+
+    Returns
+    -------
+    changes : `list` [ `str` ]
+        Descriptions of any differences in author membership, ordering, name,
+        or ORCID. Affiliation differences are not included.
+    """
+    if config.authors == ["Rubin"]:
+        # Special-cased organizational author. Nothing to compare.
+        return []
+
+    changes = []
+    for old, new in zip_longest(saved_record.persons, _create_persons(config)):
+        if change_reason := _compare_person(old, new, compare_affiliations=False):
+            changes.append(change_reason)
+    return changes
+
+
 def _update_relationships(saved_record: elinkapi.Record, config: PaperConfig) -> bool:
     # And any changes to references.
     updated = False
@@ -425,9 +474,26 @@ def update_paper_author_refs(
     *,
     dry_run: bool = False,
     update_sponsors: bool = False,
-    update_authors: bool = True,
+    update_authors: bool | None = None,
 ) -> None:
     """Update the author and references in record for an existing DOI.
+
+    Parameters
+    ----------
+    config : `PaperConfig`
+        The configuration for the paper.
+    elink : `elinkapi.Elink`
+        The ELink API to use.
+    dry_run : `bool`, optional
+        If `True` the modified record is printed rather than submitted.
+    update_sponsors : `bool`, optional
+        If `True` the sponsoring organizations are replaced with the current
+        definitions.
+    update_authors : `bool` or `None`, optional
+        If `True` the authors are replaced with the current database entries.
+        If `False` the stored authors are retained. If `None`, the default, the
+        stored authors are retained but a warning is issued if the author list
+        has changed for a reason other than affiliation.
 
     Notes
     -----
@@ -437,8 +503,8 @@ def update_paper_author_refs(
     If authors are updated then affiliations for those authors will be updated
     to the current database entries. This raises the possibility that an
     affiliation will no longer match the affiliation that was originally
-    associated with the publication. Set ``update_authors`` to `False` to
-    retain the author information already stored in the record.
+    associated with the publication. This is why the author information stored
+    in the record is retained by default.
     """
     saved_record = _get_paper_record(config, elink)
 
@@ -447,6 +513,16 @@ def update_paper_author_refs(
     # Attach entirely new set of authors to record.
     if update_authors:
         updated |= _update_authors(saved_record, config)
+    elif update_authors is None and (changes := _author_identity_changes(saved_record, config)):
+        # Affiliations are expected to drift away from the values recorded at
+        # publication time but a change in author membership or ordering is
+        # always worth knowing about.
+        _LOG.warning(
+            "Authors are not being updated but the author list has changed:\n%s\n"
+            "Enable author updates to apply these changes, or disable them explicitly to "
+            "silence this warning.",
+            "\n".join(f"- {c}" for c in changes),
+        )
 
     # And any changes to references.
     updated |= _update_relationships(saved_record, config)

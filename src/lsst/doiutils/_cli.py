@@ -22,6 +22,7 @@ from typing import IO
 
 import click
 import elinkapi
+from click.core import ParameterSource
 
 from . import __version__
 from ._datasets import (
@@ -377,9 +378,10 @@ def publish_paper_doi(
 )
 @click.option(
     "--update-authors/--no-update-authors",
-    default=True,
-    help="Update the authors in the record. Disable this to update only the relationships and retain the "
-    "author affiliations recorded at publication time.",
+    default=False,
+    help="Update the authors in the record. The default is to update only the relationships and retain "
+    "the author affiliations recorded at publication time. If neither option is given a warning is "
+    "issued when the author list has changed for a reason other than affiliation.",
 )
 @click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
 @click.option(
@@ -406,12 +408,15 @@ def update_paper_info(
     """
     paper_config = PaperConfig.from_yaml_fh(config)
     api = elinkapi.Elink(target=server, token=token)
+    # An explicit choice is passed on as given whereas the default is reported
+    # as `None` so that changes to the author list can be warned about.
+    explicit = ctx.get_parameter_source("update_authors") is not ParameterSource.DEFAULT
     update_paper_author_refs(
         paper_config,
         api,
         dry_run=dry_run,
         update_sponsors=update_sponsors,
-        update_authors=update_authors,
+        update_authors=update_authors if explicit else None,
     )
 
 
