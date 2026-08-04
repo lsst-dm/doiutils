@@ -28,3 +28,5 @@ relationships:
   - 10.6028/NIST.SP.800-171r3
   - 10.6028/NIST.SP.800-46r2
   - 10.71929/rubin/2570536
+  IsCitedBy:
+  - 10.71929/rubin/2570545

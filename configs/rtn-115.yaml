@@ -12,3 +12,6 @@ authors:
 relationships:
   Describes:
   - 10.71929/rubin/3382528
+  IsCitedBy:
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/3399546

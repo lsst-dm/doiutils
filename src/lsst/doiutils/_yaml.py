@@ -15,6 +15,7 @@ from __future__ import annotations
 
 __all__ = ["load_yaml_fh", "prepare_block_text_for_writing", "write_to_yaml_fh"]
 
+import io
 import textwrap
 import typing
 
@@ -43,8 +44,18 @@ def write_to_yaml_fh(model: dict[str, typing.Any], fh: typing.IO[str]) -> None:
         Model to write.
     fh : `typing.IO`
         Open file handle to write to.
+
+    Notes
+    -----
+    When a long plain scalar is folded at the output width the space that the
+    line break replaced is retained at the end of the line. Those trailing
+    spaces are removed before writing since they are not significant and
+    trailing whitespace is not allowed in these files.
     """
-    YAML().dump(model, fh)
+    buffer = io.StringIO()
+    YAML().dump(model, buffer)
+    for line in buffer.getvalue().splitlines():
+        print(line.rstrip(), file=fh)
 
 
 def prepare_block_text_for_writing(text: str, indent: int = 2) -> str | LiteralScalarString:

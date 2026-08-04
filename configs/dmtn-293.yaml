@@ -14,3 +14,7 @@ osti_id: 2586676
 authors:
 - salnikova
 - mccormickj
+relationships:
+  IsCitedBy:
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2998133
