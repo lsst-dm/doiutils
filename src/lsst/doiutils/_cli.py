@@ -11,7 +11,6 @@
 
 from __future__ import annotations
 
-import contextlib
 import glob
 import logging
 import pathlib
@@ -22,6 +21,7 @@ from typing import IO
 
 import click
 import elinkapi
+from click.core import ParameterSource
 
 from . import __version__
 from ._datasets import (
@@ -33,6 +33,7 @@ from ._datasets import (
 )
 from ._instruments import InstrumentConfig, submit_instrument
 from ._papers import PaperConfig, publish_paper, submit_paper, update_paper_author_refs
+from ._yaml import load_yaml_fh
 
 _LOG = logging.getLogger("lsst.doiutils")
 
@@ -375,6 +376,13 @@ def publish_paper_doi(
 @click.option(
     "--update-sponsors/--no-update-sponsors", default=False, help="Force update to sponsoring organizations."
 )
+@click.option(
+    "--update-authors/--no-update-authors",
+    default=False,
+    help="Update the authors in the record. The default is to update only the relationships and retain "
+    "the author affiliations recorded at publication time. If neither option is given a warning is "
+    "issued when the author list has changed for a reason other than affiliation.",
+)
 @click.option("--token", default="", type=str, help="Auth token to use for DOI submission.")
 @click.option(
     "--server",
@@ -388,6 +396,7 @@ def update_paper_info(
     config: IO[str],
     dry_run: bool,  # noqa: FBT001
     update_sponsors: bool,  # noqa: FBT001
+    update_authors: bool,  # noqa: FBT001
     token: str,
     server: str,
 ) -> None:
@@ -399,7 +408,16 @@ def update_paper_info(
     """
     paper_config = PaperConfig.from_yaml_fh(config)
     api = elinkapi.Elink(target=server, token=token)
-    update_paper_author_refs(paper_config, api, dry_run=dry_run, update_sponsors=update_sponsors)
+    # An explicit choice is passed on as given whereas the default is reported
+    # as `None` so that changes to the author list can be warned about.
+    explicit = ctx.get_parameter_source("update_authors") is not ParameterSource.DEFAULT
+    update_paper_author_refs(
+        paper_config,
+        api,
+        dry_run=dry_run,
+        update_sponsors=update_sponsors,
+        update_authors=update_authors if explicit else None,
+    )
 
 
 @cli.command("save-instrument-doi")
@@ -496,6 +514,35 @@ def extract_toml_authors(
         print(f"- {author['internal_id']}")
 
 
+def _normalize_relationships(papers: dict[str, PaperConfig]) -> set[str]:
+    """Sort the relationships of the given papers and remove repeated DOIs.
+
+    Parameters
+    ----------
+    papers : `dict` [ `str`, `PaperConfig` ]
+        Paper configurations, indexed by DOI. Modified in place.
+
+    Returns
+    -------
+    modified : `set` [ `str` ]
+        The DOIs of the papers that were modified.
+
+    Notes
+    -----
+    A DOI only needs to be listed once per relationship. The DOIs are sorted
+    so that the order written to the configuration is predictable and easy to
+    compare.
+    """
+    modified: set[str] = set()
+    for doi, paper in papers.items():
+        for relationship, related in paper.relationships.items():
+            normalized = sorted(set(related))
+            if normalized != related:
+                paper.relationships[relationship] = normalized
+                modified.add(doi)
+    return modified
+
+
 @cli.command("find-internal-citations")
 @click.pass_context
 def find_internal_citations(
@@ -512,31 +559,37 @@ def find_internal_citations(
     """
     papers: dict[str, PaperConfig] = {}
     for file in glob.glob("configs/*.yaml"):
-        with contextlib.suppress(ValueError):
-            with open(file) as fh:
-                paper = PaperConfig.from_yaml_fh(fh)
-                assert paper.doi is not None  # noqa: S101
-                papers[paper.doi] = paper
+        with open(file) as fh:
+            config_dict = load_yaml_fh(fh)
+        # Data release and instrument configurations share this directory and
+        # are not papers. Only papers have a handle, so use that to select
+        # them rather than relying on validation failing.
+        if "handle" not in config_dict:
+            continue
+        paper = PaperConfig.model_validate(config_dict, strict=True)
+        assert paper.doi is not None  # noqa: S101
+        papers[paper.doi] = paper
 
-    modified: set[str] = set()
+    modified = _normalize_relationships(papers)
 
     forward = "Cites"
     inverse = "IsCitedBy"
     for paper in papers.values():
         if forward not in paper.relationships:
             continue
+        paper_doi = paper.doi
+        assert paper_doi is not None  # noqa: S101
         references = paper.relationships[forward]
         for ref in references:
             if ref in papers:
                 # This paper cites another paper we know about.
                 other = papers[ref]
-                if inverse not in other.relationships:
-                    other.relationships[inverse] = []
-                if ref not in other.relationships[inverse]:
-                    paper_doi = paper.doi
-                    assert paper_doi is not None  # noqa: S101
-                    other.relationships[inverse].append(paper_doi)
-                    other.relationships[inverse] = sorted(other.relationships[inverse])
+                cited_by = other.relationships.get(inverse, [])
+                if paper_doi not in cited_by:
+                    # Assign to the field rather than modifying the dict in
+                    # place so that the model knows the field has been set and
+                    # includes it when the model is dumped.
+                    other.relationships = other.relationships | {inverse: sorted({*cited_by, paper_doi})}
                     modified.add(ref)
 
     for to_update in modified:

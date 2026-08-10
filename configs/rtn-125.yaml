@@ -1,0 +1,31 @@
+title: Photometric Transformation Relations for the LSST Data Preview 2
+handle: RTN-125
+site_url: https://rtn-125.lsst.io/
+date: 2026-07-26
+abstract: |-
+  This technical note provides photometric transformation relations between the
+  NSF-DOE Vera C. Rubin Observatory's Data Preview 2 (DP2) and other photometric
+  systems. These transformations are derived using both synthetic and empirical
+  data and are intended to support calibration and comparison across survey
+  systems. We present both polynomial equations and lookup-table-based methods,
+  depending on the available data and desired accuracy. The transformations are
+  generally valid for stars with typical spectral energy distributions (SEDs),
+  and caution should be used when applying them to objects with strong emission
+  lines or atypical colors.
+doi: 10.71929/rubin/3399546
+osti_id: 3399546
+authors:
+- tuckerdl
+- adaircl
+- smithja
+- porterm
+relationships:
+  Cites:
+  - 10.1086/316197
+  - 10.3847/1538-3881/ae521f
+  - 10.71929/RUBIN/2561361
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/3006074
+  - 10.71929/rubin/3377440
+  - 10.71929/rubin/3382528

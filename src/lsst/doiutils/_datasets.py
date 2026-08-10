@@ -26,7 +26,7 @@ import elinkapi
 from pydantic import AfterValidator, AnyHttpUrl, BaseModel, field_serializer, model_validator
 
 from ._constants import FUNDING_ORGANIZATIONS, IDENTIFIERS, LOCATION, ORGANIZATION_AUTHORS, SUBJECT_CATEGORY
-from ._utils import strip_newlines
+from ._utils import check_self_reference, strip_newlines
 from ._yaml import load_yaml_fh, prepare_block_text_for_writing, write_to_yaml_fh
 
 """
@@ -218,6 +218,18 @@ class DataReleaseConfig(BaseModel):
     """OSTI ID of the data release (required to retrieve and edit the record
     in ELink).
     """
+
+    @model_validator(mode="after")
+    def validate_no_self_reference(self) -> Self:
+        """Ensure this data release does not refer to its own DOI."""
+        check_self_reference(
+            self.doi,
+            {
+                "instrument_doi": [self.instrument_doi],
+                "description_paper": [self.description_paper],
+            },
+        )
+        return self
 
     @cached_property
     def osti_id_to_dataset_type(self) -> dict[int, DataReleaseDatasetType]:

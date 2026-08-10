@@ -1,6 +1,6 @@
 title: Pessimistic Pattern Matching for LSST
 handle: DMTN-031
-site_url: https://dmtn-031.lsst.io
+site_url: https://dmtn-031.lsst.io/
 date: 2018-06-07
 abstract: |-
   The current reference catalog matcher used by LSST for astrometry has been
@@ -16,4 +16,6 @@ relationships:
   - 10.1051/0004-6361/201629512
   - 10.1071/AS07028
   - 10.3847/0004-637X/832/2/155
+  - 10.71929/rubin/2570545
+  IsCitedBy:
   - 10.71929/rubin/2570545

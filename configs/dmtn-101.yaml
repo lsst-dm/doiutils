@@ -1,6 +1,6 @@
 title: Verifying LSST Calibration Data Products
 handle: DMTN-101
-site_url: https://dmtn-101.lsst.io
+site_url: https://dmtn-101.lsst.io/
 date: 2025-01-16
 abstract: |-
   A description of plans for verifying LSST's Calibration Data Products. This
@@ -19,3 +19,5 @@ relationships:
   - 10.71929/RUBIN/2561361
   - 10.71929/rubin/2571927
   - 10.71929/rubin/2571930
+  IsCitedBy:
+  - 10.71929/rubin/2570545

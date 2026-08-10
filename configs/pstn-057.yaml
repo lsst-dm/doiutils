@@ -1,0 +1,34 @@
+title: Survey Cadence Optimization Committee's Survey Start Recommendations
+handle: PSTN-057
+site_url: https://pstn-057.lsst.io/
+date: 2026-07-17
+abstract: |-
+  A recommendation for adjustments to the initial LSST survey strategy is
+  delivered to the Observatory Director. These adjustments respond to improved
+  knowledge and understanding of the system performance and completeness of
+  science verification activities at the start of LSST.
+doi: 10.71929/rubin/3395070
+osti_id: 3395070
+authors:
+- SCOC
+- biancofb
+- jonesrl
+- anguitat
+- assefr
+- dagorets
+- edwardsl
+- jhasw
+- mandelbaumr
+- millera
+- smarttsj
+- streetra
+- vivask
+- volkk
+- yoachimp
+relationships:
+  Cites:
+  - 10.3847/1538-4365/ac3e72
+  - 10.71929/rubin/2584021
+  - 10.71929/rubin/2584276
+  - 10.71929/rubin/2585249
+  - 10.71929/rubin/2585402

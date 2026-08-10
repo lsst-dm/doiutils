@@ -1,6 +1,6 @@
 title: Streak Masking in DM Image Processing
 handle: DMTN-197
-site_url: https://dmtn-197.lsst.io
+site_url: https://dmtn-197.lsst.io/
 date: 2021-07-15
 abstract: |-
   Streaks caused by satellites are a persistent problem in optical images, and
@@ -26,3 +26,5 @@ relationships:
   - 10.1016/j.patcog.2007.04.003
   - 10.1145/361237.361242
   - 10.71929/rubin/2583441
+  IsCitedBy:
+  - 10.71929/rubin/2570545

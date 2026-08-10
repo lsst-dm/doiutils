@@ -1,6 +1,7 @@
-title: "jointcal: Simultaneous Astrometry & Photometry for thousands of Exposures with Large CCD Mosaics"
+title: 'jointcal: Simultaneous Astrometry & Photometry for thousands of Exposures
+  with Large CCD Mosaics'
 handle: DMTN-036
-site_url: https://dmtn-036.lsst.io
+site_url: https://dmtn-036.lsst.io/
 date: 2017-09-18
 abstract: |-
   The jointcal package simultaneously optimizes the astrometric and photometric
@@ -26,4 +27,6 @@ relationships:
   - 10.1088/0067-0049/205/2/20
   - 10.1088/1538-3873/aa6c55
   - 10.1137/0710036
+  - 10.71929/rubin/2570545
+  IsCitedBy:
   - 10.71929/rubin/2570545

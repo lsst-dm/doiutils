@@ -15,9 +15,12 @@ from __future__ import annotations
 
 import pathlib
 
+import pytest
 from click.testing import CliRunner
 
+from lsst.doiutils import _cli
 from lsst.doiutils._cli import cli
+from lsst.doiutils._yaml import load_yaml_fh
 
 from .test_dataset_records import _make_bibtex_config
 
@@ -58,3 +61,148 @@ def test_create_dataset_bibs_stdout() -> None:
 
         assert not list(pathlib.Path().glob("*.bib"))
         assert result.output.count("@misc{") == 5
+
+
+def _write_paper_config(handle: str, doi: str, relationships: str = "") -> None:
+    """Write a minimal paper configuration to the configs directory."""
+    path = pathlib.Path("configs") / f"{handle.lower()}.yaml"
+    path.parent.mkdir(exist_ok=True)
+    path.write_text(
+        f"""title: Paper {handle} with a title that is long enough that the YAML writer folds it
+  on to a second line
+handle: {handle}
+site_url: https://{handle.lower()}.lsst.io/
+date: 2025-01-01
+abstract: Short abstract.
+doi: {doi}
+authors:
+- timj
+{relationships}"""
+    )
+
+
+def test_find_internal_citations() -> None:
+    """Inverse relationships are added, sorted, and never duplicated."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config(
+            "TSTN-001",
+            "10.71929/rubin/1",
+            """relationships:
+  Cites:
+  - 10.71929/rubin/3
+  - 10.71929/rubin/2
+  - 10.71929/rubin/2
+""",
+        )
+        # The inverse relationship is already recorded, twice.
+        _write_paper_config(
+            "TSTN-002",
+            "10.71929/rubin/2",
+            """relationships:
+  IsCitedBy:
+  - 10.71929/rubin/1
+  - 10.71929/rubin/1
+""",
+        )
+        # No relationships section at all.
+        _write_paper_config("TSTN-003", "10.71929/rubin/3")
+
+        result = runner.invoke(cli, ["find-internal-citations"])
+        assert result.exit_code == 0, result.output
+
+        # Existing relationships are sorted with repeated DOIs removed.
+        assert "Cites:\n  - 10.71929/rubin/2\n  - 10.71929/rubin/3\n" in _read_config("TSTN-001")
+        assert "IsCitedBy:\n  - 10.71929/rubin/1\n" in _read_config("TSTN-002")
+
+        # A missing inverse relationship is added to a config that had none.
+        assert "IsCitedBy:\n  - 10.71929/rubin/1\n" in _read_config("TSTN-003")
+
+
+def test_find_internal_citations_reports_self_citation() -> None:
+    """A paper that cites itself is reported rather than quietly skipped."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config(
+            "TSTN-001",
+            "10.71929/rubin/1",
+            "relationships:\n  Cites:\n  - 10.71929/rubin/1\n",
+        )
+
+        result = runner.invoke(cli, ["find-internal-citations"])
+
+        assert result.exit_code != 0
+        assert "refers to itself" in str(result.exception)
+
+
+def test_find_internal_citations_ignores_non_paper_configs() -> None:
+    """Configurations that are not papers are skipped without error."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config("TSTN-001", "10.71929/rubin/1")
+        # A data release config lives in the same directory but has no handle.
+        with open(pathlib.Path("configs") / "release.yaml", "w") as fh:
+            _make_bibtex_config().write_yaml_fh(fh)
+
+        result = runner.invoke(cli, ["find-internal-citations"])
+        assert result.exit_code == 0, result.output
+
+
+def test_find_internal_citations_no_trailing_whitespace() -> None:
+    """Folded long titles are written without trailing whitespace."""
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config(
+            "TSTN-001", "10.71929/rubin/1", "relationships:\n  Cites:\n  - 10.71929/rubin/2\n"
+        )
+        _write_paper_config("TSTN-002", "10.71929/rubin/2")
+
+        result = runner.invoke(cli, ["find-internal-citations"])
+        assert result.exit_code == 0, result.output
+
+        content = _read_config("TSTN-002")
+        assert not [line for line in content.splitlines() if line != line.rstrip()]
+
+        # The title is long enough that it is folded on to a second line but
+        # the folding must not change its value.
+        lines = content.splitlines()
+        assert lines[1].startswith("  "), lines
+        with open(pathlib.Path("configs") / "tstn-002.yaml") as fh:
+            model = load_yaml_fh(fh)
+        assert model["title"] == (
+            "Paper TSTN-002 with a title that is long enough that the YAML writer"
+            " folds it on to a second line"
+        )
+
+
+def _read_config(handle: str) -> str:
+    """Read the configuration file for the given handle."""
+    return (pathlib.Path("configs") / f"{handle.lower()}.yaml").read_text()
+
+
+@pytest.mark.parametrize(
+    ("options", "expected"),
+    [([], None), (["--update-authors"], True), (["--no-update-authors"], False)],
+)
+def test_update_paper_info_author_option(
+    monkeypatch: pytest.MonkeyPatch,
+    options: list[str],
+    expected: bool | None,  # noqa: FBT001
+) -> None:
+    """The author update option is passed on as given, with the default
+    reported distinctly from an explicit choice.
+    """
+    calls: list[bool | None] = []
+    monkeypatch.setattr(
+        _cli,
+        "update_paper_author_refs",
+        lambda config, api, *, dry_run, update_sponsors, update_authors: calls.append(update_authors),
+    )
+
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        _write_paper_config("TSTN-001", "10.71929/rubin/1")
+        result = runner.invoke(cli, ["update-paper-info", "configs/tstn-001.yaml", *options])
+        assert result.exit_code == 0, result.output
+
+    assert calls == [expected]

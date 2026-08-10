@@ -4,130 +4,226 @@ handle: PSTN-019
 site_url: https://pstn-019.lsst.io/
 date: 2025-06-27
 abstract: |-
-  The NSF-DOE Vera C. Rubin Observatory will produce the Legacy Survey of Space
-  and Time (LSST), producing 11 data releases over the ten-year survey. The LSST
-  Science Pipelines Software, the Optical Survey Pipeline Reduction and Analysis
-  Environment (OSPRAE), will be used to create these data releases and to
-  perform the nightly alert production. This paper provides an overview of the
-  LSST Science Pipelines Software, describing the components and how they are
-  combined to form pipelines
+  The NSF-DOE Vera C. Rubin Observatory is executing the Legacy Survey of Space
+  and Time (LSST) as its prime mission,  producing a series of data releases
+  over the ten-year survey. The LSST Science Pipelines Software will be used to
+  create these data releases and to perform the nightly prompt processing and
+  alert production. This paper provides an overview of the LSST Science
+  Pipelines Software, describing the components and their integration into
+  pipelines that generate science-ready data products.
 doi: 10.71929/rubin/2570545
 osti_id: 2570545
 authors:
-- Rubin
+- DMPipelines
+- alsayyady
+- axelrodts
+- banovetzj
+- bechtolk
+- bellme
+- boschjf
+- bradshawa
+- broughtona
+- budlonga
+- caplarn
+- carlinjl
+- ceballor
+- chiangh
+- choiy
+- cohentanugij
+- connollyaj
+- dagorets
+- duboisfelsmanngp
+- economouf
+- eigero
+- fertea
+- findeisenk
+- fisherlevinem
+- gowerm
+- guylp
+- hernandezf
+- hernerk
+- hoblittj
+- howardel
+- hyunm
+- irvingd
+- ivezicv
+- jennesst
+- juricm
+- kannawadia
+- kelvinl
+- krughoffks
+- kurlanderja
+- legetp
+- limk
+- luptonrh
+- lustnb
+- macarthurla
+- macbrides
+- mccormickj
+- megiasg
+- meyersj
+- moolekampfe
+- mullaneyjr
+- nourbakhshe
+- omullanew
+- parejkojk
+- parkhy
+- pattersonmt
+- pietrowiczs
+- plazasa
+- pricepa
+- ranabhata
+- rawlsml
+- reeds
+- rykoffe
+- salnikova
+- sanchezbo
+- saundersc
+- sedaghatn
+- sickj
+- slaterct
+- smartbm
+- snydera
+- sullivanis
+- swinbankjd
+- taranuds
+- thorntonaj
+- wangy
+- watersc
+- williamscc
+- wittgenm
+- woodvaseywm
 relationships:
   IsCitedBy:
   - 10.71929/rubin/2570536
-  - 10.71929/rubin/2570536
-  - 10.71929/rubin/2570536
-  - 10.71929/rubin/2571480
   - 10.71929/rubin/2571480
   - 10.71929/rubin/2572986
-  - 10.71929/rubin/2572986
-  - 10.71929/rubin/2575154
   - 10.71929/rubin/2575154
   - 10.71929/rubin/2575156
-  - 10.71929/rubin/2575156
-  - 10.71929/rubin/2583846
   - 10.71929/rubin/2583846
   - 10.71929/rubin/2583849
-  - 10.71929/rubin/2583849
-  - 10.71929/rubin/2584021
   - 10.71929/rubin/2584021
   - 10.71929/rubin/2584108
-  - 10.71929/rubin/2584108
-  - 10.71929/rubin/2586490
   - 10.71929/rubin/2586490
   - 10.71929/rubin/2586578
-  - 10.71929/rubin/2586578
-  - 10.71929/rubin/2586685
   - 10.71929/rubin/2586685
   - 10.71929/rubin/2587242
-  - 10.71929/rubin/2587242
-  - 10.71929/rubin/2998003
   - 10.71929/rubin/2998003
   - 10.71929/rubin/2998133
-  - 10.71929/rubin/2998133
   - 10.71929/rubin/2998139
-  - 10.71929/rubin/2998139
-  - 10.71929/rubin/3000578
   - 10.71929/rubin/3000578
   - 10.71929/rubin/3011115
   - 10.71929/rubin/3019817
+  - 10.71929/rubin/3398709
   Cites:
-  - 10.1086/305984
-  - 10.3847/1538-3881/aabc4f
-  - 10.3847/1538-4357/ac7c74
-  - 10.1117/12.857297
-  - 10.1145/3307681.3325400
-  - 10.1117/12.366388
-  - 10.1088/1538-3873/aa6c55
-  - 10.1016/j.ascom.2016.02.003
-  - 10.1051/aas:1996164
-  - 10.1086/668468
-  - 10.48550/arXiv.astro-ph/0608715
-  - 10.1093/pasj/psx080
-  - 10.1117/12.459890
-  - 10.1088/1538-3873/ad3aa2
-  - 10.3847/1538-3881/aa9f22
-  - 10.48550/arXiv.2501.15018
-  - 10.1117/12.789466
-  - 10.1093/mnras/stz2357
-  - 10.1088/1538-3873/ad0a73
-  - 10.1117/12.3019081
-  - 10.1016/j.patcog.2007.04.003
-  - 10.1088/0004-6256/150/5/150
-  - 10.1088/0004-6256/150/3/82
-  - 10.48550/arXiv.2211.15795
-  - 10.1038/s41586-020-2649-2
-  - 10.1016/j.ascom.2022.100584
-  - 10.1046/j.1365-8711.2003.06683.x
-  - 10.3847/1538-3881/aad69a
-  - 10.5281/zenodo.14238973
-  - 10.1109/MCSE.2007.55
-  - 10.1117/12.2561112
-  - 10.3847/1538-4357/ab042c
-  - 10.1093/mnras/staa3679
-  - 10.48550/arXiv.1712.00461
-  - 10.1117/12.2312157
-  - 10.1117/12.2231313
-  - 10.1117/12.2629569
-  - 10.48550/arXiv.1512.07914
-  - 10.1117/12.857920
-  - 10.1051/epjconf/202429504026
-  - 10.1109/MCSE.2005.11
-  - 10.1051/0004-6361:20066601
-  - 10.1093/mnras/stv2140
-  - 10.3847/2515-5172/ad0044
-  - 10.1117/12.3019302
-  - 10.1093/pasj/psac006
-  - 10.48550/arXiv.2303.03313
-  - 10.1111/j.1365-2966.2005.09282.x
-  - 10.1093/pasj/psx130
-  - 10.48550/arXiv.2412.09721
-  - 10.48550/arXiv.1910.10094
-  - 10.1016/j.ascom.2018.07.001
-  - 10.1093/pasj/psx063
-  - 10.1017/pasa.2020.45
-  - 10.3847/0004-637X/825/1/61
-  - 10.1088/1748-0221/10/08/C08010
-  - 10.48550/arXiv.2211.13611
-  - 10.48550/arXiv.2111.15030
-  - 10.1117/1.JATIS.6.1.011005
-  - 10.1088/1748-0221/12/05/C05015
-  - 10.48550/arXiv.1912.01703
-  - 10.1086/346138
-  - 10.48550/arXiv.2404.14516
-  - 10.1117/12.3019698
   - 10.1016/j.ascom.2015.02.002
-  - 10.33232/001c.132299
+  - 10.1016/j.ascom.2016.02.003
+  - 10.1016/j.ascom.2018.07.001
+  - 10.1016/j.ascom.2022.100584
+  - 10.1016/j.patcog.2007.04.003
+  - 10.1017/pasa.2020.45
+  - 10.1038/s41586-020-2649-2
+  - 10.1046/j.1365-8711.2003.06683.x
   - 10.1051/0004-6361/201424973
+  - 10.1051/0004-6361/202346730
+  - 10.1051/0004-6361:20021326
+  - 10.1051/0004-6361:20066601
+  - 10.1051/aas:1996164
+  - 10.1051/epjconf/202429504026
   - 10.1071/AS07028
-  - 10.1117/12.2630226
-  - 10.3847/1538-3881/abba3e
-  - 10.1117/12.3019117
-  - 10.1145/2063348.2063364
-  - 10.1117/12.2561194
-  - 10.3847/1538-4365/abb82b
-  - 10.3847/0004-637X/830/1/27
+  - 10.1086/190669
+  - 10.1086/305984
+  - 10.1086/324741
+  - 10.1086/338085
+  - 10.1086/346138
+  - 10.1086/668468
+  - 10.1086/668616
+  - 10.1088/0004-6256/150/3/82
+  - 10.1088/0004-6256/150/5/150
+  - 10.1088/1538-3873/aa6c55
+  - 10.1088/1538-3873/ad3aa2
+  - 10.1093/mnras/staa3679
   - 10.1093/mnras/stac3350
+  - 10.1093/mnras/stv2140
+  - 10.1093/mnras/stz2357
+  - 10.1093/pasj/psab122
+  - 10.1093/pasj/psac006
+  - 10.1093/pasj/psx063
+  - 10.1093/pasj/psx080
+  - 10.1093/pasj/psx130
+  - 10.1093/pasj/psz103
+  - 10.1109/MCSE.2005.11
+  - 10.1109/MCSE.2007.55
+  - 10.1111/j.1365-2966.2005.09282.x
+  - 10.1117/1.JATIS.11.1.011209
+  - 10.1117/1.JATIS.6.1.011005
+  - 10.1117/12.2231313
+  - 10.1117/12.2312157
+  - 10.1117/12.2561112
+  - 10.1117/12.2567224
+  - 10.1117/12.2628887
+  - 10.1117/12.2629569
+  - 10.1117/12.2630184
+  - 10.1117/12.2630226
+  - 10.1117/12.3015967
+  - 10.1117/12.3019081
+  - 10.1117/12.3019698
+  - 10.1117/12.366388
+  - 10.1117/12.459890
+  - 10.1117/12.789466
+  - 10.1117/12.857297
+  - 10.1117/12.857920
+  - 10.1145/2063348.2063364
+  - 10.1145/3307681.3325400
+  - 10.26624/LBRP6571
+  - 10.26624/OLUK1600
+  - 10.26624/SKGZ6035
+  - 10.26624/XCPI7375
+  - 10.33232/001c.132299
+  - 10.3847/0004-637X/830/1/27
+  - 10.3847/1538-3881/aa9f22
+  - 10.3847/1538-3881/aabc4f
+  - 10.3847/1538-3881/aad69a
+  - 10.3847/1538-3881/abba3e
+  - 10.3847/1538-3881/add3ec
+  - 10.3847/1538-3881/ae521f
+  - 10.3847/1538-4357/ab042c
+  - 10.3847/1538-4357/ac7c74
+  - 10.3847/1538-4365/abb829
+  - 10.3847/1538-4365/abd62c
+  - 10.3847/2515-5172/ad0044
+  - 10.48550/arXiv.1512.07914
+  - 10.48550/arXiv.1712.00461
+  - 10.48550/arXiv.1910.10094
+  - 10.48550/arXiv.1912.01703
+  - 10.48550/arXiv.2111.15030
+  - 10.48550/arXiv.2412.09721
+  - 10.48550/arXiv.2501.15018
+  - 10.48550/arXiv.astro-ph/0608715
+  - 10.5281/zenodo.2579447
+  - 10.5479/ADS/bib/2019ivoa.spec.0927D
+  - 10.71929/RUBIN/2561361
+  - 10.71929/RUBIN/2570308
+  - 10.71929/RUBIN/2570313
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2571930
+  - 10.71929/rubin/2583441
+  - 10.71929/rubin/2583688
+  - 10.71929/rubin/2583846
+  - 10.71929/rubin/2583849
+  - 10.71929/rubin/2583850
+  - 10.71929/rubin/2584108
+  - 10.71929/rubin/2585429
+  - 10.71929/rubin/2586490
+  - 10.71929/rubin/2586493
+  - 10.71929/rubin/2586496
+  - 10.71929/rubin/2586498
+  - 10.71929/rubin/2586569
+  - 10.71929/rubin/2586578
+  - 10.71929/rubin/2586668
+  - 10.71929/rubin/2586676
+  - 10.71929/rubin/2586685
+  - 10.71929/rubin/2587118
+  - 10.71929/rubin/2587242
+  - 10.71929/rubin/3377440
+  - 10.71929/rubin/3382528

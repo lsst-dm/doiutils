@@ -11,3 +11,7 @@ doi: 10.71929/rubin/2584109
 osti_id: 2584109
 authors:
 - yoachimp
+relationships:
+  IsCitedBy:
+  - 10.71929/rubin/2570536
+  - 10.71929/rubin/2584276
