@@ -1,0 +1,21 @@
+title: Trailing Losses for Moving Objects
+handle: SMTN-003
+site_url: https://smtn-003.lsst.io/
+date: 2017-08-03
+abstract: |-
+  Trailing losses occur for Solar System objects when their motion during an
+  image results in their detection covering more than the equivalent stellar PSF
+  for that image. This results in a decreased SNR for the moving object compared
+  to a stationary point source. There are two distinct sources of this decreased
+  SNR: if the moving object measurement is done with a trailed PSF that matches
+  the moving object PSF, SNR decreases due to the additional background sky
+  pixels (larger n_effective) in the trailed PSF; if the moving object
+  measurement is done with a point-source PSF that does not match the moving
+  object's PSF, SNR decreases due to the flux missed outside the point-source
+  PSF. This technote evaluates trailing losses from both sources and provides a
+  summary formula to calculate each from the moving object's velocity and the
+  image's FWHM and exposure time.
+doi: 10.71929/rubin/3408483
+osti_id: 3408483
+authors:
+- jonesrl
