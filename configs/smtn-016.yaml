@@ -1,0 +1,19 @@
+title: Surface Brightness Limit Derivations Relevant For Rubin Observatory
+handle: SMTN-016
+site_url: https://smtn-016.lsst.io/
+date: 2022-02-01
+abstract: |-
+  This technote derives the limiting surface magnitude SNR equation, links to
+  the MAF metric to calculate the value, and reports the calculated surface
+  brightness limits for each filter for the current baseline simulation for the
+  LSST performed by the NSF-DOE Vera C. Rubin Observatory.
+doi: 10.71929/rubin/3428336
+osti_id: 3428336
+authors:
+- yoachimp
+relationships:
+  Cites:
+  - 10.1117/12.2056835
+  - 10.3847/1538-4357/ab042c
+  - 10.48550/arXiv.1812.04897
+  - 10.71929/rubin/2585249
