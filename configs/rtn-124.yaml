@@ -1,0 +1,50 @@
+title: Photometric Redshifts for the Vera C. Rubin Observatory Data Preview
+handle: RTN-124
+site_url: https://rtn-124.lsst.io/
+date: 2026-08-20
+abstract: |-
+  We present the photometric redshifts (photo-z) inferred using algorithms
+  implemented in the Redshift Assessment Infrastructure Layers (RAIL) for the
+  NSF-DOE Vera C. Rubin Observatory Data Preview 2 (DP2). We produce a
+  compilation of reference redshift catalog using spectroscopic, grism and many
+  band photometric redshift dataset hosted on the LIneA Photo-z Server. We
+  curate training and testing set for assessing the scientific and technical
+  performance of Rubin photo-z. The algorithm applied to the object catalog are
+  FlexZBoost, BPZ, kNN, GPz, DNF and TPz; with a combination of 6-band and
+  4-band photo-z depending on availability of u and y photometry. The redshift
+  point estimates and uncertainty estimation in tabular format through the Large
+  Survey DataBase (LSDB).
+doi: 10.71929/rubin/3484518
+osti_id: 3484518
+authors:
+- charlese
+- zhangt
+- schmidts
+- taranuds
+- gschwendj
+- grahamml
+- kannawadia
+relationships:
+  Cites:
+  - 10.1007/BF00337288
+  - 10.1046/j.1365-8711.1999.02978.x
+  - 10.1086/308947
+  - 10.1086/505530
+  - 10.1088/0004-637X/690/2/1236
+  - 10.1088/0004-637X/737/2/103
+  - 10.1093/mnras/staa3764
+  - 10.1093/mnras/stag1012
+  - 10.1093/mnras/stt574
+  - 10.1093/mnras/stw1618
+  - 10.1093/mnras/stw857
+  - 10.1117/12.2629569
+  - 10.1214/17-EJS1302
+  - 10.3847/1538-3881/ae521f
+  - 10.3847/1538-4357/ab042c
+  - 10.48550/arXiv.2501.02103
+  - 10.48550/arXiv.2505.02928
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2571480
+  - 10.71929/rubin/3377440
+  - 10.71929/rubin/3382528
+  - 10.71929/rubin/3382539
