@@ -1,0 +1,55 @@
+title: Image Calibration and Instrument Signal Removal for the First Year of the LSST
+handle: RTN-117
+site_url: https://rtn-117.lsst.io/
+date: 2026-08-24
+abstract: |-
+  The NSF-DOE Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST)
+  requires calibration products that provide uniform, stable, and accurate
+  photometric and astrometric performance across the 3.2 gigapixel focal plane
+  and throughout the 10-year survey. This paper details the algorithms and
+  workflows used to produce instrument calibrations and remove instrumental
+  artifacts for Data Preview 2 (DP2)---the first end-to-end processing
+  demonstration using on-sky data with the LSST Camera (LSSTCam). We describe
+  the verification, acceptance, and certification framework used to assess
+  calibration quality and quantify residual systematics. We show baseline
+  metrics on calibrated science images to evaluate the robustness of the
+  calibration and instrument signature removal (ISR) data processing pipelines
+  for DP2. Finally, we summarize the known limitations observed in DP2
+  production and outline expected algorithmic improvements for the first public
+  LSST data release (Data Release~1, DR1).
+doi: 10.71929/rubin/3488007
+osti_id: 3488007
+authors:
+- broughtona
+- fertea
+- watersc
+- rykoffe
+- macbrides
+- plazasa
+- luptonrh
+- urbachek
+relationships:
+  Cites:
+  - 10.1016/j.phpro.2012.02.472
+  - 10.1051/0004-6361/201935508
+  - 10.1051/0004-6361/202245748
+  - 10.1088/1538-3873/aab4ef
+  - 10.1088/1538-3873/acbe67
+  - 10.1088/1538-3873/ad0a73
+  - 10.1088/1538-3873/ad3aa2
+  - 10.1088/1748-0221/10/05/C05032
+  - 10.1088/1748-0221/12/03/C03091
+  - 10.1093/pasj/psab122
+  - 10.1093/pasj/psx080
+  - 10.1117/1.JATIS.7.4.048002
+  - 10.1117/12.3019117
+  - 10.1117/12.3019698
+  - 10.1117/12.926844
+  - 10.3847/1538-3881/aac08d
+  - 10.3847/1538-3881/ae521f
+  - 10.3847/1538-4357/ab042c
+  - 10.48550/arxiv.astro-ph/0510346
+  - 10.71929/rubin/2570545
+  - 10.71929/rubin/2571927
+  - 10.71929/rubin/2584019
+  - 10.71929/rubin/2586498
