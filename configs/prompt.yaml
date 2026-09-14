@@ -1,6 +1,6 @@
 title: Vera C. Rubin Observatory Prompt Products
 site_url: https://prompt-products.lsst.io
-date: 2025-02-24
+date: 2026-02-24
 abstract: |-
   Data products produced by prompt and daily processing of images obtained in
   the Legacy Survey of Space and Time.  These include realtime alerts sent to
@@ -17,4 +17,8 @@ dataset_types:
   path: products/alerts/index.html
   misc:
     name: alert packets
+    doi: 10.71929/rubin/3020139
+    osti_id: 3020139
     format: application/avro
+doi: 10.71929/rubin/3020138
+osti_id: 3020138
