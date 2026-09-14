@@ -17,4 +17,8 @@ dataset_types:
   path: products/alerts/index.html
   misc:
     name: alert packets
+    doi: 10.71929/rubin/3020139
+    osti_id: 3020139
     format: application/avro
+doi: 10.71929/rubin/3020138
+osti_id: 3020138
