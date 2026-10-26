@@ -10,16 +10,21 @@ abstract: |-
   create these data releases and to perform the nightly prompt processing and
   alert production. This paper provides an overview of the LSST Science
   Pipelines Software, describing the components and their integration into
-  pipelines that generate science-ready data products.
+  pipelines that generate science-ready data products. We do not provide
+  detailed descriptions of individual algorithms, but instead aim to show how
+  the pipeline software is constructed and the breadth of the system. Similarly,
+  we do not provide details of specific data products and the associated file formats.
 doi: 10.71929/rubin/2570545
 osti_id: 2570545
 authors:
 - DMPipelines
 - alsayyady
+- armstrongr
 - axelrodts
 - banovetzj
 - bechtolk
 - bellme
+- bernardinelliph
 - boschjf
 - bradshawa
 - broughtona
@@ -27,7 +32,9 @@ authors:
 - caplarn
 - carlinjl
 - ceballor
+- chandlerc
 - chiangh
+- chiangj
 - choiy
 - cohentanugij
 - connollyaj
@@ -62,6 +69,7 @@ authors:
 - mccormickj
 - megiasg
 - meyersj
+- moeyensj
 - moolekampfe
 - mullaneyjr
 - nourbakhshe
@@ -93,7 +101,10 @@ authors:
 - williamscc
 - wittgenm
 - woodvaseywm
+- zhangt
 relationships:
+  IsOriginalFormOf:
+  - 10.48550/arXiv.2610.22613
   IsCitedBy:
   - 10.71929/rubin/2570536
   - 10.71929/rubin/2571480
@@ -132,6 +143,7 @@ relationships:
   - 10.1051/epjconf/202429504026
   - 10.1071/AS07028
   - 10.1086/190669
+  - 10.1086/301540
   - 10.1086/305984
   - 10.1086/324741
   - 10.1086/338085
@@ -160,14 +172,14 @@ relationships:
   - 10.1117/12.2231313
   - 10.1117/12.2312157
   - 10.1117/12.2561112
-  - 10.1117/12.2567224
   - 10.1117/12.2628887
   - 10.1117/12.2629569
   - 10.1117/12.2630184
   - 10.1117/12.2630226
-  - 10.1117/12.3015967
   - 10.1117/12.3019081
   - 10.1117/12.3019698
+  - 10.1117/12.3102964
+  - 10.1117/12.3104181
   - 10.1117/12.366388
   - 10.1117/12.459890
   - 10.1117/12.789466
@@ -191,6 +203,7 @@ relationships:
   - 10.3847/1538-4357/ac7c74
   - 10.3847/1538-4365/abb829
   - 10.3847/1538-4365/abd62c
+  - 10.3847/1538-4365/ae8843
   - 10.3847/2515-5172/ad0044
   - 10.48550/arXiv.1512.07914
   - 10.48550/arXiv.1712.00461
