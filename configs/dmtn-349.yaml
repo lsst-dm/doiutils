@@ -1,0 +1,32 @@
+title: Experimenting with Porting a Large C Library to Rust Using Coding Agents
+handle: DMTN-349
+site_url: https://dmtn-349.lsst.io/
+date: 2026-09-03
+abstract: |-
+  With the rapid rise in abilities of Large Language Model Coding Agents such as
+  Codex and Claude Code over the course of 2026, it became apparent that some
+  software tasks which had seemed impossible to implement were now possible to
+  contemplate. In this document I will discuss one such task involving the
+  conversion of approximately 475,000 lines of a C library that has been in
+  development for 30 years to Rust. The motivation for choosing Rust is the much
+  stronger memory management model and additional type safety inherent in the
+  language, coupled with the more modern tooling infrastructure available and
+  the potential to support technologies such as WebAssembly. The main outcome
+  from this work is that your success in porting any code to a different
+  language using agents depends entirely on the test coverage of your original
+  source code.
+doi: 10.71929/rubin/17426051
+osti_id: 17426051
+authors:
+- jennesst
+relationships:
+  Cites:
+  - 10.1016/j.ascom.2014.06.001
+  - 10.1016/j.ascom.2016.02.003
+  - 10.1051/0004-6361:20021327
+  - 10.1080/08874417.2026.2621186
+  - 10.1117/12.3102964
+  - 10.1145/3729379
+  - 10.48550/arXiv.2506.23253
+  - 10.48550/arXiv.2511.20617
+  - 10.71929/rubin/2570545
